@@ -1,0 +1,22 @@
+name: "EDLD 654 - UO COE"
+title: "Applied Statistics in Education and Human Services I"
+description: |
+  This course provides a first introduction to quantitative data analysis in education and the social sciences. 
+  It is part of a three course sequence intended to provide a toolkit of statistical concepts, methods and their implementation to producers of applied research in education and other social sciences.
+output_dir: "docs"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+      
+    - text: "Syllabus"
+      href: resources/syllabus.pdf
+    
+    - text: "Schedule"
+      href: schedule.html
+          
+    - icon: fa fa-github
+      href: 
+
+output: 
+  distill::distill_article:    
