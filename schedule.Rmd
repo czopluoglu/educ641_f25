@@ -90,9 +90,26 @@ tbl <- function(tab,d){
     tab2$lab_ <- ''
   }
   
-
-
+  if(!is.na(tab2$r)){
+    
+    tab2$r_ <- paste0(cell_spec(strsplit(tab2$r,';')[[1]],
+                                            'html',
+                                          link=strsplit(tab2$r_link,';')[[1]]),
+                                  collapse = '<br>')
+  } else{
+    tab2$r_ <- ''
+  }
   
+  
+  if(!is.na(tab2$data)){
+    
+    tab2$data_ <- paste0(cell_spec(strsplit(tab2$data,';')[[1]],
+                                            'html',
+                                          link=strsplit(tab2$data_link,';')[[1]]),
+                                  collapse = '<br>')
+  } else{
+    tab2$data_ <- ''
+  }
   
     
   if(!is.na(tab2$week)){
@@ -104,14 +121,14 @@ tbl <- function(tab,d){
   }
   
   
-  tab2 <- tab2[,c('week_','date_','topic_','slides_','reading_','assignments_','lab_')]
+  tab2 <- tab2[,c('week_','date_','topic_','slides_','r_','data_','reading_','assignments_','lab_')]
   
   rownames(tab2) <- NULL
   
   tab2 %>%
     kbl(format = 'html',
         escape = FALSE,
-        col.names = c('Week','Dates','Topics','Slides','Readings','Assignments','Lab')) %>%
+        col.names = c('Week','Dates','Topic','Slides','R scripts','Datasets','Readings','Assignments','Lab')) %>%
     kable_material(c("striped", "hover"),full_width = T) %>%
     row_spec(0, background = "#F6FBF4") %>%
     row_spec(0:1, extra_css = "border-bottom: solid;") %>%
@@ -129,4 +146,83 @@ tbl <- function(tab,d){
 tbl(tab,d=tab$week[1])
 
 ```
+
+### Week 2: Describing Continuous Variables
+
+```{r}
+
+tbl(tab,d=tab$week[2])
+
+```
+
+
+### Week 3: Law of Large Numbers
+
+```{r}
+
+tbl(tab,d=tab$week[3])
+
+```
+
+### Week 4-5: Introduction to Inference
+
+```{r}
+
+tbl(tab,d=tab$week[4])
+
+```
+
+```{r}
+
+tbl(tab,d=tab$week[5])
+
+```
+
+### Week 6: Describing and testing the relationship between two continuous variables
+
+```{r}
+
+tbl(tab,d=tab$week[6])
+
+```
+
+### Week 7: Some history
+
+*No class on Nov 11 (Veterans Day holiday)*
+
+```{r}
+
+tbl(tab,d=tab$week[7])
+
+```
+
+### Week 8-9: Describing and testing the relationship between categorical variables
+
+*No class on Nov 27 (Thanksgiving holiday)*
+
+
+```{r}
+
+tbl(tab,d=tab$week[8])
+
+```
+
+```{r}
+
+tbl(tab,d=tab$week[9])
+
+```
+
+### Week 10: Wrapping up and critiques of Null Hypothesis Significance Testing
+
+```{r}
+
+tbl(tab,d=tab$week[10])
+
+```
+
+### Week 11: Finals week
+
+Final assignment is due on December 10 at midnight.
+
 

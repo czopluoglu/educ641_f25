@@ -2132,6 +2132,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h3>Contents</h3>
 <ul>
 <li><a href="#week-1-introduction" id="toc-week-1-introduction">Week 1: Introduction</a></li>
+<li><a href="#week-2-describing-continuous-variables" id="toc-week-2-describing-continuous-variables">Week 2: Describing Continuous Variables</a></li>
+<li><a href="#week-3-law-of-large-numbers" id="toc-week-3-law-of-large-numbers">Week 3: Law of Large Numbers</a></li>
+<li><a href="#week-4-5-introduction-to-inference" id="toc-week-4-5-introduction-to-inference">Week 4-5: Introduction to Inference</a></li>
+<li><a href="#week-6-describing-and-testing-the-relationship-between-two-continuous-variables" id="toc-week-6-describing-and-testing-the-relationship-between-two-continuous-variables">Week 6: Describing and testing the relationship between two continuous variables</a></li>
+<li><a href="#week-7-some-history" id="toc-week-7-some-history">Week 7: Some history</a></li>
+<li><a href="#week-8-9-describing-and-testing-the-relationship-between-categorical-variables" id="toc-week-8-9-describing-and-testing-the-relationship-between-categorical-variables">Week 8-9: Describing and testing the relationship between categorical variables</a></li>
+<li><a href="#week-10-wrapping-up-and-critiques-of-null-hypothesis-significance-testing" id="toc-week-10-wrapping-up-and-critiques-of-null-hypothesis-significance-testing">Week 10: Wrapping up and critiques of Null Hypothesis Significance Testing</a></li>
+<li><a href="#week-11-finals-week" id="toc-week-11-finals-week">Week 11: Finals week</a></li>
 </ul>
 </nav>
 </div>
@@ -2150,10 +2158,16 @@ Week
 Dates
 </th>
 <th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
-Topics
+Topic
 </th>
 <th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
 Slides
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+R scripts
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Datasets
 </th>
 <th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
 Readings
@@ -2178,20 +2192,602 @@ Lab
 <span style="     ">Course introduction</span><br><span style="     "> Introduction to scientific principles and data analysis</span>
 </td>
 <td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
-<a href="https://www.google.com/" style="     ">Class 1</a><br><a href="https://www.google.com/" style="     "> Class 2</a>
-</td>
-<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
-<a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%201.pdf" style="     ">LSWR Chapter 2</a><br><a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%202.pdf" style="     "> LSWR Chapter 3</a><br><a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Light%20Singer%20Willett%201990.pdf" style="     "> Light, Singer, &amp; Willet (1990) pp. 1-40</a>
+<a href="Class%201" style="     ">Class 1</a><br><a href="Class%202" style="     "> Class 2</a>
 </td>
 <td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
 </td>
 <td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
-<a href="https://czopluoglu.github.io/educ641_f25/resources/labs/Lab1.pdf" style="     ">Lab 1</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%201.pdf" style="     ">LSWR Chapter 1</a><br><a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%202.pdf" style="     "> LSWR Chapter 2</a><br><a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Light%20Singer%20Willett%201990.pdf" style="     "> Light, Singer, &amp; Willet (1990) pp. 1-40</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="" style="     "></a>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
+<h3 id="week-2-describing-continuous-variables">Week 2: Describing Continuous Variables</h3>
+<div class="layout-chunk" data-layout="l-body">
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Week
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Dates
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Topic
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Slides
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+R scripts
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Datasets
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Readings
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Assignments
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Lab
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">2</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Oct 7</span><br><span style="     "> Oct 9</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Descriptive statistics for continuous data</span><br><span style="     "> Visualizing continuous data </span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Class%201" style="     ">Class 1</a><br><a href="Class%202" style="     "> Class 2</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%205.pdf" style="     ">LSWR Chapter 5</a><br><a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%206.pdf" style="     "> LSWR Chapter 6</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Lab1" style="     ">Lab 1</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="week-3-law-of-large-numbers">Week 3: Law of Large Numbers</h3>
+<div class="layout-chunk" data-layout="l-body">
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Week
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Dates
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Topic
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Slides
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+R scripts
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Datasets
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Readings
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Assignments
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Lab
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">3</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Oct 14</span><br><span style="     "> Oct 16</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Introduction to Normal Distribution</span><br><span style="     "> Sampling Distribution</span><br><span style="     "> Central Limit Theorem</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Class%201" style="     ">Class 1</a><br><a href="Class%202" style="     "> Class 2</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%209.pdf" style="     ">LSWR Chapter 9</a><br><a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%2010.pdf" style="     "> LSWR Chapter 10</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Lab2" style="     ">Lab 2</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="week-4-5-introduction-to-inference">Week 4-5: Introduction to Inference</h3>
+<div class="layout-chunk" data-layout="l-body">
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Week
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Dates
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Topic
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Slides
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+R scripts
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Datasets
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Readings
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Assignments
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Lab
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">4</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Oct 21</span><br><span style="     "> Oct 23</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">One-sample z-test</span><br><span style="     "> One-sample t-test</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Class%201" style="     ">Class 1</a><br><a href="Class%202" style="     "> Class 2</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%2011.pdf" style="     ">LSWR Chapter 13</a><br><a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%2013.pdf" style="     "> LSWR Chapter 11</a><br><a href="http://lineardigressions.com/episodes/2016/2/29/guinness" style="     "> Podcast: Guinnes</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="" style="     "></a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Week
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Dates
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Topic
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Slides
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+R scripts
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Datasets
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Readings
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Assignments
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Lab
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">5</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Oct 28</span><br><span style="     "> Oct 30</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Independent samples t-test</span><br><span style="     "> Dependent samples t-test</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Class%201" style="     ">Class 1</a><br><a href="Class%202" style="     "> Class 2</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%2011.pdf" style="     ">LSWR Chapter 13</a><br><a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%2013.pdf" style="     "> LSWR Chapter 11</a><br><a href="https://czopluoglu.github.io/educ641_f25/resources/readings/evans_2020.pdf" style="     "> Evans 2020</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Lab3" style="     ">Lab 3</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="week-6-describing-and-testing-the-relationship-between-two-continuous-variables">Week 6: Describing and testing the relationship between two continuous variables</h3>
+<div class="layout-chunk" data-layout="l-body">
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Week
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Dates
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Topic
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Slides
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+R scripts
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Datasets
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Readings
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Assignments
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Lab
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">6</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Nov 4</span><br><span style="     "> Nov 6</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Relationship between two continuous variables</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Class%201" style="     ">Class 1</a><br><a href="Class%202" style="     "> Class 2</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%2015.pdf" style="     ">LSWR Chapter 15</a><br><a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Gould_Chapter%203.pdf" style="     "> Gould Chapter 3</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Lab4" style="     ">Lab 4</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="week-7-some-history">Week 7: Some history</h3>
+<p><em>No class on Nov 11 (Veterans Day holiday)</em></p>
+<div class="layout-chunk" data-layout="l-body">
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Week
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Dates
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Topic
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Slides
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+R scripts
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Datasets
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Readings
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Assignments
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Lab
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">7</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Nov 13</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Troubling history of statistics</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Class%201" style="     ">Class 1</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Clayton%202020.pdf" style="     ">Clayton 2020</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="" style="     "></a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="week-8-9-describing-and-testing-the-relationship-between-categorical-variables">Week 8-9: Describing and testing the relationship between categorical variables</h3>
+<p><em>No class on Nov 27 (Thanksgiving holiday)</em></p>
+<div class="layout-chunk" data-layout="l-body">
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Week
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Dates
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Topic
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Slides
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+R scripts
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Datasets
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Readings
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Assignments
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Lab
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">8</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Nov 18</span><br><span style="     "> Nov 20</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Relationship between categorical variables</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Class%201" style="     ">Class 1</a><br><a href="Class%202" style="     "> Class 2</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%2012.pdf" style="     ">LSWR Chapter 12</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Lab5" style="     ">Lab 5</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Week
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Dates
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Topic
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Slides
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+R scripts
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Datasets
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Readings
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Assignments
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Lab
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">9</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Nov 25</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Relationship between categorical variables</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Class%201" style="     ">Class 1</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="https://czopluoglu.github.io/educ641_f25/resources/readings/Chapter%2012.pdf" style="     ">LSWR Chapter 12</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="" style="     "></a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="week-10-wrapping-up-and-critiques-of-null-hypothesis-significance-testing">Week 10: Wrapping up and critiques of Null Hypothesis Significance Testing</h3>
+<div class="layout-chunk" data-layout="l-body">
+<table class=" lightable-material lightable-striped lightable-hover" style="font-family: &quot;Source Sans Pro&quot;, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Week
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Dates
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Topic
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Slides
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+R scripts
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Datasets
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Readings
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Assignments
+</th>
+<th style="text-align:left;background-color: #F6FBF4 !important;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+Lab
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">10</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Dec 2</span><br><span style="     "> Dec 4</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<span style="     ">Critiques of NHST</span>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="Class%201" style="     ">Class 1</a><br><a href="Class%202" style="     "> Class 2</a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="" style="     "></a>
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+</td>
+<td style="text-align:left;border-bottom: solid;border-top: solid;border-left: solid;border-right: solid;">
+<a href="" style="     "></a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="week-11-finals-week">Week 11: Finals week</h3>
+<p>Final assignment is due on December 10 at midnight.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
