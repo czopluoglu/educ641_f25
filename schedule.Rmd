@@ -1,10 +1,132 @@
 ---
-title: "About this site"
-description: |
-  Some additional details about the website
+title: "Schedule"
+
+output:
+  distill::distill_article:
+    self_contained: true
+    toc: true
+    toc_float: true
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+```{r, include=FALSE}
+require(here)
+require(kableExtra)
+
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE)
+
+tab <- read.csv(here('resources/schedule.csv'))
+```
+
+```{r}
+
+tbl <- function(tab,d){
+  
+  loc <- which(tab$week==d)
+  
+  tab2 <- tab[loc,]
+  
+  
+  
+  if(!is.na(tab2$slides)){
+      
+    tab2$slides_      <- paste0(cell_spec(strsplit(tab2$slides,';')[[1]],
+                                          'html',
+                                          link=strsplit(tab2$slides_link,';')[[1]]),
+                                collapse = '<br>')
+  } else {
+    tab2$slides_ <- ''
+  }
+  
+  
+  if(!is.na(tab2$reading)){
+     
+    tab2$reading_     <- paste0(cell_spec(strsplit(tab2$reading,';')[[1]],
+                                            'html',
+                                            link=strsplit(tab2$reading_link,';')[[1]]),
+                                  collapse = '<br>')
+  } else{
+    tab2$reading_ <- ''
+  }
+  
+  if(!is.na(tab2$assignments)){
+    
+    tab2$assignments_ <- paste0(cell_spec(strsplit(tab2$assignments,';')[[1]],
+                                            'html',
+                                          link=strsplit(tab2$assignments_link,';')[[1]]),
+                                  collapse = '<br>')
+  } else{
+    tab2$assignments_ <- ''
+  }
+  
+  if(!is.na(tab2$date)){
+    
+    tab2$date_ <- paste0(cell_spec(strsplit(tab2$date,';')[[1]],
+                                            'html'),
+                                  collapse = '<br>')
+  } else{
+    tab2$date_ <- ''
+  }
+  
+  
+  if(!is.na(tab2$topic)){
+    
+    tab2$topic_ <- paste0(cell_spec(strsplit(tab2$topic,';')[[1]],
+                                            'html'),
+                                  collapse = '<br>')
+  } else{
+    tab2$topic_ <- ''
+  }
+  
+    
+  if(!is.na(tab2$lab)){
+    
+    tab2$lab_ <- paste0(cell_spec(strsplit(tab2$lab,';')[[1]],
+                                            'html',
+                                          link=strsplit(tab2$lab_link,';')[[1]]),
+                                  collapse = '<br>')
+  } else{
+    tab2$lab_ <- ''
+  }
+  
+
+
+  
+  
+    
+  if(!is.na(tab2$week)){
+    
+    tab2$week_ <- paste0(cell_spec(tab2$week,'html'),
+                                  collapse = '<br>')
+  } else{
+    tab2$week_ <- ''
+  }
+  
+  
+  tab2 <- tab2[,c('week_','date_','topic_','slides_','reading_','assignments_','lab_')]
+  
+  rownames(tab2) <- NULL
+  
+  tab2 %>%
+    kbl(format = 'html',
+        escape = FALSE,
+        col.names = c('Week','Dates','Topics','Slides','Readings','Assignments','Lab')) %>%
+    kable_material(c("striped", "hover"),full_width = T) %>%
+    row_spec(0, background = "#F6FBF4") %>%
+    row_spec(0:1, extra_css = "border-bottom: solid;") %>%
+    row_spec(0:1, extra_css = "border-top: solid;") %>%
+    row_spec(0:1, extra_css = "border-left: solid;") %>%
+    row_spec(0:1, extra_css = "border-right: solid;")
+  
+}
+```
+
+### Week 1: Introduction
+
+```{r}
+
+tbl(tab,d=tab$week[1])
+
 ```
 
