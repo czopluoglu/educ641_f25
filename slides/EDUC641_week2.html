@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Describing Continuous Variables</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Cengiz Zopluoglu" />
+    <script src="EDUC641_week2_files/header-attrs-2.20/header-attrs.js"></script>
+    <link href="EDUC641_week2_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="EDUC641_week2_files/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="EDUC641_week2_files/remark-css-0.0.1/ki-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my_custom.css" type="text/css" />
+    <link rel="stylesheet" href="xaringanthemer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Describing Continuous Variables
+]
+.subtitle[
+## EDUC 641: Week 2
+]
+.author[
+### Cengiz Zopluoglu
+]
+
+---
+
+
+
+&lt;style&gt;
+
+#infobox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background: #E6F6DC 5px center/3em no-repeat;
+}
+
+.left-column2 {
+  width: 75%;
+  height: 92%;
+  float: left;
+  padding-top: 1em;
+}
+
+.right-column2 {
+  width: 20%;
+  float: right;
+  padding-top: 1em;
+}
+
+.remark-code {
+  font-size: 18px;
+}
+
+.tiny .remark-code { /*Change made here*/
+  font-size: 70% !important;
+}
+
+&lt;/style&gt;
+
+
+
+### Goals
+
+By the end of this session, you should be able to:
+
+- Summarize and describe continuous quantitative variables.
+
+- Explain key measures of central tendency: mean, median, and mode.
+
+- Explain measures of variability: quartiles, interquartile range, range, variance, and standard deviation.
+
+- Describe measures of distribution shape: skewness and kurtosis.
+
+- Create clear visualizations of continuous data in R, including:
+
+    - Histograms
+
+    - Density plots
+
+    - Stem-and-leaf displays
+
+    - Boxplots
+
+---
+
+### Introducing the dataset
+
+Imagine you are working for the World Health Organization (WHO), exploring life expectancy across different regions.
+
+Using this dataset, we can ask questions such as:
+
+- How does life expectancy compare between high-income countries and middle- or low-income countries?
+
+- Do populations in countries with more years of schooling tend to live longer, on average?
+
+--
+
+&lt;div id="infobox"&gt;
+
+⚠️ &lt;b&gt;Important note&lt;/b&gt;: These questions sound causal, but in this exercise we are not establishing causality. Our goal here is purely descriptive and educational.
+
+&lt;/div&gt;
+
+--
+
+Before diving into comparisons of socioeconomic conditions or more advanced analysis, it’s essential to begin with a careful description of the variables related to our research question.
+
+--
+
+First look at the dataset:
+
+.tiny[
+         
+         ```r
+         life_exp &lt;- read.table(file   = "./resources/datasets/life_expectancy.csv",
+                                sep    = ",",
+                                header = TRUE) %&gt;%
+             
+         head(life_exp)
+         ```
+]
+
+---
+
+class: middle, inverse
+
+# Describing Continuous Variables with Distributions
+
+---
+
+### What is a distribution?
+
+&gt; A distribution describes how the values of a variable are spread across possible outcomes, showing how often (frequency) or how likely (probability) each outcome occurs in a set of observations.
+
+To see a distribution in practice, we often begin with a frequency table, which organizes the data by listing each unique value of a variable and the number of times it occurs.
+
+Consider the life expectancy variable from the sample dataset for different countries in the year 2015 (180 observations). For demonstration purposed, I rounded the values to the nearest integer.
+
+.small[
+  
+  ```
+  65, 78, 76, 52, 76, 76, 75, 83, 82, 73, 76, 77, 72, 76, 72, 81, 71, 60 
+  70, 77, 77, 66, 75, 78, 74, 60, 60, 73, 69, 57, 82, 52, 53, 85, 76, 75 
+  64, 65, 80, 78, 79, 85, 79, 60, 86, 64, 74, 76, 79, 74, 58, 65, 78, 65 
+  70, 81, 82, 66, 61, 74, 81, 62, 81, 74, 72, 59, 59, 66, 64, 75, 76, 83 
+  68, 69, 76, 69, 81, 82, 83, 76, 84, 74, 72, 63, 66, 75, 71, 75, 75, 54 
+  61, 73, 74, 82, 66, 58, 75, 78, 58, 82, 63, 75, 77, 69, 69, 76, 74, 58 
+  67, 66, 69, 82, 82, 75, 62, 54, 82, 77, 66, 78, 63, 74, 76, 68, 78, 81 
+  78, 82, 72, 75, 75, 66, 75, 73, 74, 68, 74, 67, 76, 73, 51, 83, 77, 88 
+  69, 55, 63, 57, 83, 75, 64, 72, 59, 82, 83, 64, 70, 75, 76, 68, 60, 74 
+  71, 75, 76, 66, 62, 71, 77, 81, 62, 79, 77, 69, 72, 74, 76, 66, 62, 67 
+  ```
+]
+
+---
+
+         
+
+.pull-left[
+
+.tiny[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Value &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Frequency &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 52 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 53 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 54 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 55 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 57 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 58 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 59 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 62 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 63 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 65 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 66 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 67 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 68 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 69 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+]
+
+.pull-right[
+
+.tiny[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Value &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Frequency &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 70 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 71 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 72 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 73 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 76 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 77 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 78 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 79 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 80 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 81 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 82 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 83 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 84 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 85 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 86 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 88 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+]
+
+---
+### Histogram
+
+We can graph this frequency table using a plot called **histogram**. Each bar in this histogram is called a **bin**. 
+
+In this plot, I visualized each unique value as a separate bin. This is equivalent to the frequency table, but displayed visually.
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-6-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+- When data are spread across many unique values, a histogram with one bin per value may look sparse and hard to interpret. 
+
+- We can collapse bins into wider intervals (e.g., 5 years) to make the histogram more compact and reveal the overall distribution pattern more clearly.
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-7-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Stem-and-leaf plot
+  
+&gt; A stem-and-leaf plot is a way to display the distribution of a continuous variable while preserving the actual data values.
+
+- The stem represents the leading digits (e.g., tens).
+
+- The leaf represents the final digit (e.g., ones).
+
+- Each row groups observations with the same stem, showing the spread of values within that group.
+
+
+```
+
+  The decimal point is 1 digit(s) to the right of the |
+
+  5 | 122344
+  5 | 5778888999
+  6 | 000001122222333344444
+  6 | 55556666666666777888899999999
+  7 | 00011112222222333334444444444444
+  7 | 5555555555555555666666666666666677777777888888889999
+  8 | 01111111222222222223333334
+  8 | 5568
+```
+
+This plot is similar to a histogram but keeps the original data values visible, making it useful for small to moderately sized datasets.
+
+---
+
+### Density
+
+&gt; A density plot can be thought of as a smoothed version of a histogram, showing the overall shape of a distribution.
+
+- Instead of discrete bins, the density curve is continuous.
+
+- The y-axis values represent the probability density function (PDF).
+
+    - You don’t need to calculate these values — just understand they describe the likelihood of different values.
+
+- The area under the curve = 1, so it represents the whole distribution.
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-9-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+Higher peaks correspond to more common values of life expectancy. 
+
+Any point on the curve reflects the relative likelihood of observing that value if we drew one observation at random.
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-10-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+class: middle, inverse
+# Describing Continuous Variables with Summary Statistics
+
+---
+
+### Measures of Central Tendency
+
+- Central tendency measures describe the center of a distribution.
+
+- The three most common statistics are:
+
+    - Mean
+
+    - Median
+
+    - Mode
+
+- These measures differ in how much of the data they use:
+
+    - The mode uses the least information (only the most frequent value).
+
+    - The mean uses the most information (every observation).
+
+
+---
+
+**Mode**
+
+- The mode is the value that occurs most frequently in a dataset
+
+- Simplest measure of central tendency.
+
+- Represents the most common value or “typical” observation.
+
+Example data:
+
+&gt; 8, 9, 8, 7, 10, 9, 6, 4, 9, 8, 7, 8, 10, 9, 8, 6, 9, 7, 8, 8
+
+What is the mode of this data?
+
+Sort the data first.
+
+&gt; 4, 6, 6, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10
+
+- The most frequent value is 8 → mode = 8.
+
+- We can say the data is “centered” around 8.
+
+---
+
+**Mode**
+  
+Sometimes there may be more than one mode.
+  
+  &gt; 4, 6, 6, 7, 7, 7, **8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9,** 10, 10
+
+- Both 8 and 9 appear seven times.
+
+- We would report both.
+
+The mode, as a single statistic, is rarely used in practice because it can be unstable and overly sensitive to small data quirks.
+
+In our sample dataset, the mode life expectancy is 75 and 76.
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-11-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+**Median**
+
+- The median is the midpoint of the data when all observations are ordered from smallest to largest.
+
+- 50% of the observations fall **at or below** the median.
+
+- Also called the *50th percentile of a distribution* of *2nd quartile*.
+
+How to find it:
+
+- Sort the data first
+
+- Compute `\((n+1)/2\)`, where `\(n\)` is the number of observations. This is the **midpoint** 
+
+- If `\(n\)` is odd, the midpoint position is the the median.
+
+- If `\(n\)` is even, take the average of the two values around the midpoint.
+
+---
+
+Example (Odd, `\(n\)`=11): 
+
+&gt; 4, 6, 7, 7, 7, 8, 9, 9, 9, 10, 10
+
+  - Midpoint position = (11+1)/2=6
+
+  - The 6th value is 8 → median = 8.
+
+Example (Even, `\(n\)`=10): 
+
+&gt; 4, 6, 7, 7, 7, 8, 9, 9, 9, 10
+
+  - Midpoint position = (10+1)/2=5.5.
+
+  - Average of 5th and 6th values = (7+8)/2=7.5.
+
+  - Median = 7.5.
+  
+---
+
+In our sample dataset, the median life expectancy is 74.
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-12-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+**Mean**
+
+- The mean (arithmetic average) is the most commonly used measure of central tendency.
+
+- Defined as the sum of all values divided by the number of observations.
+
+`$$\bar{x} = \frac{\sum_{i=1}^{N} x_i}{N}$$`
+Example Data:
+
+&gt; 4, 6, 6, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10
+
+- Number of observations: # `\(N = 20\)`
+
+- Sum of all values: # `\(158\)`
+
+- Therefore:
+
+`$$\bar{x} = \frac{158}{20} = 7.9$$`
+---
+
+In our sample dataset, the mean life expectancy is 71.75.
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-13-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+**Pros and Cons of Central Tendency Measures**
+
+- The choice of central tendency measure depends on how well it represents the variable.
+
+- **Symmetric distribution, no extreme scores** → mean, median, and mode are all close, so the mean is a natural choice.
+
+- **Advantages of the mean:**
+
+    - Can be expressed with a formula and manipulated algebraically.
+
+    - Plays a central role in statistical theory (e.g., Central Limit Theorem).
+
+- **Limitations of the mean:**
+
+    - Highly sensitive to extreme scores (outliers).
+
+    - May misrepresent the “center” in skewed or heavy-tailed distributions.
+
+- Median is more robust to extreme values and may be preferred when extreme values are present.
+
+- Mode is simple but less informative and rarely used alone, though it can describe the overall shape of a distribution.
+
+---
+
+- Humans on Mars and Venus have very low life expectancies (for now).
+
+- Question: How would adding these two (as zeros) change the mode, mean, and median for life expectancy?
+
+.small[
+  
+  ```
+  65, 78, 76, 52, 76, 76, 75, 83, 82, 73, 76, 77, 72, 76, 72, 81, 71, 60 
+  70, 77, 77, 66, 75, 78, 74, 60, 60, 73, 69, 57, 82, 52, 53, 85, 76, 75 
+  64, 65, 80, 78, 79, 85, 79, 60, 86, 64, 74, 76, 79, 74, 58, 65, 78, 65 
+  70, 81, 82, 66, 61, 74, 81, 62, 81, 74, 72, 59, 59, 66, 64, 75, 76, 83 
+  68, 69, 76, 69, 81, 82, 83, 76, 84, 74, 72, 63, 66, 75, 71, 75, 75, 54 
+  61, 73, 74, 82, 66, 58, 75, 78, 58, 82, 63, 75, 77, 69, 69, 76, 74, 58 
+  67, 66, 69, 82, 82, 75, 62, 54, 82, 77, 66, 78, 63, 74, 76, 68, 78, 81 
+  78, 82, 72, 75, 75, 66, 75, 73, 74, 68, 74, 67, 76, 73, 51, 83, 77, 88 
+  69, 55, 63, 57, 83, 75, 64, 72, 59, 82, 83, 64, 70, 75, 76, 68, 60, 74 
+  71, 75, 76, 66, 62, 71, 77, 81, 62, 79, 77, 69, 72, 74, 76, 66, 62, 67 
+  ```
+  
+  ```
+  0, 0
+  ```
+]
+
+|  | Without Extreme Values | With Extreme Values  |
+|-------|:------:|:------:|
+| Mean    | 71.75  | 70.96   |
+| Median  | 74     | 74     |
+| Mode    | 75     | 75     |
+
+---
+
+### Comparing distributions
+
+- These distributions have the same central tendency (mean = 100).
+
+- .blue[How are they different?]
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-15-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Measures of Variability
+
+- Central tendency describes the center of a distribution.
+
+- But distributions can share the same mean/median and still look very different.
+
+- We often want to know:
+
+    - How much do values vary across observations?
+
+    - How far does a “typical” observation deviate from the mean?
+
+**Key Measures of Variability:**
+
+- Range (min to max)
+
+- Interquartile Range (IQR) (middle 50% of values)
+
+- Variance (average squared deviation from mean)
+
+- Standard Deviation (SD) (typical distance from mean, in original units)
+
+---
+
+**Range**
+
+- The range is the distance between the minimum and maximum values in a dataset.
+
+- Simple to compute, but only depends on two numbers (can be distorted by extreme values).
+
+`$$Range = Max - Min$$`
+Example Data:
+
+&gt; 62, 64, 66, 70, 72, 76, 77, 81, 81
+
+Min = 62
+
+Max = 81
+
+Range = 81 – 62 = 19
+
+---
+
+**Interquartile Range (IQR)**
+
+The IQR is the difference between the 1st quartile (Q1 = 25th percentile) and the 3rd quartile (Q3 = 75th percentile).
+
+`$$IQR = Q_3 - Q_1$$`
+
+- The IQR summarizes the middle 50% of the data (the most typical values).
+
+- More robust to outliers than the range, because it ignores the extreme highs and lows.
+
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-16-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+**Variance**
+
+- Variance measures the average squared deviation of each observation from the mean.
+
+`$$s^2 = \frac{\sum_{i=1}^{N}(x_i - \bar{x})^2}{N - 1}$$`
+- We divide by 𝑁−1 instead of N to correct for bias when estimating the population variance from a sample.
+
+---
+
+Breaking down the variance formula:
+
+| observed value | mean | deviance | deviance² |
+|:--------------:|:----:|:--------:|:---------:|
+|       62       | 72.1 |  -10.1   |  102.01   |
+|       64       | 72.1 |  -8.11   |   65.77   |
+|       66       | 72.1 |  -6.11   |   37.33   |
+|       70       | 72.1 |  -2.11   |    4.45   |
+|       72       | 72.1 |  -0.111  |    0.01   |
+|       76       | 72.1 |   3.89   |   15.13   |
+|       77       | 72.1 |   4.89   |   23.90   |
+|       81       | 72.1 |   8.89   |   79.03   |
+|       81       | 72.1 |   8.89   |   79.03   |
+| **Σ**          |      | **0**    | **406.66**|
+
+`$$s^2 = \frac{406.66}{9-1}=50.83$$`
+---
+
+**Standard Deviation (SD)**
+
+- Variance is useful but expressed in squared units, which makes it less intuitive.
+
+- To bring variability back into the original units of measurement, we take the square root of the variance.
+
+- This gives us the standard deviation (SD) — the most commonly reported measure of spread.
+
+`$$s = \sqrt{s^2}$$`
+
+
+- Standard deviation represents the typical distance of observations from the mean.
+
+- Larger SD → data are more spread out.
+
+- Smaller SD → data are more tightly clustered around the mean.
+
+---
+
+**Statistical Notation**
+
+Statistics usually have two notational forms:
+
+- Population statistics (Greek letters) → describe the full universe of possible values.
+
+- Sample statistics (Roman letters) → describe actual values in our data.
+
+.pull-left[
+Sample Statistics (Roman Alphabet)
+
+- Mean: `\(\bar{x}\)`
+
+- Standard Deviation: `\(s\)`
+
+- Variance: `\(s^2\)`
+]
+
+.pull-right[
+Population Statistics (Greek Alphabet)
+
+- Mean: `\(\mu\)`
+
+- Standard Deviation: `\(\sigma\)`
+
+- Variance: `\(\sigma^2\)`
+]
+
+---
+
+In practice, we usually use sample statistics to *estimate* population statistics.
+
+An estimated value is denoted with a “hat” symbol.
+
+.pull-left[
+Sample Statistics → Population Estimates
+
+- `\(\bar{x} \rightarrow \hat{\mu}\)`
+
+- `\(s \rightarrow \hat{\sigma}\)`
+
+- `\(s^2 \rightarrow \hat{\sigma}^2\)`
+]
+
+.pull-right[
+Population (Greek Alphabet)
+
+- Mean: `\(\mu\)`
+
+- Standard Deviation: `\(\sigma\)`
+
+- Variance: `\(\sigma^2\)`
+]
+
+
+Greek vs. Roman letters are conventions, not rules.
+
+For example, we could use `\(\psi\)` for the mean — but standard symbols ($\mu$, `\(\sigma\)`) reduce cognitive load.
+
+You’ll want to get familiar with the most commonly used notations in textbooks and academic literature.
+
+---
+
+### Measures of Shape
+
+So far, we’ve described a distribution with:
+
+  - Center → mean, median, mode
+
+  - Spread → range, IQR, variance, standard deviation
+
+--
+
+But two distributions can have the same center and spread yet still look very different.
+
+To fully describe a distribution, we also need to consider its shape.
+
+- Skewness → direction and degree of asymmetry
+
+- Kurtosis → “peakedness”, "pointiness", or heaviness of tails
+
+---
+
+**Skewness**
+
+- Not all real-world distributions are symmetrical.
+
+- Many show asymmetry, called **skewness**.
+
+- Skewness describes whether values are “bunched up” more on one side of the mean.
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-17-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+**Kurtosis**
+
+- *Kurtosis* describes how much values concentrate around the center → the “peakedness” of a distribution.
+
+Types of kurtosis:
+
+- Leptokurtic → more values near the center, taller/narrower peak, heavier tails.
+
+- Mesokurtic  → normal distribution as a reference (no excess kurtosis).
+
+- Platykurtic] → flatter peak, lighter tails, more spread out.
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-18-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+**Evaluating Skew and Kurtosis**
+
+These can be assessed both visually and quantitatively.
+
+- Skewness
+
+  - Positive skew → Skewness &gt; 0
+
+  - Negative skew → Skewness &lt; 0
+
+- Kurtosis (Excess)
+
+  - Leptokurtic (tall/narrow, heavy tails) → Kurtosis &gt; 0
+
+  - Platykurtic (flat, light tails) → Kurtosis &lt; 0
+  
+---
+
+**Moments of a Distribution**
+
+Each statistic we’ve introduced corresponds to a different moment (mathematical characteristic) of a distribution:
+
+- Mean (1st moment, location)
+
+`$$\mu = \frac{\Sigma(x_i)}{N}$$`
+
+- Variance (2nd moment, spread)
+
+`$$\sigma^2 = \frac{\Sigma(X_i-\mu)^2}{N}$$`
+
+- Skewness (3rd moment, asymmetry)
+
+`$$skewness(X) = \frac{1}{N\sigma^3}\Sigma(X_i-\mu)^3$$`
+
+- Kurtosis (4th moment, “peakedness” / tails)
+
+`$$kurtosis(X) = \frac{1}{N\sigma^4}\Sigma(X_i-\mu)^4 - 3$$`
+
+You don’t need to compute these by hand, but you should understand how to interpret them.
+
+---
+
+**Kurtosis: Two Conventions**
+
+- Different software/packages use different definitions of kurtosis.
+
+- This can cause confusion, but the two are directly related.
+
+**Raw Kurtosis (a.k.a. 4th standardized moment)*
+
+`$$\frac{1}{N} \sum \left(\frac{X_i - \mu}{\sigma}\right)^4$$`
+For a normal distribution, raw kurtosis is equal to 3. So, values lower than 3 are platykurtic, and values higher than 3 are leptokurtic.
+
+**Excess Kurtosis**
+
+`$$\frac{1}{N} \sum \left(\frac{X_i - \mu}{\sigma}\right)^4 - 3$$`
+
+For a normal distribution, excess kurtosis is equal to 0. So, values lower than 0 are platykurtic, and values higher than 0 are leptokurtic.
+
+---
+
+- It is critical that you know which definition of kurtosis is used by any software you use before you interpret the kurtosis value.
+
+In R:
+
+- `moments::kurtosis()` function uses the definition of raw kurtosis
+
+
+- `psych::describe()` function uses the definition of excess kurtosis
+
+💡 Rule of thumb: When reporting, always state which convention you’re using (raw or excess).
+
+---
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-19-1.svg" style="display: block; margin: auto;" /&gt;
+
+Shape: Does the distribution look symmetric or asymmetric?
+
+Skewness: Is there evidence of strong right or left skew?
+
+Kurtosis: Does the curve appear flatter (platykurtic) or more peaked (leptokurtic) compared to a normal distribution?
+
+---
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-20-1.svg" style="display: block; margin: auto;" /&gt;
+
+**Numerical Assessment**
+
+- Skewness = -0.50
+
+- Raw Kurtosis = 2.56 (Normal Distribution = 3)
+
+- Excess Kurtosis = -0.44 (Normal Distribution = 0)
+
+The distribution of life expectancy is nearly symmetric, with only mild left skew and slightly flatter peak/tails than a normal curve.
+
+---
+
+### Reporting Descriptive Statistics (APA Style)
+
+Get familiar with the [APA Style Table Setup](https://apastyle.apa.org/style-grammar-guidelines/tables-figures/tables) guidelines!
+
+&lt;img src="../resources/images/APA_Table.png" width="1093" style="display: block; margin: auto;" /&gt;
+
+**Narrative Write-up Example**
+
+&gt; The average life expectancy in 2015 ranged from 51 to 88, *M* = 71.75, *SD* = 8.08.
+
+---
+
+**Box-and-whisker plots**
+
+A box-and-whisker plot summarizes a distribution using the five-number summary:
+
+- Min, Q1, Median (Q2), Q3, Max.
+
+- The whiskers extend to the most extreme values within the fences:
+
+Lower fence = Q1 − 1.5·IQR
+
+Upper fence = Q3 + 1.5·IQR
+
+Points outside the fences are shown as extreme values.
+
+(Note: the fences are not part of the five-number summary; they’re a rule to flag outliers.)
+
+---
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-22-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="EDUC641_week2_files/figure-html/unnamed-chunk-23-1.svg" style="display: block; margin: auto;" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
