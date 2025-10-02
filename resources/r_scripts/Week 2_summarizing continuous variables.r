@@ -21,14 +21,11 @@ require('psych')
 ################################################################################
 
 
-life_exp <- read.table(file   = "./resources/datasets/life_expectancy.csv",
+life_exp_2015 <- read.table(file   = "./resources/datasets/life_expectancy_2015.csv",
                        sep    = ",",
-                       header = TRUE) %>%
-            clean_names() %>%                # making variable names take a common format
-            filter(year==2015) %>%           # filtering observations from 2015
-            mutate(life_expectancy = round(life_expectancy, 0)) # round this column to the nearest integer
-  
-head(life_exp)
+                       header = TRUE)
+
+head(life_exp_2015)
 
 ################################################################################
 #
@@ -39,11 +36,11 @@ head(life_exp)
 
 # Frequency table for life expectancy variable
 
-table(life_exp$life_expectancy)
+table(life_exp_2015$life_expectancy)
 
 # Histogram with a separate bin for each unique value
 
-hist(x      = life_exp_2015$Life.expectancy,
+hist(x      = life_exp_2015$life_expectancy,
      breaks = 50:89,
      col    = 'white',
      xlab   = 'Life Expectancy',
@@ -51,18 +48,18 @@ hist(x      = life_exp_2015$Life.expectancy,
 
 # Histogram with collapsed bins (a bin for every five year)
 
-hist(x      = life_exp_2015$Life.expectancy,
+hist(x      = life_exp_2015$life_expectancy,
      breaks = seq(50, 90, 5),
      col    = 'white',
      xlab   = 'Life Expectancy',
      main   = '')
 
 # Stem-and-leaf plot
-stem(life_exp_2015$Life.expectancy,scale=0.5)
+stem(life_exp_2015$life_expectancy,scale=0.5)
 
 # Density plot
 
-d <- density(life_exp_2015$Life.expectancy)
+d <- density(life_exp_2015$life_expectancy)
 
 plot(d,
      main = "Density Plot of Life Expectancy (2015)",
@@ -81,14 +78,14 @@ plot(d,
 # R does not have a built-in mode() function for this purpose
 # Instead, you can tabulate frequencies and find the maximum:
 
-tab <- table(life_exp_2015$Life.expectancy)
+tab <- table(life_exp_2015$life_expectancy)
 
 sort(tab)
 
   # In this case, there are multiple modes
   # Both 75 and 76 would be reported as mode
 
-d <- density(life_exp_2015$Life.expectancy)
+d <- density(life_exp_2015$life_expectancy)
 
 plot(d,
      main = "Density Plot of Life Expectancy (2015)",
@@ -109,9 +106,9 @@ legend("topright",                   # Position of legend
 
 ?median
 
-median(life_exp_2015$Life.expectancy)
+median(life_exp_2015$life_expectancy)
 
-d <- density(life_exp_2015$Life.expectancy)
+d <- density(life_exp_2015$life_expectancy)
 
 plot(d,
      main = "Density Plot of Life Expectancy (2015)",
@@ -132,9 +129,9 @@ legend("topright",                                  # Position of legend
 
 ?mean
 
-mean(life_exp_2015$Life.expectancy)
+mean(life_exp_2015$life_expectancy)
 
-d <- density(life_exp_2015$Life.expectancy)
+d <- density(life_exp_2015$life_expectancy)
 
 plot(d,
      main = "Density Plot of Life Expectancy (2015)",
@@ -162,28 +159,28 @@ legend("topright",                                  # Position of legend
 
 ?range
 
-range(life_exp_2015$Life.expectancy)
+range(life_exp_2015$life_expectancy)
 
 ###########     IQR        ##########
 
 ?quantile
 
-quantile(life_exp_2015$Life.expectancy)
+quantile(life_exp_2015$life_expectancy)
 
 
 ?IQR
 
-IQR(life_exp_2015$Life.expectancy)
+IQR(life_exp_2015$life_expectancy)
 
 ###########     Variance   ##########
 
 ?var
-var(life_exp_2015$Life.expectancy)
+var(life_exp_2015$life_expectancy)
 
 ###########     Standard Deviation   ##########
 
 ?sd
-sd(life_exp_2015$Life.expectancy)
+sd(life_exp_2015$life_expectancy)
 
 ################################################################################
 #
@@ -194,18 +191,18 @@ sd(life_exp_2015$Life.expectancy)
 # Skewness
 
 ?moments::skewness
-skewness(life_exp_2015$Life.expectancy)
+skewness(life_exp_2015$life_expectancy)
 
 ?psych::skew
-skew(life_exp_2015$Life.expectancy)
+skew(life_exp_2015$life_expectancy)
 
 # Kurtosis
 
 ?moments::kurtosis
-kurtosis(life_exp_2015$Life.expectancy)
+kurtosis(life_exp_2015$life_expectancy)
 
 ?psych::kurtosi
-kurtosi(life_exp_2015$Life.expectancy)
+kurtosi(life_exp_2015$life_expectancy)
 
 
 
