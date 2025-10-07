@@ -152,8 +152,8 @@ First look at the dataset:
 ```{r, echo=TRUE,eval=FALSE,comment='',indent = '         '}
 life_exp <- read.table(file   = "./resources/datasets/life_expectancy.csv",
                        sep    = ",",
-                       header = TRUE) %>%
-    
+                       header = TRUE)
+  
 head(life_exp)
 ```
 ]
@@ -176,7 +176,7 @@ Consider the life expectancy variable from the sample dataset for different coun
 
 .small[
 ```{r, echo=FALSE,eval=TRUE,comment='',indent = '  '}
-life_exp <- read.table(file   = here("resources/datasets/life_expectancy.csv"),
+life_exp <- read.table(file   = here("resources/datasets/life_expectancy_all.csv"),
                          sep    = ",",
                          header = TRUE)
 
@@ -401,7 +401,7 @@ legend("topright",
 
 - The median is the midpoint of the data when all observations are ordered from smallest to largest.
 
-- 50% of the observations fall **at or below** the median.
+- When all data points are distinct, the median does split the dataset into two equal halves (50% below, 50% above).
 
 - Also called the *50th percentile of a distribution* of *2nd quartile*.
 

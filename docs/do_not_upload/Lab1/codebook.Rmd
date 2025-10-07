@@ -1,0 +1,293 @@
+---
+title: "ECLS-K Codebook"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    theme: readable
+---
+
+
+```{r,echo=FALSE,eval=TRUE,warning=FALSE}
+library(knitr)
+library(kableExtra)  # styling, striping, borders, group rows
+```
+
+```{r,echo=FALSE,eval=TRUE,warning=FALSE}
+# Collapse code:value pairs into a single string like "1: YES; 2: NO"
+collapse_codes <- function(codes_named_vec) {
+  if (length(codes_named_vec) == 0) return("")
+  paste(paste(names(codes_named_vec), codes_named_vec, sep = ": "), collapse = "; ")
+}
+
+# Reusable categorical value sets
+yn <- c(`1`="YES", `2`="NO")
+
+race_eth_1_8 <- c(
+  `1`="WHITE, NON-HISPANIC",
+  `2`="BLACK/AFRICAN AMERICAN, NON-HISPANIC",
+  `3`="HISPANIC, RACE SPECIFIED",
+  `4`="HISPANIC, NO RACE SPECIFIED",
+  `5`="ASIAN, NON-HISPANIC",
+  `6`="NATIVE HAWAIIAN/PACIFIC ISLANDER, NON-HISPANIC",
+  `7`="AMERICAN INDIAN/ALASKA NATIVE, NON-HISPANIC",
+  `8`="TWO OR MORE RACES, NON-HISPANIC"
+)
+
+locale_1_4 <- c(
+  `1`="CITY (11–13)",
+  `2`="SUBURB (21–23)",
+  `3`="TOWN (31–33)",
+  `4`="RURAL (41–43)"
+)
+
+par_ed_0_8 <- c(
+  `0`="NONE",
+  `1`="8TH GRADE OR BELOW",
+  `2`="9TH–12TH GRADE",
+  `3`="HIGH SCHOOL DIPLOMA/EQUIVALENT",
+  `4`="VOC/TECH PROGRAM",
+  `5`="SOME COLLEGE",
+  `6`="BACHELOR'S DEGREE",
+  `7`="GRADUATE/PROF SCHOOL – NO DEGREE",
+  `8`="MASTER'S (MA, MS) OR HIGHER"
+)
+
+# Row builder: now includes Definition and Missing columns
+row_def <- function(var, desc_or_def, codes = c(), missing = "") {
+  data.frame(
+    Variable   = var,
+    Definition = desc_or_def,
+    Values     = collapse_codes(codes),
+    Missing    = missing,
+    stringsAsFactors = FALSE
+  )
+}
+
+# === New definitions & missing codes you provided ===
+dm <- list(
+  CHILDID   = list(def="CHILD IDENTIFICATION NUMBER", miss=""),
+  X1RSCALK5 = list(def="X1 READING IRT SCALE SCORE-K5 DATA FILE", miss="-9"),
+  X2RSCALK5 = list(def="X2 READING IRT SCALE SCORE-K5 DATA FILE", miss="-9"),
+  X1MSCALK5 = list(def="X1 MATH IRT SCALE SCORE-K5 DATA FILE", miss="-9"),
+  X2MSCALK5 = list(def="X2 MATH IRT SCALE SCORE-K5 DATA FILE", miss="-9"),
+  X1PRNAPP = list(def="X1 PARENT REPORT APPROACHES TO LEARNING", miss="-9, -1"),
+  X2PRNAPP = list(def="X2 PARENT REPORT APPROACHES TO LEARNING", miss="-9, -1"),
+  X1PRNSOC = list(def="X1 PARENT REPORT SOCIAL INTERACTION", miss="-9, -1"),
+  X2PRNSOC = list(def="X2 PARENT REPORT SOCIAL INTERACTION", miss="-9, -1"),
+  X1PRNSAD = list(def="X1 PARENT REPORT SAD/LONELY", miss="-9, -1"),
+  X2PRNSAD = list(def="X2 PARENT REPORT SAD/LONELY", miss="-9, -1"),
+  X1PRNIMP = list(def="X1 PARENT REPORT IMPULSIVE/OVERACTIVE", miss="-9, -1"),
+  X2PRNIMP = list(def="X2 PARENT REPORT IMPULSIVE/OVERACTIVE", miss="-9, -1"),
+  X1TCHAPP = list(def="X1 TEACHER REPORT APPROACHES TO LEARNING", miss="-9, -1"),
+  X2TCHAPP = list(def="X2 TEACHER REPORT APPROACHES TO LEARNING", miss="-9, -1"),
+  X1TCHCON = list(def="X1 TEACHER REPORT SELF-CONTROL", miss="-9, -1"),
+  X2TCHCON = list(def="X2 TEACHER REPORT SELF-CONTROL", miss="-9, -1"),
+  X1TCHPER = list(def="X1 TEACHER REPORT INTERPERSONAL", miss="-9, -1"),
+  X2TCHPER = list(def="X2 TEACHER REPORT INTERPERSONAL", miss="-9, -1"),
+  X1TCHEXT = list(def="X1 TEACHER REPORT EXTERN PROB BEHAVIORS", miss="-9, -1"),
+  X2TCHEXT = list(def="X2 TEACHER REPORT EXTERN PROB BEHAVIORS", miss="-9, -1"),
+  X1TCHINT = list(def="X1 TEACHER REPORT INTERN PROB BEHAVIORS", miss="-9, -1"),
+  X2TCHINT = list(def="X2 TEACHER REPORT INTERN PROB BEHAVIORS", miss="-9, -1"),
+  X1ATTNFS = list(def="X1 TEACHER REPORT ATTENTIONAL FOCUS", miss="-9, -1"),
+  X2ATTNFS = list(def="X2 TEACHER REPORT ATTENTIONAL FOCUS", miss="-9, -1"),
+  X1INBCNT = list(def="X1 TEACHER REPORT INHIBITORY CONTROL", miss="-9, -1"),
+  X2INBCNT = list(def="X2 TEACHER REPORT INHIBITORY CONTROL", miss="-9, -1"),
+  X4KINBCNT = list(def="X4K TEACHER REPORT INHIBITORY CONTROL", miss="-9, -1"),
+  X1BMI    = list(def="X1 CHILD COMPOSITE BMI", miss="-9"),
+  X2BMI    = list(def="X2 CHILD COMPOSITE BMI", miss="-9"),
+  X1HEIGHT = list(def="X1 CHILD COMPOSITE HGT (INCHES)", miss="-9, -8, -7"),
+  X2HEIGHT = list(def="X2 CHILD COMPOSITE HGT (INCHES)", miss="-9, -8, -7"),
+  X1WEIGHT = list(def="X1 CHILD COMPOSITE WGT (POUNDS)", miss="-9, -8, -7"),
+  X2WEIGHT = list(def="X2 CHILD COMPOSITE WGT (POUNDS)", miss="-9, -8, -7"),
+  X_HISP_R   = list(def="CHILD HISPANIC/LATINO (ANY RACE) - REV", miss="-9"),
+  X_WHITE_R  = list(def="CHILD WHITE - REVISED", miss="-9"),
+  X_BLACK_R  = list(def="CHILD BLACK/AFRICAN AMERICAN - REVISED", miss="-9"),
+  X_ASIAN_R  = list(def="CHILD ASIAN - REVISED", miss="-9"),
+  X_AMINAN_R = list(def="CHILD AMER INDIAN/ALASKA NATIVE - REV", miss="-9"),
+  X_HAWPI_R  = list(def="CHILD NATIVE HAWAIIAN/PAC ISL - REVISED", miss="-9"),
+  X_MULTR_R  = list(def="CHILD TWO OR MORE RACES - REVISED", miss="-9"),
+  X_RACETH_R = list(def="CHILD RACE PARENT AND SCHL REPORT - REV", miss="-9"),
+  X_RACETHP_R= list(def="CHILD RACE FROM PARENT INTERVIEW - REV", miss="-9"),
+  X12LANGST  = list(def="X12 HOME LANGUAGE OF CHILD", miss="-9"),
+  X1FIRKDG   = list(def="X1 FIRST-TIME KINDERGARTNER", miss="-9"),
+  X1LOCALE   = list(def="X1 LOCATION TYPE OF SCHOOL", miss="-9, -1"),
+  X2LOCALE   = list(def="X2 LOCATION TYPE OF SCHOOL", miss="-9, -1"),
+  X12TWIN    = list(def="X12 HOUSEHOLD HAS SAMPLED TWINS", miss="-9"),
+  X1HPARNT   = list(def="X1 TYPES OF PARENTS IN HOUSEHOLD", miss="-9"),
+  X2HPARNT   = list(def="X2 TYPES OF PARENTS IN HOUSEHOLD", miss="-9"),
+  X1PAR1RAC  = list(def="X1 RACE OF PARENT 1", miss="-9"),
+  X2PAR1RAC  = list(def="X2 RACE OF PARENT 1", miss="-9"),
+  X12PAR1ED_I= list(def="X12 PARENT 1 EDUCATION LEVEL (IMPUTED)", miss="-9"),
+  X1PAR2RAC  = list(def="X1 RACE OF PARENT 2", miss="-9, -1"),
+  X2PAR2RAC  = list(def="X2 RACE OF PARENT 2", miss="-9, -1"),
+  X12PAR2ED_I= list(def="X12 PARENT 2 EDUCATION LEVEL (IMPUTED)", miss="-9"),
+  X1HTOTAL   = list(def="X1 TOTAL NUMBER IN HOUSEHOLD", miss="-9"),
+  X2HTOTAL   = list(def="X2 TOTAL NUMBER IN HOUSEHOLD", miss="-9"),
+  X1LESS18   = list(def="X1 NUMBER IN HOUSEHOLD AGED <18", miss="-9"),
+  X2LESS18   = list(def="X2 NUMBER IN HOUSEHOLD AGED <18", miss="-9"),
+  X1OVER18   = list(def="X1 NUMBER IN HOUSEHOLD AGED 18+", miss="-9"),
+  X2OVER18   = list(def="X2 NUMBER IN HOUSEHOLD AGED 18+", miss="-9"),
+  X1NUMSIB   = list(def="X1 NUMBER OF SIBLINGS IN HOUSEHOLD", miss="-9"),
+  X2NUMSIB   = list(def="X2 NUMBER OF SIBLINGS IN HOUSEHOLD", miss="-9"),
+  X1AGEENT   = list(def="X1 AGE (MONTHS) AT KINDERGARTEN ENTRY", miss="-9"),
+  X2POVTY    = list(def="X12 POVERTY LEVEL", miss="-9"),
+  X12SESL    = list(def="X12 CONTINUOUS SES MEASURE", miss="-9"),
+  X1PUBPRI   = list(def="X1 PUBLIC OR PRIVATE SCHOOL", miss="-9, -1"),
+  X2PUBPRI   = list(def="X2 PUBLIC OR PRIVATE SCHOOL", miss="-9, -1")
+)
+
+# ------- Build grouped sections (order matters for contiguous grouping) -------
+
+sections <- list(
+  # New groups/variables from your list:
+  list(
+    name = "Identifiers",
+    rows = list(
+      row_def("CHILDID", dm$CHILDID$def, c(), dm$CHILDID$miss)
+    )
+  ),
+  list(
+    name = "Assessments: Reading & Math (IRT)",
+    rows = list(
+      row_def("X1RSCALK5", dm$X1RSCALK5$def, c(), dm$X1RSCALK5$miss),
+      row_def("X2RSCALK5", dm$X2RSCALK5$def, c(), dm$X2RSCALK5$miss),
+      row_def("X1MSCALK5", dm$X1MSCALK5$def, c(), dm$X1MSCALK5$miss),
+      row_def("X2MSCALK5", dm$X2MSCALK5$def, c(), dm$X2MSCALK5$miss)
+    )
+  ),
+  list(
+    name = "Social–Emotional (Parent Reports)",
+    rows = list(
+      row_def("X1PRNAPP", dm$X1PRNAPP$def, c(), dm$X1PRNAPP$miss),
+      row_def("X2PRNAPP", dm$X2PRNAPP$def, c(), dm$X2PRNAPP$miss),
+      row_def("X1PRNSOC", dm$X1PRNSOC$def, c(), dm$X1PRNSOC$miss),
+      row_def("X2PRNSOC", dm$X2PRNSOC$def, c(), dm$X2PRNSOC$miss),
+      row_def("X1PRNSAD", dm$X1PRNSAD$def, c(), dm$X1PRNSAD$miss),
+      row_def("X2PRNSAD", dm$X2PRNSAD$def, c(), dm$X2PRNSAD$miss),
+      row_def("X1PRNIMP", dm$X1PRNIMP$def, c(), dm$X1PRNIMP$miss),
+      row_def("X2PRNIMP", dm$X2PRNIMP$def, c(), dm$X2PRNIMP$miss)
+    )
+  ),
+  list(
+    name = "Social–Emotional (Teacher Reports)",
+    rows = list(
+      row_def("X1TCHAPP", dm$X1TCHAPP$def, c(), dm$X1TCHAPP$miss),
+      row_def("X2TCHAPP", dm$X2TCHAPP$def, c(), dm$X2TCHAPP$miss),
+      row_def("X1TCHCON", dm$X1TCHCON$def, c(), dm$X1TCHCON$miss),
+      row_def("X2TCHCON", dm$X2TCHCON$def, c(), dm$X2TCHCON$miss),
+      row_def("X1TCHPER", dm$X1TCHPER$def, c(), dm$X1TCHPER$miss),
+      row_def("X2TCHPER", dm$X2TCHPER$def, c(), dm$X2TCHPER$miss),
+      row_def("X1TCHEXT", dm$X1TCHEXT$def, c(), dm$X1TCHEXT$miss),
+      row_def("X2TCHEXT", dm$X2TCHEXT$def, c(), dm$X2TCHEXT$miss),
+      row_def("X1TCHINT", dm$X1TCHINT$def, c(), dm$X1TCHINT$miss),
+      row_def("X2TCHINT", dm$X2TCHINT$def, c(), dm$X2TCHINT$miss),
+      row_def("X1ATTNFS", dm$X1ATTNFS$def, c(), dm$X1ATTNFS$miss),
+      row_def("X2ATTNFS", dm$X2ATTNFS$def, c(), dm$X2ATTNFS$miss),
+      row_def("X1INBCNT", dm$X1INBCNT$def, c(), dm$X1INBCNT$miss),
+      row_def("X2INBCNT", dm$X2INBCNT$def, c(), dm$X2INBCNT$miss),
+      row_def("X4KINBCNT", dm$X4KINBCNT$def, c(), dm$X4KINBCNT$miss)
+    )
+  ),
+  list(
+    name = "Anthropometrics",
+    rows = list(
+      row_def("X1BMI", dm$X1BMI$def, c(), dm$X1BMI$miss),
+      row_def("X2BMI", dm$X2BMI$def, c(), dm$X2BMI$miss),
+      row_def("X1HEIGHT", dm$X1HEIGHT$def, c(), dm$X1HEIGHT$miss),
+      row_def("X2HEIGHT", dm$X2HEIGHT$def, c(), dm$X2HEIGHT$miss),
+      row_def("X1WEIGHT", dm$X1WEIGHT$def, c(), dm$X1WEIGHT$miss),
+      row_def("X2WEIGHT", dm$X2WEIGHT$def, c(), dm$X2WEIGHT$miss)
+    )
+  ),
+
+  # Your original groups/variables + Definitions/Missing from the list above
+  list(
+    name = "Demographics & Identity",
+    rows = list(
+      row_def("X_HISP_R",   dm$X_HISP_R$def,   yn, dm$X_HISP_R$miss),
+      row_def("X_WHITE_R",  dm$X_WHITE_R$def,  yn, dm$X_WHITE_R$miss),
+      row_def("X_BLACK_R",  dm$X_BLACK_R$def,  yn, dm$X_BLACK_R$miss),
+      row_def("X_ASIAN_R",  dm$X_ASIAN_R$def,  yn, dm$X_ASIAN_R$miss),
+      row_def("X_AMINAN_R", dm$X_AMINAN_R$def, yn, dm$X_AMINAN_R$miss),
+      row_def("X_HAWPI_R",  dm$X_HAWPI_R$def,  yn, dm$X_HAWPI_R$miss),
+      row_def("X_MULTR_R",  dm$X_MULTR_R$def,  yn, dm$X_MULTR_R$miss),
+      row_def("X_RACETH_R",  dm$X_RACETH_R$def,  race_eth_1_8, dm$X_RACETH_R$miss),
+      row_def("X_RACETHP_R", dm$X_RACETHP_R$def, race_eth_1_8, dm$X_RACETHP_R$miss),
+      row_def("X12LANGST", dm$X12LANGST$def,
+              c(`1`="NON-ENGLISH LANGUAGE", `2`="ENGLISH LANGUAGE", `3`="CAN'T CHOOSE PRIMARY OR 2 LANG EQUALLY"),
+              dm$X12LANGST$miss)
+    )
+  ),
+  list(
+    name = "School & Locale",
+    rows = list(
+      row_def("X1FIRKDG", dm$X1FIRKDG$def, yn, dm$X1FIRKDG$miss),
+      row_def("X1LOCALE", dm$X1LOCALE$def, locale_1_4, dm$X1LOCALE$miss),
+      row_def("X2LOCALE", dm$X2LOCALE$def, locale_1_4, dm$X2LOCALE$miss),
+      row_def("X1PUBPRI", dm$X1PUBPRI$def, c(`1`="PUBLIC", `2`="PRIVATE"), dm$X1PUBPRI$miss),
+      row_def("X2PUBPRI", dm$X2PUBPRI$def, c(`1`="PUBLIC", `2`="PRIVATE"), dm$X2PUBPRI$miss)
+    )
+  ),
+  list(
+    name = "Household & Family",
+    rows = list(
+      row_def("X12TWIN", dm$X12TWIN$def, c(`0`="NO TWIN IN HOUSEHOLD", `1`="TWIN IN HOUSEHOLD"), dm$X12TWIN$miss),
+      row_def("X1HPARNT", dm$X1HPARNT$def,
+              c(`1`="TWO BIO/ADOPT PARENTS", `2`="ONE PARENT + PARTNER", `3`="ONE PARENT ONLY", `4`="OTHER GUARDIANS"),
+              dm$X1HPARNT$miss),
+      row_def("X2HPARNT", dm$X2HPARNT$def,
+              c(`1`="TWO BIO/ADOPT PARENTS", `2`="ONE PARENT + PARTNER", `3`="ONE PARENT ONLY", `4`="OTHER GUARDIANS"),
+              dm$X2HPARNT$miss),
+      row_def("X1HTOTAL", dm$X1HTOTAL$def, c(), dm$X1HTOTAL$miss),
+      row_def("X2HTOTAL", dm$X2HTOTAL$def, c(), dm$X2HTOTAL$miss),
+      row_def("X1LESS18", dm$X1LESS18$def, c(), dm$X1LESS18$miss),
+      row_def("X2LESS18", dm$X2LESS18$def, c(), dm$X2LESS18$miss),
+      row_def("X1OVER18", dm$X1OVER18$def, c(), dm$X1OVER18$miss),
+      row_def("X2OVER18", dm$X2OVER18$def, c(), dm$X2OVER18$miss),
+      row_def("X1NUMSIB", dm$X1NUMSIB$def, c(), dm$X1NUMSIB$miss),
+      row_def("X2NUMSIB", dm$X2NUMSIB$def, c(), dm$X2NUMSIB$miss),
+      row_def("X1AGEENT", dm$X1AGEENT$def, c(), dm$X1AGEENT$miss),
+      row_def("X2POVTY",  dm$X2POVTY$def,
+              c(`1`="BELOW POVERTY THRESHOLD",
+                `2`="AT OR ABOVE POVERTY (BELOW 200% THRESHOLD)",
+                `3`="AT OR ABOVE 200% THRESHOLD"),
+              dm$X2POVTY$miss),
+      row_def("X12SESL", dm$X12SESL$def, c(), dm$X12SESL$miss)
+    )
+  ),
+  list(
+    name = "Parent Characteristics",
+    rows = list(
+      row_def("X1PAR1RAC", dm$X1PAR1RAC$def, race_eth_1_8, dm$X1PAR1RAC$miss),
+      row_def("X2PAR1RAC", dm$X2PAR1RAC$def, race_eth_1_8, dm$X2PAR1RAC$miss),
+      row_def("X1PAR2RAC", dm$X1PAR2RAC$def, race_eth_1_8, dm$X1PAR2RAC$miss),
+      row_def("X2PAR2RAC", dm$X2PAR2RAC$def, race_eth_1_8, dm$X2PAR2RAC$miss),
+      row_def("X12PAR1ED_I", dm$X12PAR1ED_I$def, par_ed_0_8, dm$X12PAR1ED_I$miss),
+      row_def("X12PAR2ED_I", dm$X12PAR2ED_I$def, par_ed_0_8, dm$X12PAR2ED_I$miss)
+    )
+  )
+)
+
+# Bind sections and compute group ranges
+codebook <- do.call(rbind, lapply(sections, function(s) do.call(rbind, s$rows)))
+group_sizes <- sapply(sections, function(s) length(s$rows))
+group_names <- sapply(sections, function(s) s$name)
+starts <- cumsum(c(1, head(group_sizes, -1)))
+ends   <- cumsum(group_sizes)
+
+# Render PDF-friendly table with stripes and grouped headers
+kbl <- kable(codebook, booktabs = TRUE, caption = "ECLS-K Sub Codebook (Grouped, Compact, with Definitions & Missing)") %>%
+  kable_styling(latex_options = c("striped","hold_position","scale_down"),
+                stripe_color = "#F5F5F5")
+
+for (i in seq_along(group_names)) {
+  kbl <- group_rows(kbl, group_names[i], starts[i], ends[i])
+}
+
+kbl
+
+
+```
+
+

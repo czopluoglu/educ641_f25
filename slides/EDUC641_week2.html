@@ -119,8 +119,8 @@ First look at the dataset:
          ```r
          life_exp &lt;- read.table(file   = "./resources/datasets/life_expectancy.csv",
                                 sep    = ",",
-                                header = TRUE) %&gt;%
-             
+                                header = TRUE)
+           
          head(life_exp)
          ```
 ]
@@ -480,7 +480,7 @@ In our sample dataset, the mode life expectancy is 75 and 76.
 
 - The median is the midpoint of the data when all observations are ordered from smallest to largest.
 
-- 50% of the observations fall **at or below** the median.
+- When all data points are distinct, the median does split the dataset into two equal halves (50% below, 50% above).
 
 - Also called the *50th percentile of a distribution* of *2nd quartile*.
 
