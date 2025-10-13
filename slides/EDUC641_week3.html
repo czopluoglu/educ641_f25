@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Law of Large Numbers</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Cengiz Zopluoglu" />
+    <script src="EDUC641_week3_files/header-attrs-2.20/header-attrs.js"></script>
+    <link href="EDUC641_week3_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="EDUC641_week3_files/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="EDUC641_week3_files/remark-css-0.0.1/ki-fonts.css" rel="stylesheet" />
+    <link href="EDUC641_week3_files/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+    <script src="EDUC641_week3_files/htmlwidgets-1.6.1/htmlwidgets.js"></script>
+    <script src="EDUC641_week3_files/viz-1.8.2/viz.js"></script>
+    <link href="EDUC641_week3_files/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+    <script src="EDUC641_week3_files/grViz-binding-1.0.9/grViz.js"></script>
+    <link rel="stylesheet" href="my_custom.css" type="text/css" />
+    <link rel="stylesheet" href="xaringanthemer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Law of Large Numbers
+]
+.subtitle[
+## EDUC 641: Week 3
+]
+.author[
+### Cengiz Zopluoglu
+]
+
+---
+
+
+
+&lt;style&gt;
+
+#infobox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background: #E6F6DC 5px center/3em no-repeat;
+}
+
+.left-column2 {
+  width: 75%;
+  height: 92%;
+  float: left;
+  padding-top: 1em;
+}
+
+.right-column2 {
+  width: 20%;
+  float: right;
+  padding-top: 1em;
+}
+
+.remark-code {
+  font-size: 18px;
+}
+
+.tiny .remark-code { /*Change made here*/
+  font-size: 70% !important;
+}
+
+&lt;/style&gt;
+
+
+
+### Goals
+
+- Understand the concept and properties of the Normal Distribution
+  - Learn how mean (μ) and standard deviation (σ) define its shape  
+  - Interpret areas under the normal curve using **PDF** and **CDF**
+
+- Learn to use R functions (`dnorm`, `pnorm`, `qnorm`) for working with normal distributions  
+  - Compute probabilities and quantiles  
+  - Visualize and interpret normal curves
+
+- Apply the Empirical Rule to real-world contexts
+
+- Understand the Sampling Distribution  
+  - Conceptualize sampling distributions as distributions of sample statistics  
+  - Use simulations to explore variability across samples
+
+-Understand the Central Limit Theorem (CLT)* 
+  - See how sampling distributions approach normality as sample size increases  
+  - Connect CLT to statistical inference and hypothesis testing
+
+---
+
+class: middle, inverse
+
+# Introduction to Normal Distribution
+
+---
+
+### What is a statistical distribution?
+
+**A nontechnical definition**
+
+A statistical distribution is a tool that we use to describe how numbers tend to show up in the world. 
+
+**A more technical definition**
+
+A statistical distribution is a mathematical function that assigns probabilities to the possible values of a random variable, describing how frequently each value (or range of values) occurs.
+
+They help us talk about what’s typical, what’s unlikely, and how often different outcomes might occur.
+
+
+[A chart of univariate distributions](https://www.math.wm.edu/~leemis/chart/UDR/UDR.html)
+
+---
+
+### Normal Distribution (Gaussian Distribution)
+
+- Origins: modeling measurement error in astronomy, (for more -&gt; [Evolution of Normal Distribution](https://czopluoglu.github.io/educ641_f25/resources/readings/Stahl-EvolutionNormalDistribution-2006.pdf))
+
+- A number of real-world phenomena follow an approximately normal distribution
+
+.pull-left[
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-1-1.svg" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-2-1.svg" style="display: block; margin: auto;" /&gt;
+]
+
+- It connects the randomness of the real world with a mathematical structure 
+
+- Its symmetry around the mean simplifies a lot of things
+
+- Plays a central role in classical statistical inference (hypothesis testing)
+
+---
+
+### Definition &amp; Notation
+
+A normal random variable is written 
+
+`$$X \sim \mathcal{N}(\mu, \sigma)$$`
+
+where:
+
+-  `\(\mu\)` represents the mean parameter (location), and
+
+- `\(\sigma\)` represents the standard deviation parameter (scale)
+  
+Every continuous distribution is defined by a **probability density function** (PDF) that determines its shape.
+
+$$
+f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{- \frac{(x-\mu)^2}{2\sigma^2}}
+$$
+
+- `\(x\)` is the real-valued input value for the function
+
+- `\(\pi\)` (3.14...) and `\(e\)` (2.71...) are mathematical constants
+  
+---
+
+.pull-left[
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-3-1.svg" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+.tiny[
+
+`$$f(x=30) = \frac{1}{10*\sqrt{2*3.14}} e^{- \frac{(30-50)^2}{2*10^2}}=0.0054$$`
+
+$$ $$
+
+`$$f(x=40) = \frac{1}{10*\sqrt{2*3.14}} e^{- \frac{(40-50)^2}{2*10^2}}=0.024$$`
+]
+
+The probability of observing values around 40 are more likely than the probability of observing values around 30 because X=40 has a higher density than X = 30.
+
+]
+
+For continuous distributions, while they are closely related, the **probability** and **the probability density** are not the same thing.
+
+$$ Probability \neq Density $$
+PDF gives density, not probability.
+
+---
+
+### Cumulative Distribution Function (CDF)
+
+When working with continuous distributions, it doesn’t make sense to talk about the probability of a single exact value as it is literally zero. Why? 
+
+What does make sense is talking about the probability that a random variable falls **within a range of values**.  
+
+To find this probability, we calculate the area under the curve of the probability density function (PDF) over that range.
+
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-4-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+The **cumulative distribution function (CDF)** gives the probability that a random variable takes on a value **less than or equal to** a specified value \(x\).
+
+CDF represents the **area under the probability density function (PDF)** from `\(-\infty\)` up to `\(x\)`:
+
+`$$F(x) = P(X \le x) = \int_{-\infty}^{x} f(t)\,dt$$`
+
+
+By definition, the **total area under the PDF** from `\(-\infty\)` to `\(+\infty\)` equals **1**, representing the entire probability space.
+
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-5-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Probability Functions in R
+
+R provides a consistent naming convention for working with **probability distributions**.
+
+| Function | Meaning | Concept |
+|-----------|----------|----------|
+| `d*` | Density | Returns the value of the probability density function (PDF) at a given point |
+| `p*` | Probability| Returns the value of the cumulative distribution function (CDF) — the probability of observing a value less than or equal to `x` |
+
+For a normal distribution, `\(X \sim N(\mu, \sigma)\)`:
+
+`$$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{- \frac{(x-\mu)^2}{2\sigma^2}}$$`
+
+`$$F(x) = P(X \le x) = \int_{-\infty}^{x} f(t)\,dt$$`
+
+- `dnorm(x, mean, sd)` → gives the **height of the PDF** (the density) at point `x`
+
+- `pnorm(x, mean, sd)` → gives the **area under the PDF up to `x`** (the cumulative probability)
+
+---
+
+#### 📈 Example: The Normal Distribution
+
+```r{eval=FALSE,echo=TRUE}
+dnorm(40, mean = 50, sd = 10)   # Density at x = 50
+
+pnorm(40, mean = 50, sd = 10)   # P(X ≤ 40)
+
+pnorm(40, mean = 50, sd = 10,lower.tail = FALSE)   # P(X &gt; 40)
+
+```
+
+---
+
+**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value of 40 or less?**
+
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-6-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 40 and 60 (within 1 standard deviation of the mean)?**
+
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-7-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 30 and 70 (within 2 standard deviation of the mean)?**
+
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-8-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 20 and 80 (within 2 standard deviation of the mean)?**
+
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-9-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+### 📊 The Empirical Rule
+
+For a **normally distributed** variable, approximately,
+
+- **68.3%** of observations fall within **1 standard deviation** of the mean, `\([\mu - \sigma, \, \mu + \sigma]\)`
+
+- **95.5%** of observations fall within **2 standard deviations** of the mean,  `\([\mu - 2\sigma, \, \mu + 2\sigma]\)`
+
+- **99.7%** of observations fall within **3 standard deviations** of the mean, `\([\mu - 3\sigma, \, \mu + 3\sigma]\)`
+
+
+🧠 **Remember:**  
+
+These percentages are so common they’re often called the **“68–95–99 rule.”**  
+You’ll see or hear them frequently in statistics discussions and data interpretation.
+
+---
+
+### Standard Normal Distribution
+
+A special transformation simplifies the equations for the normal distribution.
+
+**Standard Normal Distribution**: `\(Z \sim \mathcal{N}(0, 1)\)`
+
+$$
+X \sim \mathcal{N}(\mu,\sigma) \quad \Longleftrightarrow \quad Z=\frac{X-\mu}{\sigma} \sim \mathcal{N}(0,1)
+$$
+
+PDF for the standard normal distribution simplifies to the following:
+
+`$$f(x) = \frac{1}{\sqrt{2\pi}} e^{- \frac{x^2}{2}}$$`
+
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-10-1.svg" style="display: block; margin: auto;" /&gt;
+---
+
+In R, the default settings for the `dnorm` and `pnorm` function implies a standard normal distribution.
+
+```r{eval=FALSE,echo=TRUE}
+dnorm(-1)   # Density at x = -1
+
+pnorm(-1)   # P(X ≤ -1)
+
+pnorm(-1,lower.tail = FALSE)   # P(X &gt; -1)
+
+```
+---
+
+### Quantiles and the `qnorm()` Function
+
+The **quantile function** (inverse of the CDF) gives the value of a random variable **at or below** a specified probability.
+
+If `$$F(x) = P(X \le x),$$`  
+then the quantile function is the inverse:  
+
+`$$F^{-1}(p) = x$$` such that $$P(X \le x) = p $$
+
+In R, use the `qnorm()` function:
+
+.tiny[
+| Function | Meaning | Example |
+|-----------|----------|----------|
+| `qnorm(p, mean, sd)` | Returns the value of X where the cumulative probability equals `p` | `qnorm(0.90, mean = 50, sd = 10)` → 66.45 |
+]
+
+This means that 90% of the distribution lies below **62.82** when `\(X \sim \mathcal{N}(50, 10)\)`.
+
+---
+
+#### General Naming Convention for R probability functions (base)
+
+
+| Prefix | Meaning                      | Example (Normal) |
+| ------ | ---------------------------- | ---------------- |
+| `d`    | density (PDF)                | `dnorm()`        |
+| `p`    | cumulative probability (CDF) | `pnorm()`        |
+| `q`    | quantile (inverse CDF)       | `qnorm()`        |
+| `r`    | random generation            | `rnorm()`        |
+
+
+
+```r{eval=FALSE,echo=TRUE}
+?Distributions
+```
+---
+
+### 🧩 Practice Question 1
+
+The observed scores for an exam follow a normal distribution. The mean for the test scores is 120, and the standard deviation is 17. A student received a score of 150.
+
+- What percentage of students scored **below** this student?  
+
+- Suppose the observed test scores are transformed into Z-scores. What would be the Z-score for this student?
+
+- Recalculate the same percentage using the student’s Z-score.
+
+---
+
+### 🧩 Practice Question 2
+
+The exam scores follow a normal distribution.  The mean score is 120, and the standard deviation is 17. You would like to set a cut score so that only 10% of students pass the test.
+
+What score should be chosen as the **cut score**?  
+
+---
+
+### 🧩 Practice Question 3
+
+The exam scores follow a normal distribution. The mean score is 120, and the standard deviation is 17.
+
+Cut scores are set to define student performance categories as follows:
+
+- **Does not meet criteria:** below 90  
+- **Meets the criteria:** 90–140  
+- **Exceeds the criteria:** above 140  
+
+What **percentage of students** would fall into each category?  
+
+---
+
+class: middle, inverse
+
+# Sampling Distribution and Central Limit Theorem
+
+---
+
+### What is a sampling distribution?
+
+&gt; A **sampling distribution** is the distribution of a statistic (such as a mean, median, or correlation) obtained by repeatedly drawing random samples of the same size from the same population and calculating that statistic for each sample.
+
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a6271e5d77f0b86e9aab" style="width:756px;height:486px;"></div>
+<script type="application/json" data-for="htmlwidget-a6271e5d77f0b86e9aab">{"x":{"diagram":"\ndigraph sampling_distribution {\n\n  # general settings\n  graph [layout = dot, rankdir = TB]\n  node [shape = ellipse, style = filled, color = \"#0072B2\", fillcolor = \"#E6F0FA\", fontname = Helvetica, fontsize = 12]\n  edge [color = \"#0072B2\", arrowsize = 0.8]\n\n  # main population node\n  Population [label = \"Population\\n(μ)\", shape = ellipse, fillcolor = \"#CCE5FF\", color = \"#0072B2\", fontsize = 14, fontcolor = \"#003366\"]\n\n  # sample nodes\n  node [shape = circle, fillcolor = \"#FFFFFF\", color = \"#E6550D\", fontcolor = \"#E6550D\", width = 1.1]\n  Sample1 [label = \"Sample 1\"]\n  Sample2 [label = \"Sample 2\"]\n  Sample3 [label = \"Sample 3\"]\n  Sample4 [label = \"Sample 4\"]\n  SampleN [label = \"Sample R\"]\n\n  # edges from population\n  Population -> Sample1\n  Population -> Sample2\n  Population -> Sample3\n  Population -> Sample4\n  Population -> SampleN\n\n  # sample means below each sample\n  node [shape = none, fontcolor = \"#00441B\", fontsize = 12]\n  Mean1 [label = \"x̄₁\"]\n  Mean2 [label = \"x̄₂\"]\n  Mean3 [label = \"x̄₃\"]\n  Mean4 [label = \"x̄₄\"]\n  MeanN [label = \"x̄ᵣ\"]\n\n  # connect samples to their means\n  edge [color = \"#00441B\", style = solid, arrowsize = 0.7]\n  Sample1 -> Mean1\n  Sample2 -> Mean2\n  Sample3 -> Mean3\n  Sample4 -> Mean4\n  SampleN -> MeanN\n\n  # invisible ranks to align vertically\n  {rank = same; Sample1; Sample2; Sample3; Sample4; SampleN}\n  {rank = same; Mean1; Mean2; Mean3; Mean4; MeanN}\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+### Demonstration
+
+[sampling distribution demo.r]
+
+---
+
+- A *sampling distribution* is a **theoretical (hypothetical)** distribution — we almost never actually observe it in real life.  
+
+    - How many possible samples of 10 countries you can draw from 180 countries?
+    
+- In practice, we would not (and need not) collect thousands of samples to see what the sampling distribution looks like.
+
+- Even though we don’t observe it directly, we can derive its properties mathematically.  
+
+- This theoretical framework allows us to understand how a statistic (like the sample mean) would behave *if* we could take all possible samples of the same size from the population.
+
+- In reality, we usually have just one sample and one sample mean.  
+
+- Our goal is to use that single sample mean to make inferences about the population mean.
+
+This kind of inference is only possible because we know what the sampling distribution would look like in theory.
+
+---
+
+### Central Limit Theorem (CLT)
+
+For a population with mean `\(\mu\)` and standard deviation `\(\sigma\)`, the sampling distribution of the sample means, `\(\bar{X}\)` (from random samples of size `\(n\)`), is approximately normal with  
+
+
+&gt; a mean equal to `\(\;\mathbb{E}[\bar{X}] = \mu\)` and standard deviation equal to `\(\;\mathrm{SE}(\bar{X}) = \dfrac{\sigma}{\sqrt{n}}\)`.  
+
+As the sample size `\(n\)` increases, this approximation improves regardless of the shape of the population distribution (provided `\(\sigma^2\)` is finite).
+
+- If the population is normal, then the sampling distribution of `\(\bar{X}\)` is exactly normal for any `\(n\)`.
+
+- If the population is not normal, we typically need a **large enough** sample for the sampling distribution of `\(\bar{X}\)` to be close to normal (how large depends on skewness and extreme values, but larger `\(n\)` helps).
+
+---
+
+In our demo, we treated 180 countries as our population, and the population mean and astandard deviation for life expectanct was 
+
+`$$\mu = 71.75$$`
+
+`$$\sigma = 8.08$$`
+
+1. If you randomly draw samples of size 10 from this population, what would be the mean and standard deviation of sample means?
+
+2. If you randomly draw samples of size 30 from this population, what would be the mean and standard deviation of sample means?
+
+3. If you randomly draw samples of size 50 from this population, what would be the mean and standard deviation of sample means?
+
+4. If you randomly draw samples of size 100 from this population, what would be the mean and standard deviation of sample means?
+
+---
+
+&lt;img src="../resources/images/sampling_dist.png" width="1384" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="../resources/images/sampling_dist2.png" width="1388" style="display: block; margin: auto;" /&gt;
+
+---
+
+### 🧩 Practice Question 4
+
+Consider the following **population distribution** for a variable `\(X\)`.
+
+.pull-left[
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-14-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+`$$\mu=0.496$$`
+
+`$$\sigma = 0.355$$`
+
+]
+
+If you take **a single simple random sample of size 100** from this population and make a histogram of those 100 observed values, what will the sample distribution most likely look like?
+
+---
+
+
+.pull-left[
+
+(A)
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-15-1.svg" style="display: block; margin: auto;" /&gt;
+
+&lt;center&gt;
+`\(\mu=0.526\)`, `\(\sigma = 0.351\)`
+
+]
+
+
+.pull-right[
+(B)
+
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-16-1.svg" style="display: block; margin: auto;" /&gt;
+
+&lt;center&gt;
+`\(\mu=0.500\)`, `\(\sigma = 0.341\)`
+
+]
+
+---
+
+### 🧩 Practice Question 5
+
+Consider again that a variable of interest has the following population distribution.
+
+.pull-left[
+&lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-17-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+`$$\mu=0.496$$`
+
+`$$\sigma = 0.355$$`
+
+]
+
+If you repeatedly take simple random samples of size `\(n=100\)` from this population and compute the **sample mean** each time, what will the **distribution of the sample means** look like?
+
+---
+
+&lt;img src="../resources/images/practice5.png" width="2152" style="display: block; margin: auto;" /&gt;
+
+---
+
+### 🧩 Practice Question 6
+
+The Institutional Research office at the University of Oregon reports that, for 550 doctoral admits in Fall 2018, the mean GRE Quantitative score was 700 and the standard deviation was **50**.
+
+You have the full list of these 550 students and you take a simple random sample of 25 students. Then, you compute the sample mean GRE Quant score for these 25 students.
+
+**Question:**  
+
+What is the probability that the sample mean for these 25 students exceeds 730?
+
+---
+
+### 🧩 Practice Question 7
+
+The amount of money college students spend per semester on textbooks is normally distributed with mean of $250 and standard deviation of $30. You take a simple random sample of 100 students from this population and compute the sample mean spending for these 100 students.
+
+**Question:** 
+
+What is the probability that the sample mean spending for these 100 students is less than $245?
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,881 @@
+---
+title: "Law of Large Numbers"
+subtitle: "EDUC 641: Week 3"
+author: "Cengiz Zopluoglu"
+#date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  xaringan::moon_reader:
+    css: ['default', 'uo', 'ki-fonts', 'my_custom.css', 'xaringanthemer.css']
+    # self_contained: true
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+
+
+<style>
+
+#infobox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background: #E6F6DC 5px center/3em no-repeat;
+}
+
+.left-column2 {
+  width: 75%;
+  height: 92%;
+  float: left;
+  padding-top: 1em;
+}
+
+.right-column2 {
+  width: 20%;
+  float: right;
+  padding-top: 1em;
+}
+
+.remark-code {
+  font-size: 18px;
+}
+
+.tiny .remark-code { /*Change made here*/
+  font-size: 70% !important;
+}
+
+</style>
+
+```{R, setup, include = F}
+library(pacman)
+p_load(here, tidyverse, ggplot2, xaringan, knitr, kableExtra, xaringanthemer)
+
+i_am("slides/EDUC641_week1.Rmd")
+
+
+red_pink <- "#e64173"
+turquoise = "#20B2AA"
+orange = "#FFA500"
+red = "#fb6107"
+blue = "#3b3b9a"
+green = "#8bb174"
+grey_light = "grey70"
+grey_mid = "grey50"
+grey_dark = "grey20"
+purple = "#6A5ACD"
+slate = "#314f4f"
+
+extra_css <- list(
+  ".red"   = list(color = "red"),
+  ".blue"  = list(color = "blue"),
+  ".red-pink" = list(color= "red_pink"),
+  ".grey-light" = list(color= "grey_light"),
+  ".purple" = list(color = "purple"),
+  ".large" = list("font-size" = "120%"),
+  ".small" = list("font-size" = "90%"),
+  ".tiny" = list("font-size" = "80%"),
+  ".tiny2" = list("font-size" = "70%"),
+  ".tiny3" = list("font-size" = "60%"))
+
+write_extra_css(css = extra_css, outfile = "my_custom.css")
+
+# Knitr options
+opts_chunk$set(
+  comment = "#>",
+  fig.align = "center",
+  fig.height = 6.75,
+  fig.width = 10.5,
+  warning = F,
+  message = F
+)
+opts_chunk$set(dev = "svg")
+options(device = function(file, width, height) {
+  svg(tempfile(), width = width, height = height)
+})
+options(knitr.table.format = "html")
+
+```
+
+### Goals
+
+- Understand the concept and properties of the Normal Distribution
+  - Learn how mean (μ) and standard deviation (σ) define its shape  
+  - Interpret areas under the normal curve using **PDF** and **CDF**
+
+- Learn to use R functions (`dnorm`, `pnorm`, `qnorm`) for working with normal distributions  
+  - Compute probabilities and quantiles  
+  - Visualize and interpret normal curves
+
+- Apply the Empirical Rule to real-world contexts
+
+- Understand the Sampling Distribution  
+  - Conceptualize sampling distributions as distributions of sample statistics  
+  - Use simulations to explore variability across samples
+
+-Understand the Central Limit Theorem (CLT)* 
+  - See how sampling distributions approach normality as sample size increases  
+  - Connect CLT to statistical inference and hypothesis testing
+
+---
+
+class: middle, inverse
+
+# Introduction to Normal Distribution
+
+---
+
+### What is a statistical distribution?
+
+**A nontechnical definition**
+
+A statistical distribution is a tool that we use to describe how numbers tend to show up in the world. 
+
+**A more technical definition**
+
+A statistical distribution is a mathematical function that assigns probabilities to the possible values of a random variable, describing how frequently each value (or range of values) occurs.
+
+They help us talk about what’s typical, what’s unlikely, and how often different outcomes might occur.
+
+
+[A chart of univariate distributions](https://www.math.wm.edu/~leemis/chart/UDR/UDR.html)
+
+---
+
+### Normal Distribution (Gaussian Distribution)
+
+- Origins: modeling measurement error in astronomy, (for more -> [Evolution of Normal Distribution](https://czopluoglu.github.io/educ641_f25/resources/readings/Stahl-EvolutionNormalDistribution-2006.pdf))
+
+- A number of real-world phenomena follow an approximately normal distribution
+
+.pull-left[
+```{r, fig.height=5.5, eval=TRUE,echo=FALSE}
+
+require(palmerpenguins)
+
+ggplot(subset(penguins, species == "Adelie"), aes(flipper_length_mm)) +
+  geom_density() + 
+  ggtitle("Flipper Length of Adelie Penguins") +
+  xlab("Flipper Length (mm)") +
+  theme_minimal(base_size = 14)
+```
+]
+.pull-right[
+```{r, fig.height=5.5,eval=TRUE,echo=FALSE}
+birthweight <- read.csv(here::here("resources/datasets/birthweight.csv"))
+
+ggplot(birthweight, aes(Birthweight)) +
+  geom_density() +
+  ggtitle("Human Birthweight") +
+  xlab("Birthweight (kg)") +
+  theme_minimal(base_size = 14)
+```
+]
+
+- It connects the randomness of the real world with a mathematical structure 
+
+- Its symmetry around the mean simplifies a lot of things
+
+- Plays a central role in classical statistical inference (hypothesis testing)
+
+---
+
+### Definition & Notation
+
+A normal random variable is written 
+
+$$X \sim \mathcal{N}(\mu, \sigma)$$
+
+where:
+
+-  $\mu$ represents the mean parameter (location), and
+
+- $\sigma$ represents the standard deviation parameter (scale)
+  
+Every continuous distribution is defined by a **probability density function** (PDF) that determines its shape.
+
+$$
+f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{- \frac{(x-\mu)^2}{2\sigma^2}}
+$$
+
+- $x$ is the real-valued input value for the function
+
+- $\pi$ (3.14...) and $e$ (2.71...) are mathematical constants
+  
+---
+
+.pull-left[
+```{r, echo=FALSE,eval=TRUE, comment='',fig.width=5,fig.height=5}
+
+require(ggplot2)
+
+x <- seq(20,80,by=.01)
+
+y <- dnorm(x,mean=50,sd = 10)
+
+ggplot()+
+  geom_line(aes(x=x,y=y)) + 
+  theme_bw()+
+  xlab('')+
+  ylab('Density')+
+  ggtitle('N ~ (50,10)')+  
+  geom_segment(aes(x=30,y=0,xend=30,yend=0.0054),lty=2)+
+  geom_segment(aes(x=40,y=0,xend=40,yend=0.024),lty=2)+
+  scale_x_continuous(breaks = seq(0, 100, by = 10))
+
+```
+]
+
+.pull-right[
+
+.tiny[
+
+$$f(x=30) = \frac{1}{10*\sqrt{2*3.14}} e^{- \frac{(30-50)^2}{2*10^2}}=0.0054$$
+
+$$ $$
+
+$$f(x=40) = \frac{1}{10*\sqrt{2*3.14}} e^{- \frac{(40-50)^2}{2*10^2}}=0.024$$
+]
+
+The probability of observing values around 40 are more likely than the probability of observing values around 30 because X=40 has a higher density than X = 30.
+
+]
+
+For continuous distributions, while they are closely related, the **probability** and **the probability density** are not the same thing.
+
+$$ Probability \neq Density $$
+PDF gives density, not probability.
+
+---
+
+### Cumulative Distribution Function (CDF)
+
+When working with continuous distributions, it doesn’t make sense to talk about the probability of a single exact value as it is literally zero. Why? 
+
+What does make sense is talking about the probability that a random variable falls **within a range of values**.  
+
+To find this probability, we calculate the area under the curve of the probability density function (PDF) over that range.
+
+```{r, echo=FALSE,eval=TRUE, comment='',fig.width=5,fig.height=5}
+
+mu <- 50
+sd <- 10        # interpret N(50, 10) as sd = 10 (see note below)
+cut <- mu - 1*sd  # analogous to z = -1 → x = 40
+
+ggplot(NULL, aes(c(mu - 3.5*sd, mu + 3.5*sd))) +
+  # Left tail (teal)
+  geom_area(
+    stat = "function", fun = dnorm,
+    args = list(mean = mu, sd = sd),
+    fill = "#00998a",
+    xlim = c(mu - 3.5*sd, cut)
+  ) +
+  # Right/remaining area (gray)
+  geom_area(
+    stat = "function", fun = dnorm,
+    args = list(mean = mu, sd = sd),
+    fill = "grey80",
+    xlim = c(cut, mu + 3.5*sd)
+  ) +
+  # Guides & labels
+  #geom_vline(xintercept = mu, linetype = "dashed") +
+  #geom_vline(xintercept = cut, linetype = "dotted") +
+  # annotate("text",
+  #          x = mu, y = dnorm(mu, mu, sd) * 1.05,
+  #          label = expression(mu == 50), vjust = 0) +
+  # annotate("text",
+  #          x = cut, y = dnorm(cut, mu, sd) * 1.05,
+  #          label = "40", vjust = 0) +
+  # Pointer + probability text (adjust y’s if you like)
+  geom_segment(
+    aes(x = mu - 1.5*sd, y = 0.006, xend = mu - 2.5*sd, yend = 0.016),
+    arrow = arrow(length = unit(0.05, "inches"))
+  ) +
+  annotate(
+    "text",
+    x = mu - 2.6*sd, y = 0.017,
+    label = paste0("P(X \u2264 ", cut, ") = ?")
+  ) +
+  labs(x = "X", y = "Density",
+       title = "Normal(50, 10)") +
+  theme_bw() +
+  scale_x_continuous(
+    breaks = seq(mu - 3*sd, mu + 3*sd, by = sd)
+  )
+```
+
+---
+
+The **cumulative distribution function (CDF)** gives the probability that a random variable takes on a value **less than or equal to** a specified value \(x\).
+
+CDF represents the **area under the probability density function (PDF)** from $-\infty$ up to $x$:
+
+$$F(x) = P(X \le x) = \int_{-\infty}^{x} f(t)\,dt$$
+
+
+By definition, the **total area under the PDF** from $-\infty$ to $+\infty$ equals **1**, representing the entire probability space.
+
+```{r, echo=FALSE,eval=TRUE, comment='',fig.width=5,fig.height=5}
+
+ggplot(NULL, aes(c(20,80))) +
+  geom_area(stat = "function", fun = dnorm, fill = "#00998a", args = list(mean = 50, sd = 10),xlim = c(20,80)) +
+#  geom_area(stat = "function", fun = dnorm, fill = "grey80", xlim = c(-1, 3.5)) +
+#  geom_area(stat = "function", fun = dnorm, fill = "grey80", xlim = c(-1, 3)) +
+  labs(x = "X", y = "Density")+
+  theme_bw()+
+  scale_x_continuous(breaks=seq(20,80,10))+
+  geom_segment(aes(x = 50, y = 0.03, xend = 80, yend = 0.035),arrow = arrow(length = unit(0.05, "inches")))+
+  annotate("text", x = 82, y = 0.035, label = "1")
+
+```
+
+---
+
+### Probability Functions in R
+
+R provides a consistent naming convention for working with **probability distributions**.
+
+| Function | Meaning | Concept |
+|-----------|----------|----------|
+| `d*` | Density | Returns the value of the probability density function (PDF) at a given point |
+| `p*` | Probability| Returns the value of the cumulative distribution function (CDF) — the probability of observing a value less than or equal to `x` |
+
+For a normal distribution, $X \sim N(\mu, \sigma)$:
+
+$$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{- \frac{(x-\mu)^2}{2\sigma^2}}$$
+
+$$F(x) = P(X \le x) = \int_{-\infty}^{x} f(t)\,dt$$
+
+- `dnorm(x, mean, sd)` → gives the **height of the PDF** (the density) at point `x`
+
+- `pnorm(x, mean, sd)` → gives the **area under the PDF up to `x`** (the cumulative probability)
+
+---
+
+#### 📈 Example: The Normal Distribution
+
+```r{eval=FALSE,echo=TRUE}
+dnorm(40, mean = 50, sd = 10)   # Density at x = 50
+
+pnorm(40, mean = 50, sd = 10)   # P(X ≤ 40)
+
+pnorm(40, mean = 50, sd = 10,lower.tail = FALSE)   # P(X > 40)
+
+```
+
+---
+
+**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value of 40 or less?**
+
+```{r, echo=FALSE,eval=TRUE, comment='',fig.width=5,fig.height=5}
+
+mu <- 50
+sd <- 10        # interpret N(50, 10) as sd = 10 (see note below)
+cut <- mu - 1*sd  # analogous to z = -1 → x = 40
+
+ggplot(NULL, aes(c(mu - 3.5*sd, mu + 3.5*sd))) +
+  # Left tail (teal)
+  geom_area(
+    stat = "function", fun = dnorm,
+    args = list(mean = mu, sd = sd),
+    fill = "#00998a",
+    xlim = c(mu - 3.5*sd, cut)
+  ) +
+  # Right/remaining area (gray)
+  geom_area(
+    stat = "function", fun = dnorm,
+    args = list(mean = mu, sd = sd),
+    fill = "grey80",
+    xlim = c(cut, mu + 3.5*sd)
+  ) +
+  # Guides & labels
+  #geom_vline(xintercept = mu, linetype = "dashed") +
+  #geom_vline(xintercept = cut, linetype = "dotted") +
+  # annotate("text",
+  #          x = mu, y = dnorm(mu, mu, sd) * 1.05,
+  #          label = expression(mu == 50), vjust = 0) +
+  # annotate("text",
+  #          x = cut, y = dnorm(cut, mu, sd) * 1.05,
+  #          label = "40", vjust = 0) +
+  # Pointer + probability text (adjust y’s if you like)
+  geom_segment(
+    aes(x = mu - 1.5*sd, y = 0.006, xend = mu - 2.5*sd, yend = 0.016),
+    arrow = arrow(length = unit(0.05, "inches"))
+  ) +
+  annotate(
+    "text",
+    x = mu - 2.6*sd, y = 0.017,
+    label = paste0("P(X \u2264 ", cut, ") = ?")
+  ) +
+  labs(x = "X", y = "Density",
+       title = "Normal(50, 10)") +
+  theme_bw() +
+  scale_x_continuous(
+    breaks = seq(mu - 3*sd, mu + 3*sd, by = sd)
+  )
+```
+
+---
+
+**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 40 and 60 (within 1 standard deviation of the mean)?**
+
+```{r, echo=FALSE,eval=TRUE, comment='',fig.width=6,fig.height=4}
+
+ggplot(NULL, aes(c(15,85))) +
+  geom_area(stat = "function", fun = dnorm, fill = "#00998a", args = list(mean = 50, sd = 10),xlim = c(15,85)) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", args = list(mean = 50, sd = 10),xlim = c(15, 40)) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", args = list(mean = 50, sd = 10),xlim = c(60, 85)) +
+  labs(x = "X", y = "Density")+
+  theme_bw()+
+  scale_x_continuous(breaks=seq(20,80,10))
+
+```
+
+---
+
+**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 30 and 70 (within 2 standard deviation of the mean)?**
+
+```{r, echo=FALSE,eval=TRUE, comment='',fig.width=6,fig.height=4}
+
+ggplot(NULL, aes(c(15,85))) +
+  geom_area(stat = "function", fun = dnorm, fill = "#00998a", args = list(mean = 50, sd = 10),xlim = c(15,85)) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", args = list(mean = 50, sd = 10),xlim = c(15, 30)) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", args = list(mean = 50, sd = 10),xlim = c(70, 85)) +
+  labs(x = "X", y = "Density")+
+  theme_bw()+
+  scale_x_continuous(breaks=seq(20,80,10))
+
+```
+
+---
+
+
+**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 20 and 80 (within 2 standard deviation of the mean)?**
+
+```{r, echo=FALSE,eval=TRUE, comment='',fig.width=6,fig.height=4}
+
+ggplot(NULL, aes(c(15,85))) +
+  geom_area(stat = "function", fun = dnorm, fill = "#00998a", args = list(mean = 50, sd = 10),xlim = c(15,85)) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", args = list(mean = 50, sd = 10),xlim = c(15, 20)) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", args = list(mean = 50, sd = 10),xlim = c(80, 85)) +
+  labs(x = "X", y = "Density")+
+  theme_bw()+
+  scale_x_continuous(breaks=seq(20,80,10))
+
+```
+
+---
+
+### 📊 The Empirical Rule
+
+For a **normally distributed** variable, approximately,
+
+- **68.3%** of observations fall within **1 standard deviation** of the mean, $[\mu - \sigma, \, \mu + \sigma]$
+
+- **95.5%** of observations fall within **2 standard deviations** of the mean,  $[\mu - 2\sigma, \, \mu + 2\sigma]$
+
+- **99.7%** of observations fall within **3 standard deviations** of the mean, $[\mu - 3\sigma, \, \mu + 3\sigma]$
+
+
+🧠 **Remember:**  
+
+These percentages are so common they’re often called the **“68–95–99 rule.”**  
+You’ll see or hear them frequently in statistics discussions and data interpretation.
+
+---
+
+### Standard Normal Distribution
+
+A special transformation simplifies the equations for the normal distribution.
+
+**Standard Normal Distribution**: $Z \sim \mathcal{N}(0, 1)$
+
+$$
+X \sim \mathcal{N}(\mu,\sigma) \quad \Longleftrightarrow \quad Z=\frac{X-\mu}{\sigma} \sim \mathcal{N}(0,1)
+$$
+
+PDF for the standard normal distribution simplifies to the following:
+
+$$f(x) = \frac{1}{\sqrt{2\pi}} e^{- \frac{x^2}{2}}$$
+
+```{r, echo=FALSE,eval=TRUE, comment='',fig.width=5,fig.height=4}
+
+require(ggplot2)
+
+x <- seq(-3.5,3.5,by=.01)
+
+y <- dnorm(x,mean=0,sd = 1)
+
+ggplot()+
+  geom_line(aes(x=x,y=y)) + 
+  theme_bw()+
+  xlab('')+
+  ylab('Density')+
+  ggtitle('N ~ (0,1)')+  
+  scale_x_continuous(breaks = seq(-3, 3, by = 1))
+
+```
+---
+
+In R, the default settings for the `dnorm` and `pnorm` function implies a standard normal distribution.
+
+```r{eval=FALSE,echo=TRUE}
+dnorm(-1)   # Density at x = -1
+
+pnorm(-1)   # P(X ≤ -1)
+
+pnorm(-1,lower.tail = FALSE)   # P(X > -1)
+
+```
+---
+
+### Quantiles and the `qnorm()` Function
+
+The **quantile function** (inverse of the CDF) gives the value of a random variable **at or below** a specified probability.
+
+If $$F(x) = P(X \le x),$$  
+then the quantile function is the inverse:  
+
+$$F^{-1}(p) = x$$ such that $$P(X \le x) = p $$
+
+In R, use the `qnorm()` function:
+
+.tiny[
+| Function | Meaning | Example |
+|-----------|----------|----------|
+| `qnorm(p, mean, sd)` | Returns the value of X where the cumulative probability equals `p` | `qnorm(0.90, mean = 50, sd = 10)` → 66.45 |
+]
+
+This means that 90% of the distribution lies below **62.82** when $X \sim \mathcal{N}(50, 10)$.
+
+---
+
+#### General Naming Convention for R probability functions (base)
+
+
+| Prefix | Meaning                      | Example (Normal) |
+| ------ | ---------------------------- | ---------------- |
+| `d`    | density (PDF)                | `dnorm()`        |
+| `p`    | cumulative probability (CDF) | `pnorm()`        |
+| `q`    | quantile (inverse CDF)       | `qnorm()`        |
+| `r`    | random generation            | `rnorm()`        |
+
+
+
+```r{eval=FALSE,echo=TRUE}
+?Distributions
+```
+---
+
+### 🧩 Practice Question 1
+
+The observed scores for an exam follow a normal distribution. The mean for the test scores is 120, and the standard deviation is 17. A student received a score of 150.
+
+- What percentage of students scored **below** this student?  
+
+- Suppose the observed test scores are transformed into Z-scores. What would be the Z-score for this student?
+
+- Recalculate the same percentage using the student’s Z-score.
+
+---
+
+### 🧩 Practice Question 2
+
+The exam scores follow a normal distribution.  The mean score is 120, and the standard deviation is 17. You would like to set a cut score so that only 10% of students pass the test.
+
+What score should be chosen as the **cut score**?  
+
+---
+
+### 🧩 Practice Question 3
+
+The exam scores follow a normal distribution. The mean score is 120, and the standard deviation is 17.
+
+Cut scores are set to define student performance categories as follows:
+
+- **Does not meet criteria:** below 90  
+- **Meets the criteria:** 90–140  
+- **Exceeds the criteria:** above 140  
+
+What **percentage of students** would fall into each category?  
+
+---
+
+class: middle, inverse
+
+# Sampling Distribution and Central Limit Theorem
+
+---
+
+### What is a sampling distribution?
+
+> A **sampling distribution** is the distribution of a statistic (such as a mean, median, or correlation) obtained by repeatedly drawing random samples of the same size from the same population and calculating that statistic for each sample.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(DiagrammeR)
+
+grViz("
+digraph sampling_distribution {
+
+  # general settings
+  graph [layout = dot, rankdir = TB]
+  node [shape = ellipse, style = filled, color = '#0072B2', fillcolor = '#E6F0FA', fontname = Helvetica, fontsize = 12]
+  edge [color = '#0072B2', arrowsize = 0.8]
+
+  # main population node
+  Population [label = 'Population\\n(μ)', shape = ellipse, fillcolor = '#CCE5FF', color = '#0072B2', fontsize = 14, fontcolor = '#003366']
+
+  # sample nodes
+  node [shape = circle, fillcolor = '#FFFFFF', color = '#E6550D', fontcolor = '#E6550D', width = 1.1]
+  Sample1 [label = 'Sample 1']
+  Sample2 [label = 'Sample 2']
+  Sample3 [label = 'Sample 3']
+  Sample4 [label = 'Sample 4']
+  SampleN [label = 'Sample R']
+
+  # edges from population
+  Population -> Sample1
+  Population -> Sample2
+  Population -> Sample3
+  Population -> Sample4
+  Population -> SampleN
+
+  # sample means below each sample
+  node [shape = none, fontcolor = '#00441B', fontsize = 12]
+  Mean1 [label = 'x̄₁']
+  Mean2 [label = 'x̄₂']
+  Mean3 [label = 'x̄₃']
+  Mean4 [label = 'x̄₄']
+  MeanN [label = 'x̄ᵣ']
+
+  # connect samples to their means
+  edge [color = '#00441B', style = solid, arrowsize = 0.7]
+  Sample1 -> Mean1
+  Sample2 -> Mean2
+  Sample3 -> Mean3
+  Sample4 -> Mean4
+  SampleN -> MeanN
+
+  # invisible ranks to align vertically
+  {rank = same; Sample1; Sample2; Sample3; Sample4; SampleN}
+  {rank = same; Mean1; Mean2; Mean3; Mean4; MeanN}
+
+}
+")
+
+```
+
+---
+
+### Demonstration
+
+[sampling distribution demo.r]
+
+---
+
+- A *sampling distribution* is a **theoretical (hypothetical)** distribution — we almost never actually observe it in real life.  
+
+    - How many possible samples of 10 countries you can draw from 180 countries?
+    
+- In practice, we would not (and need not) collect thousands of samples to see what the sampling distribution looks like.
+
+- Even though we don’t observe it directly, we can derive its properties mathematically.  
+
+- This theoretical framework allows us to understand how a statistic (like the sample mean) would behave *if* we could take all possible samples of the same size from the population.
+
+- In reality, we usually have just one sample and one sample mean.  
+
+- Our goal is to use that single sample mean to make inferences about the population mean.
+
+This kind of inference is only possible because we know what the sampling distribution would look like in theory.
+
+---
+
+### Central Limit Theorem (CLT)
+
+For a population with mean $\mu$ and standard deviation $\sigma$, the sampling distribution of the sample means, $\bar{X}$ (from random samples of size $n$), is approximately normal with  
+
+
+> a mean equal to $\;\mathbb{E}[\bar{X}] = \mu$ and standard deviation equal to $\;\mathrm{SE}(\bar{X}) = \dfrac{\sigma}{\sqrt{n}}$.  
+
+As the sample size $n$ increases, this approximation improves regardless of the shape of the population distribution (provided $\sigma^2$ is finite).
+
+- If the population is normal, then the sampling distribution of $\bar{X}$ is exactly normal for any $n$.
+
+- If the population is not normal, we typically need a **large enough** sample for the sampling distribution of $\bar{X}$ to be close to normal (how large depends on skewness and extreme values, but larger $n$ helps).
+
+---
+
+In our demo, we treated 180 countries as our population, and the population mean and astandard deviation for life expectanct was 
+
+$$\mu = 71.75$$
+
+$$\sigma = 8.08$$
+
+1. If you randomly draw samples of size 10 from this population, what would be the mean and standard deviation of sample means?
+
+2. If you randomly draw samples of size 30 from this population, what would be the mean and standard deviation of sample means?
+
+3. If you randomly draw samples of size 50 from this population, what would be the mean and standard deviation of sample means?
+
+4. If you randomly draw samples of size 100 from this population, what would be the mean and standard deviation of sample means?
+
+---
+
+```{r, echo=FALSE,eval=TRUE,fig.align='center',fig.height=6,fig.width=6}
+
+knitr::include_graphics(here('resources/images/sampling_dist.png'))
+
+```
+
+---
+
+```{r, echo=FALSE,eval=TRUE,fig.align='center',fig.height=6,fig.width=6}
+
+knitr::include_graphics(here('resources/images/sampling_dist2.png'))
+
+```
+
+---
+
+### 🧩 Practice Question 4
+
+Consider the following **population distribution** for a variable $X$.
+
+.pull-left[
+```{r, echo=FALSE,eval=TRUE,fig.align='center',fig.height=7,fig.width=7}
+
+u <- rbeta(10000,0.5,0.5)
+
+hist(u,
+     xlab = 'Variable X',
+     main = 'Histogram')
+
+# mean(u)
+# sd(u)
+```
+
+]
+
+.pull-right[
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+$$\mu=0.496$$
+
+$$\sigma = 0.355$$
+
+]
+
+If you take **a single simple random sample of size 100** from this population and make a histogram of those 100 observed values, what will the sample distribution most likely look like?
+
+---
+
+
+.pull-left[
+
+(A)
+```{r, echo=FALSE,eval=TRUE,fig.align='center',fig.height=6,fig.width=6}
+
+u <- rbeta(100,0.5,0.5)
+
+hist(u,
+     xlab = 'Variable X',
+     main = 'Histogram')
+```
+
+<center>
+$\mu=0.526$, $\sigma = 0.351$
+
+]
+
+
+.pull-right[
+(B)
+
+```{r, echo=FALSE,eval=TRUE,fig.align='center',fig.height=6,fig.width=6}
+
+u <- rnorm(100,0.5,0.36)
+
+hist(u,
+     xlab = 'Variable X',
+     main = 'Histogram')
+```
+
+<center>
+$\mu=0.500$, $\sigma = 0.341$
+
+]
+
+---
+
+### 🧩 Practice Question 5
+
+Consider again that a variable of interest has the following population distribution.
+
+.pull-left[
+```{r, echo=FALSE,eval=TRUE,fig.align='center',fig.height=7,fig.width=7}
+
+u <- rbeta(10000,0.5,0.5)
+
+hist(u,
+     xlab = 'Variable X',
+     main = 'Histogram')
+
+# mean(u)
+# sd(u)
+```
+
+]
+
+.pull-right[
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+$$\mu=0.496$$
+
+$$\sigma = 0.355$$
+
+]
+
+If you repeatedly take simple random samples of size $n=100$ from this population and compute the **sample mean** each time, what will the **distribution of the sample means** look like?
+
+---
+
+```{r, echo=FALSE,eval=TRUE,fig.align='center',fig.height=4,fig.width=8}
+
+knitr::include_graphics(here('resources/images/practice5.png'))
+
+```
+
+---
+
+### 🧩 Practice Question 6
+
+The Institutional Research office at the University of Oregon reports that, for 550 doctoral admits in Fall 2018, the mean GRE Quantitative score was 700 and the standard deviation was **50**.
+
+You have the full list of these 550 students and you take a simple random sample of 25 students. Then, you compute the sample mean GRE Quant score for these 25 students.
+
+**Question:**  
+
+What is the probability that the sample mean for these 25 students exceeds 730?
+
+---
+
+### 🧩 Practice Question 7
+
+The amount of money college students spend per semester on textbooks is normally distributed with mean of $250 and standard deviation of $30. You take a simple random sample of 100 students from this population and compute the sample mean spending for these 100 students.
+
+**Question:** 
+
+What is the probability that the sample mean spending for these 100 students is less than $245?
+
