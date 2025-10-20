@@ -2,7 +2,7 @@ require(dplyr)
 require(psych)
 ################################################################################
 
-ecls <- read.csv('./do_not_upload/Lab1/ecls-k-sub.csv')
+ecls <- read.csv('./do_not_upload/Assignment1/ecls-k-sub.csv')
 
 summary(ecls$X1RSCALK5)
 ecls$X1RSCALK5 <- recode(ecls$X1RSCALK5, `-9` = NA_real_)
@@ -91,6 +91,8 @@ boxplot(x       = ecls$X2MSCALK5,
         col     = 'white',
         horizontal = TRUE)
 ################################################################################
+
+
 describeBy(x = ecls$X1RSCALK5, group = ecls$X12LANGST)
 
 

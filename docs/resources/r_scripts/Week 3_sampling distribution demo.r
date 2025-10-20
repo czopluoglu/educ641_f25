@@ -58,6 +58,8 @@ xbar_1 <- mean(d_sub1$life_expectancy, na.rm = TRUE)
 xbar_1
 
 
+
+
 # Each time you take a new random sample, the sample mean will wiggle around
 # the true population mean.
 
@@ -65,6 +67,7 @@ xbar_1
 
 idx_2  <- sample.int(N, n, replace = FALSE)
 d_sub2 <- d[idx_2, ]
+
 xbar_2 <- mean(d_sub2$life_expectancy, na.rm = TRUE)
 
 xbar_2
@@ -86,7 +89,7 @@ R <- 10000  # number of repeated samples
 
 sample_means <- replicate(R,
                           {
-                            idx   <- sample.int(N, n, replace = FALSE)
+                            idx   <- sample.int(N, n, replace = TRUE)
                             d_sub <- d[idx, ]
                             mean(d_sub$life_expectancy, na.rm = TRUE)
                             }

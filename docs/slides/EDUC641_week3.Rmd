@@ -52,7 +52,7 @@ output:
 library(pacman)
 p_load(here, tidyverse, ggplot2, xaringan, knitr, kableExtra, xaringanthemer)
 
-i_am("slides/EDUC641_week1.Rmd")
+i_am("slides/EDUC641_week3.Rmd")
 
 
 red_pink <- "#e64173"
@@ -356,7 +356,7 @@ $$F(x) = P(X \le x) = \int_{-\infty}^{x} f(t)\,dt$$
 #### 📈 Example: The Normal Distribution
 
 ```r{eval=FALSE,echo=TRUE}
-dnorm(40, mean = 50, sd = 10)   # Density at x = 50
+dnorm(40, mean = 50, sd = 10)   # Density at x = 40
 
 pnorm(40, mean = 50, sd = 10)   # P(X ≤ 40)
 
@@ -434,7 +434,7 @@ ggplot(NULL, aes(c(15,85))) +
 
 ---
 
-**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 30 and 70 (within 2 standard deviation of the mean)?**
+**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 30 and 70 (within 2 standard deviations of the mean)?**
 
 ```{r, echo=FALSE,eval=TRUE, comment='',fig.width=6,fig.height=4}
 
@@ -451,7 +451,7 @@ ggplot(NULL, aes(c(15,85))) +
 ---
 
 
-**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 20 and 80 (within 2 standard deviation of the mean)?**
+**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 20 and 80 (within 3 standard deviations of the mean)?**
 
 ```{r, echo=FALSE,eval=TRUE, comment='',fig.width=6,fig.height=4}
 
@@ -544,7 +544,7 @@ In R, use the `qnorm()` function:
 .tiny[
 | Function | Meaning | Example |
 |-----------|----------|----------|
-| `qnorm(p, mean, sd)` | Returns the value of X where the cumulative probability equals `p` | `qnorm(0.90, mean = 50, sd = 10)` → 66.45 |
+| `qnorm(p, mean, sd)` | Returns the value of X where the cumulative probability equals `p` | `qnorm(0.90, mean = 50, sd = 10)` → 62.8155 |
 ]
 
 This means that 90% of the distribution lies below **62.82** when $X \sim \mathcal{N}(50, 10)$.
@@ -707,7 +707,7 @@ As the sample size $n$ increases, this approximation improves regardless of the 
 
 ---
 
-In our demo, we treated 180 countries as our population, and the population mean and astandard deviation for life expectanct was 
+In our demo, we treated 180 countries as our population, and the population mean and a standard deviation for life expectancy was 
 
 $$\mu = 71.75$$
 
@@ -879,3 +879,84 @@ The amount of money college students spend per semester on textbooks is normally
 
 What is the probability that the sample mean spending for these 100 students is less than $245?
 
+---
+
+class: middle, inverse
+
+# Confidence Intervals
+
+---
+
+### What is a Confidence Interval?
+
+A **confidence interval (CI)** provides a range of plausible values for an unknown population parameter.
+
+We construct it using the **sampling distribution** of a statistic, often the sample mean $\bar{X}$.
+
+For a population that is normally distributed (or a large enough sample),  the sampling distribution of the sample mean is approximately normal:
+
+$$
+\bar{X} \sim \mathcal{N}\left(\mu, \frac{\sigma}{\sqrt{n}}\right)
+$$
+
+where $\mu$ is the true population mean, $\sigma$ is the population standard deviation,  
+and $n$ is the sample size.
+
+---
+
+### General form
+
+A $(1-\alpha)100\%$ **confidence interval for the population mean** is given by:
+
+$$\bar{X} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}$$
+
+- $\bar{X}$ = sample mean  
+
+- $z_{\alpha/2}$ = critical value from the *standard normal* distribution  
+
+- $\sigma / \sqrt{n}$ = standard error of the mean
+
+Note that **standard error of the sample mean** is same as the standard deviation of the sampling distribution.
+
+---
+
+### Example 1:
+
+Suppose we draw a random sample of size $n = 25$ from a population with a known standard deviation $\sigma = 10$. 
+
+The observed sample mean is $\bar{X} = 52$.
+
+Compute a **95% confidence interval** for the population mean.
+
+$$z_{\alpha/2} = z_{0.025} = 1.96$$
+
+$$\text{CI}_{95\%} = 52 \pm 1.96 \times \frac{10}{\sqrt{25}}$$
+
+$$\text{CI}_{95\%} = 52 \pm 3.92 \Rightarrow [48.08,\; 55.92]$$
+
+**Interpretation:**  
+
+We are **95% confident** that the population mean $\mu$ lies between 48.08 and 55.92.
+
+---
+
+### Example 2: Life Expectancy
+
+Recall from earlier:
+
+Population standard deviation, $\sigma = 8.08$.
+
+If we take a random sample of $n = 30$ countries and observe $\bar{X} = 73.2$, compute a **95% confidence interval** for the population mean.
+
+$$z_{\alpha/2} = 1.96$$
+
+$$\text{CI}_{95\%} = \bar{X} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}$$
+
+$$\text{CI}_{95\%} = 73.2 \pm 1.96 \times \frac{8.08}{\sqrt{30}}$$
+
+$$\text{CI}_{95\%} = 73.2 \pm 2.89 \Rightarrow [70.31,\; 76.09]$$
+
+**Interpretation:**  
+
+We are 95% confident that the true average life expectancy of all countries  
+lies between **70.31** and **76.09** years.

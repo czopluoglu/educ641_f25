@@ -1,0 +1,895 @@
+---
+title: "Introduction to Statistical Inference"
+subtitle: "EDUC 641: Week 4"
+author: "Cengiz Zopluoglu"
+#date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  xaringan::moon_reader:
+    css: ['default', 'uo', 'ki-fonts', 'my_custom.css', 'xaringanthemer.css']
+    # self_contained: true
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+
+
+<style>
+
+#infobox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background: #E6F6DC 5px center/3em no-repeat;
+}
+
+.left-column2 {
+  width: 75%;
+  height: 92%;
+  float: left;
+  padding-top: 1em;
+}
+
+.right-column2 {
+  width: 20%;
+  float: right;
+  padding-top: 1em;
+}
+
+.remark-code {
+  font-size: 18px;
+}
+
+.tiny .remark-code { /*Change made here*/
+  font-size: 70% !important;
+}
+
+</style>
+
+```{R, setup, include = F}
+library(pacman)
+p_load(here, tidyverse, ggplot2, xaringan, knitr, kableExtra, xaringanthemer)
+
+i_am("slides/EDUC641_week1.Rmd")
+
+
+red_pink <- "#e64173"
+turquoise = "#20B2AA"
+orange = "#FFA500"
+red = "#fb6107"
+blue = "#3b3b9a"
+green = "#8bb174"
+grey_light = "grey70"
+grey_mid = "grey50"
+grey_dark = "grey20"
+purple = "#6A5ACD"
+slate = "#314f4f"
+
+extra_css <- list(
+  ".red"   = list(color = "red"),
+  ".blue"  = list(color = "blue"),
+  ".red-pink" = list(color= "red_pink"),
+  ".grey-light" = list(color= "grey_light"),
+  ".purple" = list(color = "purple"),
+  ".large" = list("font-size" = "120%"),
+  ".small" = list("font-size" = "90%"),
+  ".tiny" = list("font-size" = "80%"),
+  ".tiny2" = list("font-size" = "70%"),
+  ".tiny3" = list("font-size" = "60%"))
+
+write_extra_css(css = extra_css, outfile = "my_custom.css")
+
+# Knitr options
+opts_chunk$set(
+  comment = "#>",
+  fig.align = "center",
+  fig.height = 6.75,
+  fig.width = 10.5,
+  warning = F,
+  message = F
+)
+opts_chunk$set(dev = "svg")
+options(device = function(file, width, height) {
+  svg(tempfile(), width = width, height = height)
+})
+options(knitr.table.format = "html")
+
+```
+
+### Goals
+
+- Learn how to make claims about populations using sample data, and underlying logic behind Null Hypothesis Significance Testing (NHST).
+
+- Formulate hypotheses, compute test statistics and p-values, and interpret results.
+
+- Practice the one-sample *z*-test as a gateway to *t*-tests and beyond.
+
+- Understand the Type I and Type II errors
+
+- Understand the difference between one-tailed and two-tailed tests
+
+---
+
+class: middle, inverse
+
+# Null Hypothesis Significance Testing (NHST)
+
+---
+
+### Why Statistical Inference?
+
+- We almost never have access to the entire population 
+
+- We work with samples (mostly a single sample), which are random subsets of that population.
+
+- Samples vary from one to another (sampling variability), our observed statistics (e.g., sample means) will also vary — even if the underlying population hasn’t changed.
+
+- Inference is the process of using sample information to make statements about the unseen population.
+
+---
+
+### What is a hypothesis?
+
+- **Research Hypothesis:** A claim about the world.
+
+      This is the substantive, scientific idea. 
+
+      It usually expresses that “something is happening” or “there is a difference/effect.”
+      
+      *“Students who receive Cognitive Behavioral Therapy (CBT) have lower test anxiety than before therapy.”*
+
+
+- **Null Hypothesis:** The “no-effect” or “no-difference” claim.
+
+      This is the default position.
+      
+      The idea that nothing systematic has changed, and any observed change is due to random chance.
+
+- **Scientific reasoning:** We attempt to falsify the null hypothesis, not to confirm the research hypothesis.
+
+---
+
+### Philosophy behind hypothesis testing (Hume and Popper)
+
+- **Hume's argument: Inductive reasoning, drawing general conclusions from specific observations, can never prove a universal truth**
+
+  - How to prove the statement "All swans are white."?
+  
+  - No amount of observations of white swans will prove this unless we observe all swans, including the ones not yet born.
+  
+  - On the other hand, the observation of a single black swan is sufficient to falsify this statement.
+
+- **Popper's solution: Progress by falsification**
+
+  - We can advance scientific knowledge by showing what theories are false.
+  
+  - Theories must be falsifiable to be considered as scientific
+  
+  - Science progresses by ruling out false ideas
+  
+  
+https://www.simplypsychology.org/karl-popper.html
+  
+  
+---
+
+Any claim about the existence of an effect cannot be made unless it is first shown that a situation of no effect is untenable
+
+
+| Domain     | Research Hypothesis                                                                | Null Hypothesis                                     | What falsification means                              |
+| ---------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------- | ----------------------------------------------------- |
+| Medicine   | A new drug lowers blood pressure compared to placebo                                    | The drug and placebo have the same mean blood pressure   | Rejecting H₀ suggests the drug *likely* has an effect |
+| Education  | Students taught with active learning score higher than those with lecture-only teaching | Both groups have the same mean test scores                     | Rejecting H₀ supports that teaching method likely matters    |
+| Psychology | People recognize emotional words faster than neutral words                              | Reaction times are equal for emotional and neutral words | Rejecting H₀ supports an emotional processing effect  |
+| Business   | Changing website design increases click-through rate                                    | Click-through rate is unchanged                          | Rejecting H₀ suggests the new design has likely an impact       |
+
+---
+
+### Null Hypothesis Significance Testing
+
+1. Begin with a research question.
+
+2. Set up the null hypothesis.
+
+3. Translate both into statistical hypothesis ($H_0$ and $H_1$).
+
+4. Collect data and compute how probable the observed data (or more extreme) under the null hypothesis
+
+5. If observed data are “too unlikely” → reject $H_0$.
+
+
+**We don’t prove $H_1$; we reject $H_0$**
+
+---
+
+### Biased coin example
+
+Suppose that I have a coin and I suspect that this coin is not a fair coin (Research hypothesis).
+
+1. Research hypothesis: The coin is not fair.
+
+2. Null hypothesis: The coin is fair.
+
+3. Translate them into statistical hypotheses.
+
+$$
+H_0 : P(H) = 0.5
+$$
+$$
+H_A : P(H) \neq 0.5
+$$
+
+4. Run a small experiment to gather data. 
+
+  - After 30 flips, assume we observe  22 Heads and 8 Tails
+
+  - What is the probability of observing 22 or more heads after 30 flips if I assume that the coin is fair?
+
+$$P(Data| H_0) = ?$$
+
+
+$$P(\text{22 or more heads}| H_0) = ?$$
+---
+
+If you would like to do this in R, you can use the following R code.
+
+.tiny[
+```{r, echo=TRUE,eval=FALSE}
+
+# Probability of observing 22 heads after 30 flips assuming that the 
+# probability of observing a head is 0.5 for each flip
+
+dbinom(x    = 22, 
+       size = 30, 
+       prob = 0.5)
+
+# Probability of observing 22,23,24,25,...,30 heads
+
+dbinom(x    = 22:30, 
+       size = 30, 
+       prob = 0.5)
+
+# Sum all of these probabilities to compute the probability of 
+# observing 22 or more heads
+
+probs <- dbinom(x    = 22:30, 
+                size = 30, 
+                prob = 0.5)
+
+probs
+
+sum(probs)
+```
+]
+
+How surprising is this data under assumption that $H_0$ is true?
+
+Would you reject $H_0$?
+
+---
+
+- p-value = P(Data | H₀ true), not P(H₀ | Data).
+
+- Small p → data inconsistent with H₀.
+
+- Thresholds (e.g., α = 0.05) as conventions, not laws.
+
+- **Reminder:** statistical significance ≠ practical importance
+
+---
+
+- Why does employing NHST make sense in this scenario?
+
+- We know that the probability of observing a head or tail is 0.5 for a fair coin, and it is easier to disprove that given probability of the observed data under this assumption.
+
+$$
+H_0 : P(H) = 0.5
+$$
+
+- When we start to work with the research hypothesis (the coin is not fair), we are not sure how to translate it into a mathematical statement as there are endless ways a coin may not be fair.
+
+$$
+H_0 : P(H) = 0.3
+$$
+
+$$
+H_0 : P(H) = 0.4
+$$
+
+
+$$
+H_0 : P(H) = 0.6
+$$
+
+$$
+H_0 : P(H) = 0.7
+$$
+
+We can compute the probability of observed data under these different assumptions, and make a decision. But which one we will pick and test to show that the coin is not fair?
+
+---
+
+class: middle, inverse
+
+# One Sample z-test
+
+---
+
+### Why z-test?
+
+- A pedagogical tool to introduce the mechanics of NHST in action
+
+- *z*-test assumes $\sigma$ is known (rare in practice), but great for:
+
+    - Connecting CLT --> Sampling distribution --> p-values
+    - Practicing test setip, standard error, decision rules, and interpretation
+    
+- Next: the *t*-test uses the same logic but replace $\sigma$ with an estimate (more realistic)
+
+
+### Assumptions
+
+- One random sample from the target population
+
+- Known population standard deviation ($\sigma$)
+
+- Sampling distribution of $\bar{X}$ is approximately normal
+  
+  - NOTE: This doesn't require sample distribution to be normal
+
+  - Either population distribution is normal or sample size is large enough (CLT)
+
+---
+
+### **Revisiting notation**
+
+|   Notation  |                  |
+|-------------|------------------|
+| $\bar{X}$   | Sample mean (calculated)      |
+| $\mu$       | Population mean (typically not known) |
+| $\hat{\mu}$ | Estimate of $\mu$ (estimated)|
+
+$$ \hat{\mu} = \bar{X} = \frac{\sum_{i=1}^{N}x_i}{N}$$
+
+|   Notation  |                  |
+|-------------|------------------|
+| $s^2$            | Sample variance (calculated) |
+| $\sigma^2$       | Population variance  (typically not known) |
+| $\hat{\sigma}^2$ | Estimate of $\sigma^2$ (estimated) |
+
+$$s^2 = \frac{\sum_{i=1}^{N}(x_i - \bar{x}^2)}{N}$$
+
+$$\hat{\sigma}^2 = \frac{\sum_{i=1}^{N}(x_i - \bar{x}^2)}{N-1}$$
+
+---
+
+**Research hypothesis:** The children of at least one depressed parent show higher level of behavior problems compared to a typical population of children.
+
+- Dependent variable: The level of behavior problems
+
+  - Measured using a Youth Self-Report Inventory (YSR)
+
+  - For a population of kids living with parents having no history of depression, the normative scores from YSR are scaled such that it has a mean of 50 and standard deviation of 10.
+
+  - The higher the YSR score, the more behavior problems a child reports.
+
+- Independent variable: Parent’s depression status
+
+  - Measured based on whether or not at least one parent had a history of depression
+
+
+Suppose that a researcher collected data by using the YSR inventory from 166 children from homes in which at least one parent had a history of depression. 
+
+The average YSR scores for these 166 children was 55.71 with a standard deviation of 7.35.
+
+---
+
+**What we know (reference):** In a typical population of children, YSR is scaled to μ = 50 (SD = 10).
+
+**What we observed:** In our sample of n = 166 children with ≥1 depressed parent, the mean YSR = 55.71.
+
+- Does 55.71 provide credible evidence of higher behavior problems in this group?
+
+- Could a mean as large as 55.71 arise just by chance if the true mean were 50?
+
+- If we repeated this study with another 166 children from the same group, how much might the sample mean vary (could it even be below 50)?
+
+How should we formalize the problem so we can answer it systematically using what we learned about sampling distributions and central limit theorem?
+
+---
+
+**Null hypothesis:** The population mean YSR score for children with at least one parent who has a history of depression is equal to 50.
+
+In other words, these children do not differ in their level of behavior problems compared to children whose parents have no history of depression.
+
+$$H_0 : \mu = 50$$
+
+**Alternative hypothesis:** The population mean YSR score for children with at least one parent who has a history of depression is greater than 50.
+
+In other words, these children show higher levels of behavior problems compared to children whose parents have no history of depression.
+
+$$H_A : \mu > 50$$
+
+**Interpreting the Evidence**
+
+If the sample mean we observed would be very unlikely to occur assuming the null hypothesis is true,
+then we reject $H_0$ because the data provide enough evidence to suggest the null hypothesis is not plausible.
+
+If the sample mean we observed would be reasonably likely under the null hypothesis,
+then we do not reject $H_0$ because the data do not provide enough evidence to conclude that the null hypothesis is false.
+
+---
+
+1. Assume that the population mean for the students with at least one parent had a history of depression is equal to 50 
+
+2. Assume that we also know the population standard deviation for the students with at least one parent had a history of depression is equal to 10. 
+
+3. If we repeatedly sample from this population with a sample size of 166 (as in our study), how would the sampling distribution of sample means look like? What would be the mean and standard deviation of the sampling distribution of sample means?
+
+4. How probable it is to observe a sample mean of 55.71 based on this sampling distribution?
+
+5. Does the probability of observing a sample mean of 55.71 or higher give you enough confidence to argue that this sample may have come from a population with a mean different than 50?
+
+
+---
+
+Based on the central limit theorem, 
+
+  - the mean of sample means from this population if we repeatedly draw samples with a size of 166 would be equal to 50.
+
+  $$\mu_\bar{X} = \mu = 50$$
+  
+  - the standard deviation of sample means from this population if we repeatedly draw samples with a size of 166 would be equal to 0.776
+
+$$ \sigma_\bar{X} = \frac{\sigma}{\sqrt{N}} = \frac{10}{\sqrt{166}} = 0.776 $$
+
+```{r, echo=FALSE,eval=TRUE, comment='',fig.width=5,fig.height=2.5}
+
+ggplot(NULL, aes(c(-8,8))) +
+  geom_area(stat = "function", fun = dnorm, fill = "#00998a", xlim = c(7.36,8)) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", xlim = c(-8,7)) +
+  labs(x = expression(bar(X)), y = "Density")+
+  theme_bw()+
+  scale_x_continuous(breaks=-8:8,labels = round(seq(50-8*0.776,50+8*0.776,0.776)))+
+  geom_segment(aes(x = 7.6, y = 0, xend = 7.6, yend = 0.4))
+```
+
+$$
+P(\bar{X} > 55.71 | H_0) = ?
+$$
+---
+
+```{r, echo=FALSE,eval=TRUE, comment='',fig.width=5,fig.height=2.5}
+
+ggplot(NULL, aes(c(-8,8))) +
+  geom_area(stat = "function", fun = dnorm, fill = "#00998a", xlim = c(7.36,8)) +
+  geom_area(stat = "function", fun = dnorm, fill = "grey80", xlim = c(-8,7)) +
+  labs(x = expression(bar(X)), y = "Density")+
+  theme_bw()+
+  scale_x_continuous(breaks=-8:8,labels = round(seq(50-8*0.776,50+8*0.776,0.776)))+
+  geom_segment(aes(x = 7.6, y = 0, xend = 7.6, yend = 0.4))
+```
+
+$$
+P(\bar{X} > 55.71 | H_0) = ?
+$$
+
+Under the null hypothesis, $H_0$,
+
+- $\mu_\bar{X} = 50$
+- $\sigma_\bar{X} = 0.776$
+
+.tiny[
+```{r,echo=TRUE,eval=TRUE, comment=''}
+
+# Change some settings when printing R output
+
+options(digits = 6)  # Print 6 non-zero digits after the decimal
+options(scipen = 99) # Turn-off the scientific notation
+        
+pnorm(q         = 55.71,
+      mean      = 50,
+      sd        = 0.776,
+      lower.tail = FALSE)
+
+```
+]
+
+
+---
+
+- The probability of observing a sample mean of 55.71 or higher in a sample of 166 children, assuming the true population mean is 50 and the population SD is 10, is virtually zero
+
+- **Question:** Does this seem consistent with the null hypothesis?
+
+- If you believe such an extreme result would be very unlikely under the null, then we reject $H_0$.
+
+- We argue that the observed data would be extremely improbable if the true mean were 50,
+therefore there is strong evidence that the null hypothesis is not true.
+
+- **Conclusion:**
+
+    The data provide convincing evidence that children with at least one depressed parent show higher levels of behavior problems than children whose parents have no history of depression.
+
+<center> 
+
+### Congratulations!
+
+### You made your first inference.
+
+---
+
+Note that we could repeat the same procedure by using the standardized values.
+
+$$z = \frac{55.71 - 50}{0.776} = 7.356$$ 
+
+$$P(\bar{X} > 55.71 | H_0) = P(z > 7.356 | H_0) $$
+
+.tiny[
+```{r,echo=TRUE,eval=TRUE, comment=''}
+
+# Note that the mean becomes zero and standard deviation becomes 1
+# because we are now working on the standardized scale
+
+pnorm(q         = (55.71-50)/0.776,
+      mean      = 0,
+      sd        = 1,
+      lower.tail = FALSE)
+
+```
+]
+
+---
+
+What we just performed is formally known as the **one-sample z-test**, a procedure used to test a claim about a population mean when the population standard deviation (σ) is known, using data from a single sample.
+
+
+- State the null and alternative hypothesis:
+
+- Compute the test statistic"
+
+$$z = \frac{\bar{X} - \mu}{\sigma_{\bar{X}}} = \frac{\bar{X} - \mu}{\sigma/\sqrt{N}}$$ 
+
+- Determine how likely it is to observe a z-value as extreme (or more extreme) than the one obtained, assuming $H_0$ is true.
+
+- Based on some standard (e.g., .05), decide whether or not you reject the null hypothesis.
+
+- Interpret the result:
+
+  - In the frequentist framework, rejecting $H_0$ is taken as evidence against the null hypothesis and in support of the alternative hypothesis.
+
+  - This does not prove $H_A$; it indicates that the data are unlikely under $H_0$
+  
+---
+
+- We **do not assume** that the distribution of raw YSR scores in our sample (or even in the population) is normal.
+
+  - The test focuses on the sampling distribution of the sample mean, not the shape of the data itself.
+
+- We **do assume** that the sampling distribution of sample means is approximately normal.
+
+  - This is a theoretical distribution we never actually observe but it underlies the logic of the test.
+  
+  - This assumption can be satisfied in two ways:
+
+      1. Population is normal: If the population distribution is truly normal, then the sampling distribution of means will be normal for any sample size.
+
+      2. Sample size is large (Central Limit Theorem): Even if the population is not normal, when n is large, the sampling distribution of means becomes approximately normal.
+
+---
+
+**“How large is large enough for sample size?”**
+
+- There’s no universal rule, it depends on the shape of the population.
+
+    - Highly skewed or heavy-tailed populations need larger n
+
+    - Moderately symmetric populations may need less.
+
+- The conventional “n ≥ 30” rule of thumb is a rough guideline, not a mathematical law.
+
+(Fun fact: you won’t find a formal citation for n=30)
+
+---
+
+### Practice
+
+**Do Stressed Children Give More Socially Desirable Answers?**
+
+Researchers have observed that young children under stress often report fewer symptoms of anxiety and depression than expected. However, they also tend to score higher on the Lie Scale — a measure of the tendency to give socially desirable answers.
+
+Suppose that the scores from Lie Scale is standardized such that the population mean is known to be 5 and population standard deviation is known to be 2. 
+
+- How can we test whether these stressed children show a greater tendency to give socially desirable responses compared to the general population?
+
+- What should our null and alternative hypotheses be?
+
+- Based on your expectations, what do you anticipate concluding?
+
+---
+
+### Type of Errors
+
+When a researcher makes an inference using a statistical test, there are two types of errors the researcher could make:
+
+- Type I Error
+
+- Type II Error
+
+|               | Researcher Does Not Reject $H_0$ | Researcher Rejects $H_0$ |
+|---------------|----------------------------------|--------------------------|
+| $H_0$ is true |    Correct Inference             |       Type I Error      |
+| $H_0$ is false|    Type II Error                 |   Correct Inference     |
+
+#### **Scenario 1**
+
+**Truth:** The person has COVID
+
+$H_0$: The person does not have COVID
+  
+**Data :** The PRC test is positive
+  
+**Inference:** The person does have COVID
+  
+1. Type I Error
+2. Type II Error
+3. Correct Inference
+
+---
+
+### Type of Errors
+
+When a researcher makes an inference using a statistical test, there are two types of errors the researcher could make:
+
+- Type I Error
+
+- Type II Error
+
+|               | Researcher Does Not Reject $H_0$ | Researcher Rejects $H_0$ |
+|---------------|----------------------------------|--------------------------|
+| $H_0$ is true |    Correct Inference             |       Type I Error      |
+| $H_0$ is false|    Type II Error                 |   Correct Inference     |
+
+#### **Scenario 2**
+
+**Truth:** The person has COVID
+
+$H_0$: The person does not have COVID
+  
+**Data :** The PRC test is negative
+  
+**Inference:** The person does not have COVID
+  
+1. Type I Error
+2. Type II Error
+3. Correct Inference
+
+---
+
+### Type of Errors
+
+When a researcher makes an inference using a statistical test, there are two types of errors the researcher could make:
+
+- Type I Error
+
+- Type II Error
+
+|               | Researcher Does Not Reject $H_0$ | Researcher Rejects $H_0$ |
+|---------------|----------------------------------|--------------------------|
+| $H_0$ is true |    Correct Inference             |       Type I Error      |
+| $H_0$ is false|    Type II Error                 |   Correct Inference     |
+
+#### **Scenario 3**
+
+**Truth:** The person does not have  COVID
+
+$H_0$: The person does not have COVID
+  
+**Data :** The PRC test is positive
+  
+**Inference:** The person does have COVID
+  
+1. Type I Error
+2. Type II Error
+3. Correct Inference
+
+---
+
+### Type of Errors
+
+When a researcher makes an inference using a statistical test, there are two types of errors the researcher could make:
+
+- Type I Error
+
+- Type II Error
+
+|               | Researcher Does Not Reject $H_0$ | Researcher Rejects $H_0$ |
+|---------------|----------------------------------|--------------------------|
+| $H_0$ is true |    Correct Inference             |       Type I Error      |
+| $H_0$ is false|    Type II Error                 |   Correct Inference     |
+
+#### **Scenario 4**
+
+**Truth:** The person does not have  COVID
+
+$H_0$: The person does not have COVID
+  
+**Data :** The PRC test is negative
+  
+**Inference:** The person does not have COVID
+  
+1. Type I Error
+2. Type II Error
+3. Correct Inference
+
+---
+
+### Understanding the Significance Level ($\alpha$) 
+
+The $\alpha$ level is a threshold used to decide whether to reject the null hypothesis.  
+It’s also called the **significance level**.
+
+In hypothesis testing:  
+
+  - If the p-value < $\alpha$, we **reject**  $H_0$.  
+  
+  - If the p-value ≥ $\alpha$, we **do not reject** $H_0$.
+
+**How to interpret $\alpha$**
+
+- If the probability of observing our sample statistic (or something more extreme) is less than 0.05 or 0.01, we consider it unlikely under $H_0$ → sufficient evidence to reject $H_0$.
+
+- Common conventional choices: 
+
+  - $\alpha = 0.05$ → 5% chance of Type I error
+
+  - $\alpha = 0.01$ → 1% chance of Type I error
+
+---
+
+**Why $\alpha$ matters**
+
+- The lower the $\alpha$, the stricter the standard for rejecting $H_0$.
+
+  → Fewer false positives, but harder to detect true effects
+
+- $\alpha$ represents the Type I error rate we’re willing to tolerate.  
+  In other words:  
+  
+  > How comfortable are we being wrong when we reject $H_0$ that’s actually true?
+
+**Ongoing debate**
+
+- The choice of $\alpha$ is **conventional, not absolute.**  
+
+- There’s active debate in the scientific community about whether rigid thresholds (like .05) should still be used. For more, see:  
+
+  **Wasserstein & Lazar (2016)** — *The ASA Statement on p-Values: Context, Process, and Purpose.*  
+  [*The American Statistician*, 70(2), 129–133.](https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108)
+
+---
+
+### One-tailed test vs. Two-tailed test
+
+Let's revisit the previous example.
+
+**Null hypothesis:** The population mean for children with at least one parent had a history of depression is equal to 50. In other words, these children are not different in the level of behavior problems compared to a population of children with parents having no history of depression.
+
+$$H_0 : \mu = 50$$
+**Alternative hypothesis:** The population mean for children with at least one parent had a history of depression is higher than 50. In other words, these children show higher level of behavior problems compared to a population of children with parents having no history of depression.
+
+$$H_A : \mu \geq 50$$
+
+
+- Notice that our alternative hypothesis specifies a direction (“greater than”).  
+  Therefore, the test we conducted is a **one-tailed test**.
+  
+- If we had no specific direction,for example, if we simply wanted to test whether the two groups differ, then we would use a **two-tailed test** instead.
+
+---
+
+|Null hypothesis  |Alternative hypothesis |                 |
+|-----------------|-----------------------|-----------------|
+| $H_0: \mu = 50$ | $H_A: \mu < 50$       | One-tailed test |
+| $H_0: \mu = 50$ | $H_A: \mu > 50$       | One-tailed test |
+| $H_0: \mu = 50$ | $H_A: \mu \neq 50$    | Two-tailed test |
+
+
+- The null hypothesis stays the same across all cases:  
+  it always states **no difference** or **no effect**.
+
+- The alternative hypothesis can be specified in **three ways**,  
+  depending on whether we expect a **directional** or **non-directional** effect.
+  
+**Key idea:**  
+
+- In a one-tailed test, we only look for an effect in one direction.  
+  (e.g., higher *or* lower, but not both)
+
+- In a two-tailed test, we consider both directions,  
+  whether the mean is either greater than or less than the hypothesized value.
+  
+- For two-tailed tests, the p-value is doubled  
+  to account for the probability in both tails of the distribution.
+  
+---
+
+.pull-left[
+
+**One-tailed test**
+
+$$H_0: \mu = 50$$ 
+$$H_0: \mu > 50$$
+We are testing whether the mean differs from 50 in **single direction**.
+
+$$P(\bar{X} > 55.71 | H_0) =? $$
+
+]
+
+.pull-right[
+
+```{r,eval=TRUE,echo=FALSE}
+
+df <- data.frame(x = seq(42,58, length.out = 1000))
+
+ggplot(df, aes(x)) +
+  stat_function(fun = dnorm, args = list(mean = 50, sd = 0.776),
+                color = "#3b3b9a", size = 1.2) +
+  stat_function(fun = dnorm, args = list(mean = 50, sd = 0.776),
+                geom = "area", fill = "#e64173", alpha = 0.4,
+                xlim = c(55.71, 60)) +
+  geom_vline(xintercept = 55.71, color = "#e64173", linetype = "dashed", size = 1) +
+  annotate("text", x = 55.71, y = 0.2, label = "Observed mean = 55.71", color = "#e64173", size = 3, hjust = -0.1) +
+  annotate("text", x = 58, y = 0.05, label = "Rejection region\nP(X̄ > 55.71 | H₀)", color = "#e64173", size = 4.5) +
+  theme_bw(base_size = 14)
+```
+
+
+]
+
+.pull-left[
+
+**Two-tailed test**
+
+$$H_0: \mu = 50$$ 
+$$H_A: \mu \neq 50$$
+We are testing whether the mean differs from 50 in **either direction**.
+
+$$P(\bar{X} > 55.71 | H_0) + P(\bar{X} < 44.29 | H_0) = ?$$
+]
+
+.pull-right[
+
+```{r,eval=TRUE,echo=FALSE}
+
+df <- data.frame(x = seq(40, 60, length.out = 1000))
+
+ggplot(df, aes(x)) +
+  stat_function(fun = dnorm, args = list(mean = 50, sd = 0.776),
+                color = "#3b3b9a", size = 1.2) +
+  # Right tail shading (greater than 55.71)
+  stat_function(fun = dnorm, args = list(mean = 50, sd = 0.776),
+                geom = "area", fill = "#e64173", alpha = 0.4,
+                xlim = c(55.71, 60)) +
+  # Left tail shading (less than 44.29)
+  stat_function(fun = dnorm, args = list(mean = 50, sd = 0.776),
+                geom = "area", fill = "#e64173", alpha = 0.4,
+                xlim = c(40, 44.29)) +
+  # Vertical lines for observed and symmetric cutoffs
+  geom_vline(xintercept = 55.71, color = "#e64173", linetype = "dashed", size = 1) +
+  geom_vline(xintercept = 44.29, color = "#e64173", linetype = "dashed", size = 1) +
+  # Text annotations
+  annotate("text", x = 55.71, y = 0.2, label = "Observed\nmean = 55.71", color = "#e64173", size = 3, hjust = -0.1) +
+  annotate("text", x = 58, y = 0.05, label = "Right tail\nP(X̄ > 55.71 | H₀)", color = "#e64173", size = 4) +
+  annotate("text", x = 42, y = 0.05, label = "Left tail\nP(X̄ < 44.29 | H₀)", color = "#e64173", size = 4) +
+  theme_bw(base_size = 14)
+
+```
+
+]
+
+
+
+

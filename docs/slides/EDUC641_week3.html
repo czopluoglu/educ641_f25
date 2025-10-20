@@ -234,7 +234,7 @@ For a normal distribution, `\(X \sim N(\mu, \sigma)\)`:
 #### 📈 Example: The Normal Distribution
 
 ```r{eval=FALSE,echo=TRUE}
-dnorm(40, mean = 50, sd = 10)   # Density at x = 50
+dnorm(40, mean = 50, sd = 10)   # Density at x = 40
 
 pnorm(40, mean = 50, sd = 10)   # P(X ≤ 40)
 
@@ -256,14 +256,14 @@ pnorm(40, mean = 50, sd = 10,lower.tail = FALSE)   # P(X &gt; 40)
 
 ---
 
-**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 30 and 70 (within 2 standard deviation of the mean)?**
+**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 30 and 70 (within 2 standard deviations of the mean)?**
 
 &lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-8-1.svg" style="display: block; margin: auto;" /&gt;
 
 ---
 
 
-**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 20 and 80 (within 2 standard deviation of the mean)?**
+**For a random variable with a normal distribution with a mean of 50 and standard deviation of 10, what is the probability of observing a value between 20 and 80 (within 3 standard deviations of the mean)?**
 
 &lt;img src="EDUC641_week3_files/figure-html/unnamed-chunk-9-1.svg" style="display: block; margin: auto;" /&gt;
 
@@ -330,7 +330,7 @@ In R, use the `qnorm()` function:
 .tiny[
 | Function | Meaning | Example |
 |-----------|----------|----------|
-| `qnorm(p, mean, sd)` | Returns the value of X where the cumulative probability equals `p` | `qnorm(0.90, mean = 50, sd = 10)` → 66.45 |
+| `qnorm(p, mean, sd)` | Returns the value of X where the cumulative probability equals `p` | `qnorm(0.90, mean = 50, sd = 10)` → 62.8155 |
 ]
 
 This means that 90% of the distribution lies below **62.82** when `\(X \sim \mathcal{N}(50, 10)\)`.
@@ -398,8 +398,8 @@ class: middle, inverse
 
 &gt; A **sampling distribution** is the distribution of a statistic (such as a mean, median, or correlation) obtained by repeatedly drawing random samples of the same size from the same population and calculating that statistic for each sample.
 
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a6271e5d77f0b86e9aab" style="width:756px;height:486px;"></div>
-<script type="application/json" data-for="htmlwidget-a6271e5d77f0b86e9aab">{"x":{"diagram":"\ndigraph sampling_distribution {\n\n  # general settings\n  graph [layout = dot, rankdir = TB]\n  node [shape = ellipse, style = filled, color = \"#0072B2\", fillcolor = \"#E6F0FA\", fontname = Helvetica, fontsize = 12]\n  edge [color = \"#0072B2\", arrowsize = 0.8]\n\n  # main population node\n  Population [label = \"Population\\n(μ)\", shape = ellipse, fillcolor = \"#CCE5FF\", color = \"#0072B2\", fontsize = 14, fontcolor = \"#003366\"]\n\n  # sample nodes\n  node [shape = circle, fillcolor = \"#FFFFFF\", color = \"#E6550D\", fontcolor = \"#E6550D\", width = 1.1]\n  Sample1 [label = \"Sample 1\"]\n  Sample2 [label = \"Sample 2\"]\n  Sample3 [label = \"Sample 3\"]\n  Sample4 [label = \"Sample 4\"]\n  SampleN [label = \"Sample R\"]\n\n  # edges from population\n  Population -> Sample1\n  Population -> Sample2\n  Population -> Sample3\n  Population -> Sample4\n  Population -> SampleN\n\n  # sample means below each sample\n  node [shape = none, fontcolor = \"#00441B\", fontsize = 12]\n  Mean1 [label = \"x̄₁\"]\n  Mean2 [label = \"x̄₂\"]\n  Mean3 [label = \"x̄₃\"]\n  Mean4 [label = \"x̄₄\"]\n  MeanN [label = \"x̄ᵣ\"]\n\n  # connect samples to their means\n  edge [color = \"#00441B\", style = solid, arrowsize = 0.7]\n  Sample1 -> Mean1\n  Sample2 -> Mean2\n  Sample3 -> Mean3\n  Sample4 -> Mean4\n  SampleN -> MeanN\n\n  # invisible ranks to align vertically\n  {rank = same; Sample1; Sample2; Sample3; Sample4; SampleN}\n  {rank = same; Mean1; Mean2; Mean3; Mean4; MeanN}\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d2ea6f903b45e30845ce" style="width:756px;height:486px;"></div>
+<script type="application/json" data-for="htmlwidget-d2ea6f903b45e30845ce">{"x":{"diagram":"\ndigraph sampling_distribution {\n\n  # general settings\n  graph [layout = dot, rankdir = TB]\n  node [shape = ellipse, style = filled, color = \"#0072B2\", fillcolor = \"#E6F0FA\", fontname = Helvetica, fontsize = 12]\n  edge [color = \"#0072B2\", arrowsize = 0.8]\n\n  # main population node\n  Population [label = \"Population\\n(μ)\", shape = ellipse, fillcolor = \"#CCE5FF\", color = \"#0072B2\", fontsize = 14, fontcolor = \"#003366\"]\n\n  # sample nodes\n  node [shape = circle, fillcolor = \"#FFFFFF\", color = \"#E6550D\", fontcolor = \"#E6550D\", width = 1.1]\n  Sample1 [label = \"Sample 1\"]\n  Sample2 [label = \"Sample 2\"]\n  Sample3 [label = \"Sample 3\"]\n  Sample4 [label = \"Sample 4\"]\n  SampleN [label = \"Sample R\"]\n\n  # edges from population\n  Population -> Sample1\n  Population -> Sample2\n  Population -> Sample3\n  Population -> Sample4\n  Population -> SampleN\n\n  # sample means below each sample\n  node [shape = none, fontcolor = \"#00441B\", fontsize = 12]\n  Mean1 [label = \"x̄₁\"]\n  Mean2 [label = \"x̄₂\"]\n  Mean3 [label = \"x̄₃\"]\n  Mean4 [label = \"x̄₄\"]\n  MeanN [label = \"x̄ᵣ\"]\n\n  # connect samples to their means\n  edge [color = \"#00441B\", style = solid, arrowsize = 0.7]\n  Sample1 -> Mean1\n  Sample2 -> Mean2\n  Sample3 -> Mean3\n  Sample4 -> Mean4\n  SampleN -> MeanN\n\n  # invisible ranks to align vertically\n  {rank = same; Sample1; Sample2; Sample3; Sample4; SampleN}\n  {rank = same; Mean1; Mean2; Mean3; Mean4; MeanN}\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -442,7 +442,7 @@ As the sample size `\(n\)` increases, this approximation improves regardless of 
 
 ---
 
-In our demo, we treated 180 countries as our population, and the population mean and astandard deviation for life expectanct was 
+In our demo, we treated 180 countries as our population, and the population mean and a standard deviation for life expectancy was 
 
 `$$\mu = 71.75$$`
 
@@ -568,6 +568,87 @@ The amount of money college students spend per semester on textbooks is normally
 
 What is the probability that the sample mean spending for these 100 students is less than $245?
 
+---
+
+class: middle, inverse
+
+# Confidence Intervals
+
+---
+
+### What is a Confidence Interval?
+
+A **confidence interval (CI)** provides a range of plausible values for an unknown population parameter.
+
+We construct it using the **sampling distribution** of a statistic, often the sample mean `\(\bar{X}\)`.
+
+For a population that is normally distributed (or a large enough sample),  the sampling distribution of the sample mean is approximately normal:
+
+$$
+\bar{X} \sim \mathcal{N}\left(\mu, \frac{\sigma}{\sqrt{n}}\right)
+$$
+
+where `\(\mu\)` is the true population mean, `\(\sigma\)` is the population standard deviation,  
+and `\(n\)` is the sample size.
+
+---
+
+### General form
+
+A `\((1-\alpha)100\%\)` **confidence interval for the population mean** is given by:
+
+`$$\bar{X} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}$$`
+
+- `\(\bar{X}\)` = sample mean  
+
+- `\(z_{\alpha/2}\)` = critical value from the *standard normal* distribution  
+
+- `\(\sigma / \sqrt{n}\)` = standard error of the mean
+
+Note that **standard error of the sample mean** is same as the standard deviation of the sampling distribution.
+
+---
+
+### Example 1:
+
+Suppose we draw a random sample of size `\(n = 25\)` from a population with a known standard deviation `\(\sigma = 10\)`. 
+
+The observed sample mean is `\(\bar{X} = 52\)`.
+
+Compute a **95% confidence interval** for the population mean.
+
+`$$z_{\alpha/2} = z_{0.025} = 1.96$$`
+
+`$$\text{CI}_{95\%} = 52 \pm 1.96 \times \frac{10}{\sqrt{25}}$$`
+
+`$$\text{CI}_{95\%} = 52 \pm 3.92 \Rightarrow [48.08,\; 55.92]$$`
+
+**Interpretation:**  
+
+We are **95% confident** that the population mean `\(\mu\)` lies between 48.08 and 55.92.
+
+---
+
+### Example 2: Life Expectancy
+
+Recall from earlier:
+
+Population standard deviation, `\(\sigma = 8.08\)`.
+
+If we take a random sample of `\(n = 30\)` countries and observe `\(\bar{X} = 73.2\)`, compute a **95% confidence interval** for the population mean.
+
+`$$z_{\alpha/2} = 1.96$$`
+
+`$$\text{CI}_{95\%} = \bar{X} \pm z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}$$`
+
+`$$\text{CI}_{95\%} = 73.2 \pm 1.96 \times \frac{8.08}{\sqrt{30}}$$`
+
+`$$\text{CI}_{95\%} = 73.2 \pm 2.89 \Rightarrow [70.31,\; 76.09]$$`
+
+**Interpretation:**  
+
+We are 95% confident that the true average life expectancy of all countries  
+lies between **70.31** and **76.09** years.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
