@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introduction to Statistical Inference II</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Cengiz Zopluoglu" />
+    <script src="EDUC641_week5_files/header-attrs-2.20/header-attrs.js"></script>
+    <link href="EDUC641_week5_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="EDUC641_week5_files/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="EDUC641_week5_files/remark-css-0.0.1/ki-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my_custom.css" type="text/css" />
+    <link rel="stylesheet" href="xaringanthemer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Introduction to Statistical Inference II
+]
+.subtitle[
+## EDUC 641: Week 5
+]
+.author[
+### Cengiz Zopluoglu
+]
+
+---
+
+
+
+&lt;style&gt;
+
+#infobox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background: #E6F6DC 5px center/3em no-repeat;
+}
+
+.left-column2 {
+  width: 75%;
+  height: 92%;
+  float: left;
+  padding-top: 1em;
+}
+
+.right-column2 {
+  width: 20%;
+  float: right;
+  padding-top: 1em;
+}
+
+.remark-code {
+  font-size: 18px;
+}
+
+.tiny .remark-code { /*Change made here*/
+  font-size: 70% !important;
+}
+
+.tiny2 .remark-code { /*Change made here*/
+  font-size: 50% !important;
+}
+
+.indent {
+  margin-left: 2em;
+}
+
+.single {
+  line-height: 1 ;
+}
+
+
+.double {
+  line-height: 2 ;
+}
+
+&lt;/style&gt;
+
+
+
+### Goals
+
+- Build intuition for the *t*-distribution and degrees of freedom; contrast with the normal.
+
+- Conduct and interpret one-sample, independent-samples, and dependent-samples t-tests.
+
+- Choose the right variant (one- vs two-tailed; pooled vs Welch’s) and justify the choice.
+
+- Write clear APA-style results.
+
+---
+
+class: middle, inverse
+
+# One-sample *t*-test (NHST)
+
+---
+
+### One-sample *t*-test
+
+- In a one-sample *z*-test, we assume that the population standard deviation (`\(\sigma\)`) is known.
+
+- In reality, we almost never know the population standard deviation.
+
+- Instead, we estimate it using the sample standard deviation:
+
+$$ \sigma \rightarrow \hat{\sigma} $$
+&lt;div style="margin-left: 3em;"&gt;
+We use the sample standard deviation as our best estimate of the population standard deviation.
+&lt;/div&gt;
+
+- This substitution changes the shape of the sampling distribution — we can no longer use the normal distribution.
+
+- Instead, we work with a ***t*-distribution**.
+
+- The *t*-distribution accounts for additional uncertainty when estimating σ from a sample.
+
+- Aside from this change, the inference process is conceptually the same as with the *z*-test.
+
+---
+
+### What is a t-distribution?
+
+- A *t*-distribution looks very similar to the standard normal distribution, N(0,1).
+
+- The key difference is that it depends on a parameter called the **degrees of freedom (df).**
+
+- As the degrees of freedom increase, the *t*-distribution becomes closer to the normal distribution.
+
+- So:
+
+    - Small samples → heavier tails (more uncertainty)
+
+    - Large samples → approaches normal
+
+---
+
+### Comparing t-distributions
+
+Below are *t*-distributions with df = 2, 10, 30, and the standard normal distribution.
+
+- Notice how the tails shrink as df increases.
+
+- This reflects increasing precision with larger samples.
+
+&lt;img src="EDUC641_week5_files/figure-html/unnamed-chunk-1-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+### *t* distribution functions in R
+
+
+| Function | Purpose                                           | Example             |
+| -------- | ------------------------------------------------- | ------------------- |
+| `dt()`   | Density at a given *t*-score                      | `dt(-1, df = 10)`   |
+| `pt()`   | Cumulative probability up to a *t*-score          | `pt(-1, df = 10)`   |
+| `qt()`   | Quantile (critical value) for a given probability | `qt(.025, df = 10)` |
+
+
+.pull-left[
+&lt;img src="EDUC641_week5_files/figure-html/unnamed-chunk-2-1.svg" style="display: block; margin: auto;" /&gt;
+
+.tiny3[
+
+```r
+dnorm(x = -1, mean = 0, sd = 1)
+```
+
+```
+[1] 0.2419707
+```
+]
+]
+
+.pull-right[
+&lt;img src="EDUC641_week5_files/figure-html/unnamed-chunk-4-1.svg" style="display: block; margin: auto;" /&gt;
+
+.tiny3[
+
+```r
+dt(x = -1, df=10)
+```
+
+```
+[1] 0.230362
+```
+]
+]
+
+---
+
+.pull-left[
+&lt;img src="EDUC641_week5_files/figure-html/unnamed-chunk-6-1.svg" style="display: block; margin: auto;" /&gt;
+
+$$
+P( z \leq -1) = ?
+$$
+
+```r
+pnorm(q          = -1, 
+      mean       = 0, 
+      sd         = 1,
+      lower.tail = TRUE)
+```
+
+```
+[1] 0.1586553
+```
+
+]
+
+.pull-right[
+&lt;img src="EDUC641_week5_files/figure-html/unnamed-chunk-8-1.svg" style="display: block; margin: auto;" /&gt;
+
+$$
+P( t \leq -1) = ?
+$$
+
+```r
+pt(q          = -1, 
+   df         = 10,
+   lower.tail = TRUE)
+```
+
+```
+[1] 0.1704466
+```
+
+]
+
+---
+
+A comparison of probability values for the standard normal distribution and *t*-distribution with degrees of freedoms are equal to 30 and 100 and 1000.
+
+| Normal Distribution |          | t-distribution |         |          |
+|---------------------|----------|----------------|---------|----------|
+|                     |          |                | df = 30 | df = 100 |
+|  `\(P(z \leq -3)\)`     | 0.00135  | `\(P(t \leq -3)\)` | 0.00269 | 0.00170  |
+|  `\(P(z \leq -2)\)`     | 0.02275  | `\(P(t \leq -2)\)` | 0.02731 | 0.02411  |
+|  `\(P(z \leq -1)\)`     | 0.15866  | `\(P(t \leq -1)\)` | 0.16265 | 0.15986  |
+|  `\(P(z \leq 0)\)`      | 0.50000  | `\(P(t \leq 0)\)`  | 0.50000 | 0.50000  |
+|  `\(P(z \leq 1)\)`      | 0.84134  | `\(P(t \leq 1)\)`  | 0.83735 | 0.84014  |
+|  `\(P(z \leq 2)\)`      | 0.97725  | `\(P(t \leq 2)\)`  | 0.97269 | 0.97589  |
+|  `\(P(z \leq 3)\)`      | 0.99865  | `\(P(t \leq 3)\)`  | 0.99731 | 0.99830  |
+
+
+As the degrees of freedom increases, *t*-distribution probabilities converge to *z*-distribution probabilities.
+
+---
+
+**Steps in a One-Sample t-Test**
+
+1.State the hypotheses
+
+  - `\(H_0: \mu =\)` test value
+
+  - `\(H_A: \mu \neq, &gt;, &lt;\)` test value
+
+2.Determine the test type (one-tailed or two-tailed)
+
+3.Compute the t-statistic:
+
+
+`$$t = \frac{\bar{X} - \mu}{\sigma_{\bar{X}}} = \frac{\bar{X} - \mu}{\hat{\sigma}/\sqrt{N}}$$` 
+
+4.Find the p-value from the *t*-distribution with `\(N−1\)` degrees of freedom.
+
+5.Compare with significance level `\(\alpha\)` (e.g., 0.05) and make a decision whether to reject the null hypothesis.
+
+6.Interpret the result in context.
+
+---
+
+### Example: Intervention and Infant Development
+
+**Research question:**
+Does a specially designed intervention for mothers of low-birthweight (LBW) infants improve their infants’ later psychomotor development?
+
+**Background:**
+Researchers created an intervention program for mothers of LBW infants. The goal was to help mothers become more aware of their infants’ cues and more responsive to their needs—behaviors believed to reduce developmental difficulties later in life.
+
+**Dependent variable:**
+Psychomotor development, measured by the Psychomotor Development Index (PDI).
+In the general population (normal-weight infants), PDI scores are scaled to have a mean of 100.
+
+**Independent variable:**
+Intervention status — whether the mother participated in the program.
+
+**Sample data:**
+A researcher collected PDI scores from 56 LBW infants at 6 months old, after their mothers had participated in the intervention shortly after birth.
+The sample had the following summary statistics:
+
+`$$N = 56$$`
+
+`$$\bar{X} = 104.125$$`
+`$$\hat{\sigma} = 12.584$$`
+---
+
+**Null hypothesis**: The intervention has no effect. The average PDI score for the LBW infants **is not different** than 100 when their mothers are exposed to the designed intervention.
+
+`$$H_0: \mu = 100$$`
+
+**Alternative hypothesis:** The intervention has a significant effect. The average PDI score for the LBW infants **is higher than 100** when their mothers are exposed to the designed intervention.
+
+
+`$$H_A: \mu &gt;100$$`
+
+
+**Solution:**
+
+`$$N = 56$$`
+
+`$$\bar{X} = 104.125$$`
+`$$\hat{\sigma} = 12.584$$`
+
+
+`$$t = \frac{\bar{X} - \mu}{\sigma_{\bar{X}}} = \frac{104.125 - 100}{12.584/\sqrt{56}}=2.453$$` 
+Due to the direction of alternative hypothesis:
+
+- This is a one-tailed test. 
+
+- We are looking for the upper tail probability in a t-distribution with 55 degrees of freedom.
+
+
+---
+
+.pull-left[
+&lt;img src="EDUC641_week5_files/figure-html/unnamed-chunk-10-1.svg" style="display: block; margin: auto;" /&gt;
+
+$$
+P( t \geq 2.453) = ?
+$$
+
+```r
+pt(q          = 2.453, 
+   df         = 55,
+   lower.tail = FALSE)
+```
+
+```
+[1] 0.008682876
+```
+
+]
+
+
+.pull-left[
+
+- The probability of observing a t-statistic of 2.453 or more extreme is equal to 0.009.
+
+- If the null hypothesis were true, the probability of observing a sample mean of 104.125 or a higher mean in our study with 56 infants would be 0.009.
+
+- If we use the significance level of 0.05 ( `\(\alpha = 0.05\)` ), then we reject the null hypothesis, p = 0.009 &lt; 0.05.
+
+- Therefore, we decide there is enough evidence to argue that the designed intervention indeed improved the psychomotor ability for low-birthweight infants.
+
+]
+
+---
+
+### Effect Size
+
+- It is also strongly recommended to report effect size along with a statistically significant result. 
+
+- A common effect size measure for *t*-tests is Cohen’s *d* 
+
+- In the context of a one-sample *t*-test, Cohen's *d* measures how much standard deviation the sample mean is further away from the null value.
+
+$$Cohen'sD =  \frac{\bar{X} - \mu}{\hat{\sigma}} = \frac{104.125 - 100}{12.584} = 0.328 $$ 
+
+---
+
+### APA Style Write-Up
+
+The average PDI scores for 56 infants whose mothers were trained during the designed intervention was **104.13** with a standard deviation of **12.58**. A one-sample *t*-test was conducted to test whether or not the average PDI score was significantly different than 100, the mean PDI score for a normative population. Based on the results of a one-sample *t*-test, there was a significant effect of the designed intervention for mothers on the psychometric ability of low-birth infants, ***t*(55)=2.453, *p* = 0.009, Cohen’s *d* = 0.33**.
+
+---
+
+class: middle, inverse
+
+# Independent samples *t*-test
+
+---
+
+### Independent Samples *t*-Test
+
+#### **When to Use**
+
+- Used when comparing two distinct groups representing two different populations.  
+
+- Each participant belongs to **only one group** — the groups are independent of each other.  
+
+- The goal is to determine whether there is a significant difference in the outcome variable between the two groups.
+
+#### **Example Scenario ([Aronson et al., 1999]**(https://www.sciencedirect.com/science/article/pii/S0022103198913713))
+
+- *Stereotype threat*: Individuals from a stereotyped group may experience anxiety in situations where their behavior could confirm a negative stereotype.  
+
+- This pressure can impair performance, reducing achievement compared to when no stereotype threat is present.  
+
+- Research hypothesis: White male college students perform worse on a math exam when exposed to a stereotype threat.
+
+---
+
+#### **Study Design**
+
+- Two independent groups of college students who excelled in mathematics and valued high performance in the subject.  
+
+- **Control group (n = 11):** Students were simply asked to complete a difficult mathematics exam.  
+
+- **Threat condition (n = 12):** Students were told that *Asian students typically outperform others* on math tests, and that the exam aimed to understand *why this difference exists*.
+
+- This instruction was expected to trigger **stereotype threat** among white students, thereby **reducing their performance**.
+
+#### **Data**
+
+- **Control condition:** 4, 9, 12, 8, 9, 13, 12, 13, 13, 7, 6  
+
+- **Experimental condition:** 7, 8, 7, 2, 6, 9, 7, 10, 5, 0, 10, 8
+
+---
+
+**White male college students perform lower in a math exam when exposed to a stereotype threat.**
+
+&lt;br&gt;
+
+- Dependent variable:
+
+&lt;br&gt;
+
+- Independent variable:
+
+&lt;br&gt;
+
+- Null Hypothesis:
+
+&lt;br&gt;
+
+- Alternative hypothesis:
+
+---
+
+### Descriptive Statistics
+
+&lt;br&gt;
+
+| Group        | N  | Mean | SD   | Skewness | Kurtosis |
+|---------------|----|------|------|:--------:|:--------:|
+| **Control**      | 11 | 9.64 | 3.17 |  -0.31 | -1.48 |
+| **Experimental** | 12 | 6.58 | 3.03 |  -0.86 | -0.39 |
+
+&lt;br&gt;
+
+- The experimental group scored lower on average than the control group.  
+
+- Does this difference reflect a true effect of stereotype threat, or could it be due to random chance?  
+
+- If another researcher replicated the study with similar sample sizes (N₁ = 11, N₂ = 12), 
+
+  - Would they find a difference?  
+
+  - Would it be in the same direction?  
+
+- Can we visualize this process as **sampling from two populations**, and think in terms of the **sampling distribution** of the difference in means?
+
+---
+
+### Sampling Distribution of the Difference in Means
+
+Suppose that the population means for the two groups are equal and both equal 8.04:
+
+.indent[
+`\(\mu_1 = \mu_2 = 8.04\)`
+]
+
+Also, assume that the population standard deviations are equal and both equal 3.4:
+
+.indent[
+`\(\sigma_1 = \sigma_2 = 3.4\)`
+]
+
+1. Randomly sample 11 individuals from Population 1 and compute `\(\bar{X}_1\)`.  
+
+2. Randomly sample 12 individuals from Population 2 and compute `\(\bar{X}_2\)`.  
+
+3. Compute the difference in sample means: `\(\bar{X}_1 - \bar{X}_2\)`.  
+
+4. Repeat Steps 1–3 many times.  
+
+5. Plot the sampling distribution of the differences in sample means.
+
+---
+
+.single[
+
+
+```r
+# Sample 11 individuals from Population 1 
+
+s1 &lt;- rnorm(n = 11, mean = 8.04, sd = 3.4)
+
+# Sample 12 individuals from Population 2
+
+s2 &lt;- rnorm(n = 12, mean = 8.04, sd = 3.4)
+
+# Compute the means
+
+mean(s1)
+```
+
+```
+[1] 6.746864
+```
+
+```r
+mean(s2)
+```
+
+```
+[1] 7.517138
+```
+
+```r
+# Difference in sample means
+
+mean(s1) - mean(s2)
+```
+
+```
+[1] -0.770274
+```
+]
+
+---
+
+.tiny[
+
+.single[
+
+
+```r
+# Repeat the same process 10,000 times
+
+diff.in.means &lt;- replicate(n    = 10000,
+                           expr = {
+                             s1 &lt;- rnorm(n = 11, mean = 8.04, sd = 3.4)
+                             s2 &lt;- rnorm(n = 12, mean = 8.04, sd = 3.4)
+                             mean(s1) - mean(s2)
+                             }
+                           )
+
+# Descriptive statistics
+
+require(psych)
+
+describe(diff.in.means)
+```
+
+```
+   vars     n  mean   sd median trimmed  mad   min max range skew kurtosis   se
+X1    1 10000 -0.02 1.42  -0.02   -0.02 1.43 -4.93 5.4 10.33 0.01    -0.08 0.01
+```
+
+
+
+```r
+# Sampling distribution of differences in sample means
+
+hist(diff.in.means,col='white',xlab = '')
+```
+
+&lt;img src="EDUC641_week5_files/figure-html/unnamed-chunk-14-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+]
+
+---
+
+**Given that the observed difference in our experiment is 3.06, how likely is it to observe a difference of 3.06 or more extreme between two groups assuming the population mean for both groups are equal?**
+
+&lt;img src="EDUC641_week5_files/figure-html/unnamed-chunk-15-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="../resources/images/two-sample.PNG" width="932" style="display: block; margin: auto;" /&gt;
+---
+
+### Central Limit Theorem (Again!)
+
+.double[
+Given two populations — Population 1 with mean `\(\mu_1\)` and standard deviation `\(\sigma\)`,  
+and Population 2 with mean `\(\mu_2\)` and standard deviation `\(\sigma\)` —  
+the **sampling distribution of the difference in sample means** is approximately normal, with:
+
+- Mean: 
+
+  $$ \mu_{\bar{X}_1 - \bar{X}_2} = \mu_1 - \mu_2 $$
+
+- Standard Deviation:
+
+  $$ \sigma_{\bar{X}_1 - \bar{X}_2} = \sqrt{ \frac{\sigma^2}{n_1} + \frac{\sigma^2}{n_2} } $$
+
+where `\(n_1\)` and `\(n_2\)` are the sample sizes for the two groups.
+]
+
+---
+
+### Estimating the Population Standard Deviation
+
+- In practice, we rarely know the population standard deviation.
+
+  Instead, we estimate it using data from both samples and compute a **pooled standard deviation**, an approximation of the common population standard deviation.
+
+$$
+\hat{\sigma} = 
+\sqrt{
+  \frac{(n_1 - 1)\hat{\sigma}_1^2 + (n_2 - 1)\hat{\sigma}_2^2}
+       {n_1 + n_2 - 2}
+}
+$$
+
+- The sample sizes **do not need to be equal** for this calculation.  
+
+- Because we replace the true population standard deviation with an **estimate**,  
+  the sampling distribution of the difference in sample means follows a *t*-distribution
+  with degrees of freedom:  
+
+$$
+df = n_1 + n_2 - 2
+$$
+---
+
+**Steps to Compare the Means of Two Independent Samples**
+
+.tiny2[
+
+1.**State the hypotheses**
+
+   - **Null hypothesis:**  
+     $$ H_0: \mu_1 = \mu_2 \quad \text{or} \quad H_0: \mu_1 - \mu_2 = 0 $$
+     
+   - **Alternative hypothesis (depending on the research question):**  
+     $$ 
+     H_A: \mu_1 \neq \mu_2 \quad \text{(two-tailed)} 
+     $$
+     or  
+     $$
+     H_A: \mu_1 &gt; \mu_2 \quad \text{or} \quad H_A: \mu_1 &lt; \mu_2 \quad \text{(one-tailed)}
+     $$
+
+2.**Compute the pooled standard deviation** 
+
+$$ 
+   \hat{\sigma}_p = 
+   \sqrt{
+     \frac{(n_1 - 1)\hat{\sigma}_1^2 + (n_2 - 1)\hat{\sigma}_2^2}
+          {n_1 + n_2 - 2}
+   }
+$$
+
+3.**Compute the standard error of the difference in sample means**  
+
+$$
+   SE_{\bar{X}_1 - \bar{X}_2} = 
+   \sqrt{
+     \frac{\hat{\sigma}_p^2}{n_1} + 
+     \frac{\hat{\sigma}_p^2}{n_2}
+   }
+$$
+
+4.**Compute the t-statistic** 
+
+`$$t = \frac{\bar{X}_1 - \bar{X}_2}{SE_{\bar{X}_1 - \bar{X}_2}}$$`
+
+5.**Find the p-value**  
+
+Determine the p-value associated with the computed *t*-statistic and decide whether the observed difference in sample means is compatible with the null hypothesis.
+]
+
+---
+
+**Null Hypothesis (`\(H_0\)`)**  
+White male college students in the stereotype threat condition perform equally wel on a math exam as those in the control condition.  
+
+`$$H_0: \mu_1 - \mu_2 = 0$$`
+**Alternative Hypothesis (`\(H_A\)`)**  
+White male college students in the stereotype threat condition perform worse on a math exam than those in the control condition.  
+
+$$
+H_A: \mu_1 - \mu_2 &gt; 0
+$$
+**Pooled Standard Deviation**
+
+$$
+\hat{\sigma}_p =
+\sqrt{
+\frac{(11 - 1)(3.17)^2 + (12 - 1)(3.03)^2}{11 + 12 - 2}
+}
+= 3.097
+$$
+
+***t*-Statistic**
+
+$$
+t =
+\frac{9.64 - 6.58}{
+\sqrt{
+\frac{3.097^2}{11} +
+\frac{3.097^2}{12}
+}
+}
+= 2.361
+$$
+
+***p*-value**
+
+$$
+P(t \ge 2.361) = ?
+$$
+---
+
+.pull-left[
+&lt;img src="EDUC641_week5_files/figure-html/unnamed-chunk-17-1.svg" style="display: block; margin: auto;" /&gt;
+
+$$
+P( t \geq 2.361) = ?
+$$
+
+```r
+pt(q          = 2.361, 
+   df         = 21,
+   lower.tail = FALSE)
+```
+
+```
+[1] 0.01398506
+```
+
+
+]
+
+.pull-right[
+
+If we assume that the null hypothesis is true
+(the white male college students in the stereotype threat condition perform equally well as those in the control condition),
+the probability of observing a mean difference of 3.06 points or more extreme is 0.014.
+
+&lt;br&gt;
+
+At a significance level of 0.05, we reject the null hypothesis.
+This suggests that the observed data are not compatible with the assumption that both groups perform equally well.
+
+]
+
+---
+
+### Effect Size
+
+As discussed earlier for the one-sample *t*-test, a statistically significant result alone does not convey the magnitude or practical importance of the effect.
+
+A statistically significant result should always be accompanied by an appropriate **effect size** measure.
+
+For an independent samples *t*-test, **Cohen’s d** is calculated as:
+
+$$
+Cohen's\ d = 
+\frac{|\bar{X}_1 - \bar{X}_2|}{\hat{\sigma}_p} =
+\frac{|9.64 - 6.58|}{3.097} = 0.988
+$$
+
+A **Cohen’s d = 0.99** indicates a **large effect size**,  
+suggesting that the difference in performance between the two groups is substantial.
+
+---
+
+### APA Style Write-Up
+
+The average test score was 9.64 (*SD* = 3.17) for 11 students in the control condition, and 6.58 (*SD* = 3.03) for 12 students in the experimental condition, in which students were exposed to a stereotype threat.
+
+An independent-samples *t*-test was conducted to examine whether students under stereotype threat performed significantly worse than those in the control condition. Results indicated that the mean score in the experimental condition was 3.06 points lower than in the control condition, a difference that was statistically significant, *t*(21) = 2.361, *p* = .014, Cohen’s *d* = 0.99.
+
+These results suggest that exposure to stereotype threat substantially reduced math performance among white male college students.
+
+---
+
+### Equal Variance Assumption
+
+- One of the key assumptions of the independent samples *t*-test is that the two populations have **equal variances**.  
+
+- This assumption is the reason we computed a pooled standard deviation estimate (`\(\hat{\sigma}_p\)`).  
+
+- When the equal variance assumption does not hold, the resulting *p*-value may be inaccurate, potentially leading to incorrect conclusions about the null hypothesis.  
+
+- However, it is possible to perform an independent samples *t*-test **without** assuming equal variances:  
+
+  - This version is known as **Welch’s *t*-test**. 
+  
+  - The formulas for the test statistic and degrees of freedom differ slightly  
+    (see [Ch. 13.4 in *Learning Statistics with R*](https://learningstatisticswithr-bookdown.netlify.app/ttest.html#welchttest)).  
+    
+  - Note that this will change the inferential statistics — be sure to report these values if you choose not to assume equal variances.
+
+---
+
+The average test score was 9.64 (*SD* = 3.17) for 11 students in the control condition, and 6.58 (*SD* = 3.03) for 12 students in the experimental condition, in which students were exposed to a stereotype threat.
+
+An independent-samples **Welch’s *t*-test** was conducted to examine whether students in the experimental condition scored significantly lower than those in the control condition.  
+Results indicated that the mean test score in the experimental condition was 3.06 points lower than in the control condition, a difference that was statistically significant, *t*(20.61) = 2.356, *p* = .014, Cohen’s *d* = 0.99.
+
+These results suggest that exposure to stereotype threat substantially reduced math performance among white male college students.
+
+---
+
+class: middle, inverse
+
+# Dependent samples *t*-test
+
+---
+
+**When to Use:**
+
+- The **same group of subjects** is measured on **two occasions**, **conditions**, or **time points**.  
+
+- The scores are **not independent**, since data are collected from the **same participants**.  
+
+- The researcher aims to determine whether the **average outcome changes** between the two conditions, for example, before and after an intervention or treatment.
+
+**Example Research Hypotheses:**
+
+- A track athlete’s 400-meter run time will be significantly shorter after 6 weeks of high-altitude training.
+
+- Participants will lose a significant amount of weight after following a strict keto diet for 4 weeks.  
+
+- Patients diagnosed with anorexia will gain weight after participating in a newly developed family therapy program.
+
+---
+
+**Patients diagnosed with anorexia will gain weight after participating in a newly developed family therapy program.**
+
+
+- Dependent variable:
+
+&lt;br&gt;
+
+- Independent variable:
+
+&lt;br&gt;
+
+- Null Hypothesis:
+
+&lt;br&gt;
+
+- Alternative hypothesis:
+
+---
+
+**Research Hypothesis**  
+Patients diagnosed with anorexia will gain weight after participating in a newly developed family therapy program.
+
+.tiny[
+.single[
+.pull-left[
+| ID | Before | After |
+|:--:|-------:|------:|
+| 1  | 83.8   | 95.2  |
+| 2  | 83.3   | 94.3  |
+| 3  | 86.0   | 91.5  |
+| 4  | 82.5   | 91.9  |
+| 5  | 86.7   | 100.3 |
+| 6  | 79.6   | 76.7  |
+| 7  | 76.9   | 76.8  |
+| 8  | 94.2   | 101.6 |
+| 9  | 73.4   | 94.9  |
+| 10 | 80.5   | 75.2  |
+| 11 | 81.6   | 77.8  |
+| 12 | 82.1   | 95.5  |
+| 13 | 77.6   | 90.7  |
+| 14 | 83.5   | 92.5  |
+| 15 | 89.9   | 93.8  |
+| 16 | 86.0   | 91.7  |
+| 17 | 87.3   | 98.0  |
+]
+]
+]
+
+.pull-right[
+- 17 patients diagnosed with anorexia  
+
+- Weight recorded **before** beginning family therapy  
+
+- Weight recorded **after 4 weeks** of therapy  
+
+- The same participants were measured twice.  
+
+- The goal is to test whether average weight increased following the intervention
+]
+
+---
+
+**Research Hypothesis**  
+Patients diagnosed with anorexia will gain weight after participating in a newly developed family therapy program.
+
+.tiny[
+.single[
+.pull-left[
+| ID | Before | After |
+|:--:|-------:|------:|
+| 1  | 83.8   | 95.2  |
+| 2  | 83.3   | 94.3  |
+| 3  | 86.0   | 91.5  |
+| 4  | 82.5   | 91.9  |
+| 5  | 86.7   | 100.3 |
+| 6  | 79.6   | 76.7  |
+| 7  | 76.9   | 76.8  |
+| 8  | 94.2   | 101.6 |
+| 9  | 73.4   | 94.9  |
+| 10 | 80.5   | 75.2  |
+| 11 | 81.6   | 77.8  |
+| 12 | 82.1   | 95.5  |
+| 13 | 77.6   | 90.7  |
+| 14 | 83.5   | 92.5  |
+| 15 | 89.9   | 93.8  |
+| 16 | 86.0   | 91.7  |
+| 17 | 87.3   | 98.0  |
+]
+]
+]
+
+.pull-right[
+
+.pull-left[
+  `\(\bar{X}_{\text{before}} = 83.23\)`
+  `\(\bar{X}_{\text{after}} = 90.49\)`  
+]
+
+.pull-left[
+  `\(\hat{\sigma}_{\text{before}} = 5.02\)`  
+  `\(\hat{\sigma}_{\text{after}} = 8.48\)`
+]
+
+
+- Could the observed weight gain have occurred **by chance**?  
+
+- If we repeated this study with another group of 17 patients, would we expect a similar result?  
+
+- What is the **sampling distribution** of the **mean weight difference** (After − Before)?  
+
+]
+
+---
+
+&lt;img src="../resources/images/dependent.PNG" width="1024" style="display: block; margin: auto;" /&gt;
+
+---
+
+---
+
+**Research Hypothesis**  
+Patients diagnosed with anorexia will gain weight after participating in a newly developed family therapy program.
+
+.tiny[
+.single[
+.pull-left[
+| ID | Before | After |
+|:--:|-------:|------:|
+| 1  | 83.8   | 95.2  |
+| 2  | 83.3   | 94.3  |
+| 3  | 86.0   | 91.5  |
+| 4  | 82.5   | 91.9  |
+| 5  | 86.7   | 100.3 |
+| 6  | 79.6   | 76.7  |
+| 7  | 76.9   | 76.8  |
+| 8  | 94.2   | 101.6 |
+| 9  | 73.4   | 94.9  |
+| 10 | 80.5   | 75.2  |
+| 11 | 81.6   | 77.8  |
+| 12 | 82.1   | 95.5  |
+| 13 | 77.6   | 90.7  |
+| 14 | 83.5   | 92.5  |
+| 15 | 89.9   | 93.8  |
+| 16 | 86.0   | 91.7  |
+| 17 | 87.3   | 98.0  |
+]
+]
+]
+
+.pull-right[
+
+- A **dependent-samples *t*-test** is conducted by analyzing the **difference scores** (After − Before).  
+
+- Conceptually, it is equivalent to performing a **one-sample *t*-test** on the difference scores, where the **null hypothesis** states that the mean difference equals zero.
+
+.pull-left[
+`\(\bar{X}_D = 7.26\)`
+]
+
+.pull-right[
+`\(\hat{\sigma}_D = 7.16\)`
+]
+
+- These values summarize the average weight change and its variability across the 17 participants.
+
+]
+
+---
+
+
+.pull-left[
+
+`$$H_0: \mu_{after} = \mu_{before}$$`
+
+`$$H_0: \mu_{after} - \mu_{before} = 0$$`
+
+`$$H_0: \mu_{D} = 0$$`
+]
+
+.pull-right[
+
+`$$H_A: \mu_{after} &gt; \mu_{before}$$`
+
+`$$H_A: \mu_{after} - \mu_{before} &gt; 0$$`
+
+`$$H_A: \mu_{D} &gt; 0$$`
+]
+
+&lt;br&gt;
+
+`$$\bar{X}_{D} = 7.26$$`
+`$$\hat{\sigma}_{D} = 7.16$$`
+$$t = \frac{\bar{X}_D - \mu_D}{\hat{\sigma}_D/\sqrt{N}} = \frac{\bar{X}_D}{\hat{\sigma}_D/\sqrt{N}} $$
+
+$$t = \frac{7.26}{7.16/\sqrt{17}} = 4.18 $$
+`$$df = N - 1 = 17 - 1 = 16$$`
+.single[
+.tiny[
+
+```r
+pt(q          = 4.18,
+   df         = 16,
+   lower.tail = FALSE)
+```
+
+```
+[1] 0.0003537404
+```
+]
+]
+
+---
+
+### Effect Size
+
+Cohen’s *d* for a **dependent-samples t-test** can be calculated as:
+
+$$
+Cohen's\ d = \frac{\bar{X}_D}{\hat{\sigma}_D}
+= \frac{7.26}{7.16}
+= 1.01
+$$
+
+- Here, the **standard deviation of the difference scores** was used to standardize the effect size. 
+
+- There is no universal agreement on which standard deviation to use for dependent-samples *t*-tests. 
+
+- Alternatives include using the pre-treatment standard deviation or the post-treatment standard deviation.
+
+- As long as you report the relevant values and are transparent about your calculation method, your approach is acceptable.
+
+---
+
+### APA Style Write-Up
+
+The average weight of 17 patients diagnosed with anorexia was 83.23 lbs (*SD* = 5.02) before the family therapy, and increased to 90.49 lbs (*SD* = 8.48) after the therapy.
+
+A dependent-samples *t*-test was conducted to determine whether the average weight gain following therapy was statistically significant. Results indicated that patients gained an average of 7.26 lbs, and this increase was statistically significant, *t*(16) = 4.18, *p* &lt; .001, Cohen’s *d* = 1.02.
+
+These results suggest that the family therapy had a large and meaningful impact on weight gain among patients with anorexia.
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
