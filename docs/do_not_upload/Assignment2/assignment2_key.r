@@ -26,14 +26,18 @@ p_value <- pt(t_stat, df = df)
 
 ecls <- read.csv('./do_not_upload/Assignment1/ecls-k-sub.csv')
 
-describe(ecls$X1WEIGHT)
+describe(ecls$X1HEIGHT)
 
 
-summary(ecls$X1WEIGHT)
-ecls$X1WEIGHT <- recode(ecls$X1WEIGHT, `-9` = NA_real_)
-ecls$X1WEIGHT <- recode(ecls$X1WEIGHT, `-8` = NA_real_)
-ecls$X1WEIGHT <- recode(ecls$X1WEIGHT, `-7` = NA_real_)
-summary(ecls$X1WEIGHT)
+summary(ecls$X1HEIGHT)
+ecls$X1HEIGHT <- recode(ecls$X1HEIGHT, `-9` = NA_real_)
+ecls$X1HEIGHT <- recode(ecls$X1HEIGHT, `-8` = NA_real_)
+ecls$X1HEIGHT <- recode(ecls$X1HEIGHT, `-7` = NA_real_)
+summary(ecls$X1HEIGHT)
+
+oneSampleTTest(x = ecls$X1HEIGHT,
+               mu = 45,
+               one.sided = "less")
 
 ################################################################################
 
