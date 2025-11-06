@@ -1,0 +1,2025 @@
+---
+title: "Relationship between two continuous variables"
+subtitle: "EDUC 641: Week 6"
+author: "Cengiz Zopluoglu"
+#date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  xaringan::moon_reader:
+    css: ['default', 'uo', 'ki-fonts', 'my_custom.css', 'xaringanthemer.css']
+    # self_contained: true
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+
+
+<style>
+
+#infobox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background: #E6F6DC 5px center/3em no-repeat;
+}
+
+.left-column2 {
+  width: 75%;
+  height: 92%;
+  float: left;
+  padding-top: 1em;
+}
+
+.right-column2 {
+  width: 20%;
+  float: right;
+  padding-top: 1em;
+}
+
+.remark-code {
+  font-size: 18px;
+}
+
+.tiny .remark-code { /*Change made here*/
+  font-size: 85% !important;
+}
+
+.tiny2 .remark-code { /*Change made here*/
+  font-size: 70% !important;
+}
+
+.indent {
+  margin-left: 2em;
+}
+
+.single {
+  line-height: 1 ;
+}
+
+
+.double {
+  line-height: 2 ;
+}
+
+</style>
+
+```{R, setup, include = F}
+library(pacman)
+p_load(here, tidyverse, ggplot2, xaringan, knitr, kableExtra, xaringanthemer)
+
+#i_am("slides/EDUC641_week1.Rmd")
+
+
+red_pink <- "#e64173"
+turquoise = "#20B2AA"
+orange = "#FFA500"
+red = "#fb6107"
+blue = "#3b3b9a"
+green = "#8bb174"
+grey_light = "grey70"
+grey_mid = "grey50"
+grey_dark = "grey20"
+purple = "#6A5ACD"
+slate = "#314f4f"
+
+extra_css <- list(
+  ".red"   = list(color = "red"),
+  ".blue"  = list(color = "blue"),
+  ".red-pink" = list(color= "red_pink"),
+  ".grey-light" = list(color= "grey_light"),
+  ".purple" = list(color = "purple"),
+  ".large" = list("font-size" = "120%"),
+  ".small" = list("font-size" = "90%"))
+
+write_extra_css(css = extra_css, outfile = "my_custom.css")
+
+# Knitr options
+opts_chunk$set(
+  comment = "#>",
+  fig.align = "center",
+  fig.height = 6.75,
+  fig.width = 10.5,
+  warning = F,
+  message = F
+)
+opts_chunk$set(dev = "svg")
+options(device = function(file, width, height) {
+  svg(tempfile(), width = width, height = height)
+})
+options(knitr.table.format = "html")
+
+```
+
+### Goals
+
+
+---
+
+class: middle, inverse
+
+# Covariance and Correlation
+
+---
+
+### Historical Origin
+
+- **Francis Galton (1822–1911)** is widely credited with introducing the statistical concept of *correlation* in the late 19th century.
+
+- In his 1888 paper [*“Co-relations and their Measurement, chiefly from Anthropometric Data”*](https://galton.org/essays/1880-1889/galton-1888-co-relations-royal-soc/galton_corr.html?utm_source=chatgpt.com), Galton used the term **“co-relation or correlation of structure”** and attempted to formally define and measure the degree to which two variables vary together.
+
+- Galton noted that the phrase **co-relation** was already used in biology but had not yet been formally defined or quantified.
+
+- The hyphenated **co-relation** appears in his 1888 paper; over time, it evolved into the modern spelling **correlation.**
+
+### Pearson Correlation
+
+- While Galton introduced and named the idea of co-relation, **Karl Pearson** formalized the **product-moment correlation coefficient** in 1896, building on Galton’s ideas and earlier mathematical work by French physicist Auguste Bravais.
+
+- The **Pearson correlation coefficient** ($\rho$) is now the most widely used measure of linear association between **continuous variables**.
+
+---
+
+### Scatterplot
+
+- A **scatterplot** is a graphical tool used to visualize the relationship between two quantitative variables.
+
+- Each point represents a single observation, located according to its values on the two variables, forming (x, y) coordinates.
+
+- By convention, the **predictor** (independent variable) is placed on the **x-axis**, and the **outcome** (dependent or criterion variable) on the **y-axis**.
+
+- Scatterplots help us visually assess:
+  - Trend/Direction of the pattern
+  - Linearity vs. non-linearity
+  - Strength of association
+  - Outliers and unusual patterns
+  - Possible clusters or heteroscedasticity
+  
+- Example variables (2019):
+  - Physicians per 1,000 inhabitants  
+  - Under-five mortality rate per 1,000 live births
+
+---
+
+.pull-left[
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:15px;
+  overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:15px;
+  font-weight:normal;overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">country</th>
+    <th class="tg-0lax">doctor</th>
+    <th class="tg-0lax">infmor</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">Australia</td>
+    <td class="tg-0lax">3.8</td>
+    <td class="tg-0lax">3.6</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Austria</td>
+    <td class="tg-0lax">5.3</td>
+    <td class="tg-0lax">3.5</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Belgium</td>
+    <td class="tg-0lax">3.2</td>
+    <td class="tg-0lax">3.4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Canada</td>
+    <td class="tg-0lax">2.8</td>
+    <td class="tg-0lax">4.9</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Czech Republic</td>
+    <td class="tg-0lax">4.1</td>
+    <td class="tg-0lax">3.2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Estonia</td>
+    <td class="tg-0lax">3.5</td>
+    <td class="tg-0lax">2.4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">France</td>
+    <td class="tg-0lax">3.4</td>
+    <td class="tg-0lax">4.5</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Germany</td>
+    <td class="tg-0lax">4.4</td>
+    <td class="tg-0lax">3.8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Hungary</td>
+    <td class="tg-0lax">3.5</td>
+    <td class="tg-0lax">3.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Iceland</td>
+    <td class="tg-0lax">3.9</td>
+    <td class="tg-0lax">2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Ireland</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">3.3</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Israel</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">3.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Italy</td>
+    <td class="tg-0lax">4</td>
+    <td class="tg-0lax">3.1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Korea</td>
+    <td class="tg-0lax">2.5</td>
+    <td class="tg-0lax">3.2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Latvia</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">3.6</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Lithuania</td>
+    <td class="tg-0lax">4.6</td>
+    <td class="tg-0lax">3.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Mexico</td>
+    <td class="tg-0lax">2.4</td>
+    <td class="tg-0lax">14.2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">New Zealand</td>
+    <td class="tg-0lax">3.4</td>
+    <td class="tg-0lax">4.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Norway</td>
+    <td class="tg-0lax">5</td>
+    <td class="tg-0lax">2.4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Slovak Republic</td>
+    <td class="tg-0lax">3.6</td>
+    <td class="tg-0lax">5.8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Slovenia</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">2.1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Spain</td>
+    <td class="tg-0lax">4.4</td>
+    <td class="tg-0lax">3.1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Switzerland</td>
+    <td class="tg-0lax">4.3</td>
+    <td class="tg-0lax">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Turkey</td>
+    <td class="tg-0lax">1.9</td>
+    <td class="tg-0lax">10</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">United Kingdom</td>
+    <td class="tg-0lax">3</td>
+    <td class="tg-0lax">4.3</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">United States</td>
+    <td class="tg-0lax">2.6</td>
+    <td class="tg-0lax">6.5</td>
+  </tr>
+</tbody>
+</table>
+
+]
+
+.pull-right[
+
+```{r, echo=FALSE, eval=TRUE, fig.height=6,fig.width=6}
+
+d <- read.csv('B:/UO Teaching/EDUC614/Winter22/Week9/infant_mortality.csv',header=TRUE)
+
+require(ggplot2)
+require(ggrepel)
+
+ggplot(data = d[c(1,2,24,26,17),],aes(x = doctor, y =infmor))+
+  theme_bw()+
+  xlab('Total Number of Doctors (per 1000 inhabitant)')+
+  ylab('Under-five mortality rate (per 1000 live births)')+
+  scale_y_continuous(limits = c(0,20),
+                     minor_breaks = seq(0,20,.5),
+                     breaks = seq(0, 20, 1))+
+  scale_x_continuous(limits = c(0,6),
+                     minor_breaks = seq(0,6,.5),
+                     breaks = seq(0, 6, 1))+
+  theme(panel.grid.major = element_line(linetype="dashed"),
+        panel.grid.minor = element_line(linetype="dashed")) + 
+  geom_point()+
+  geom_label_repel(aes(label = country),
+                  box.padding   = 0.35, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50')
+  
+
+```
+
+Imagine that we represent each country in a two-dimensional space using the pairs of values as X-Y coordinates.
+
+]
+
+
+---
+
+.pull-left[
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:15px;
+  overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:15px;
+  font-weight:normal;overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">country</th>
+    <th class="tg-0lax">doctor</th>
+    <th class="tg-0lax">infmor</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">Australia</td>
+    <td class="tg-0lax">3.8</td>
+    <td class="tg-0lax">3.6</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Austria</td>
+    <td class="tg-0lax">5.3</td>
+    <td class="tg-0lax">3.5</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Belgium</td>
+    <td class="tg-0lax">3.2</td>
+    <td class="tg-0lax">3.4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Canada</td>
+    <td class="tg-0lax">2.8</td>
+    <td class="tg-0lax">4.9</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Czech Republic</td>
+    <td class="tg-0lax">4.1</td>
+    <td class="tg-0lax">3.2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Estonia</td>
+    <td class="tg-0lax">3.5</td>
+    <td class="tg-0lax">2.4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">France</td>
+    <td class="tg-0lax">3.4</td>
+    <td class="tg-0lax">4.5</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Germany</td>
+    <td class="tg-0lax">4.4</td>
+    <td class="tg-0lax">3.8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Hungary</td>
+    <td class="tg-0lax">3.5</td>
+    <td class="tg-0lax">3.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Iceland</td>
+    <td class="tg-0lax">3.9</td>
+    <td class="tg-0lax">2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Ireland</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">3.3</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Israel</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">3.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Italy</td>
+    <td class="tg-0lax">4</td>
+    <td class="tg-0lax">3.1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Korea</td>
+    <td class="tg-0lax">2.5</td>
+    <td class="tg-0lax">3.2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Latvia</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">3.6</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Lithuania</td>
+    <td class="tg-0lax">4.6</td>
+    <td class="tg-0lax">3.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Mexico</td>
+    <td class="tg-0lax">2.4</td>
+    <td class="tg-0lax">14.2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">New Zealand</td>
+    <td class="tg-0lax">3.4</td>
+    <td class="tg-0lax">4.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Norway</td>
+    <td class="tg-0lax">5</td>
+    <td class="tg-0lax">2.4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Slovak Republic</td>
+    <td class="tg-0lax">3.6</td>
+    <td class="tg-0lax">5.8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Slovenia</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">2.1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Spain</td>
+    <td class="tg-0lax">4.4</td>
+    <td class="tg-0lax">3.1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Switzerland</td>
+    <td class="tg-0lax">4.3</td>
+    <td class="tg-0lax">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Turkey</td>
+    <td class="tg-0lax">1.9</td>
+    <td class="tg-0lax">10</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">United Kingdom</td>
+    <td class="tg-0lax">3</td>
+    <td class="tg-0lax">4.3</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">United States</td>
+    <td class="tg-0lax">2.6</td>
+    <td class="tg-0lax">6.5</td>
+  </tr>
+</tbody>
+</table>
+
+]
+
+.pull-right[
+
+
+```{r, echo=FALSE, eval=TRUE, fig.height=6,fig.width=6}
+
+d <- read.csv('B:/UO Teaching/EDUC614/Winter22/Week9/infant_mortality.csv',header=TRUE)
+
+require(ggplot2)
+require(ggrepel)
+
+ggplot(data = d,aes(x = doctor, y =infmor))+
+  theme_bw()+
+  xlab('Total Number of Doctors (per 1000 inhabitant)')+
+  ylab('Under-five mortality rate (per 1000 live births)')+
+  scale_y_continuous(limits = c(0,20),
+                     minor_breaks = seq(0,20,.5),
+                     breaks = seq(0, 20, 1))+
+  scale_x_continuous(limits = c(0,6),
+                     minor_breaks = seq(0,6,.5),
+                     breaks = seq(0, 6, 1))+
+  theme(panel.grid.major = element_line(linetype="dashed"),
+        panel.grid.minor = element_line(linetype="dashed")) + 
+  geom_point()
+  
+
+```
+
+]
+
+---
+
+#### **Describing the Pattern in a Scatterplot**
+
+When describing the relationship in a scatterplot, consider three features: **shape**, **trend**, and **strength**.
+
+- **Shape**: Describe the form of the relationship:  
+  - Linear  
+  - Curvilinear (e.g., quadratic, exponential)  
+  - Clusters or subgroups  
+  - Outliers  
+
+- **Trend (Direction)**  
+  - **Positive trend:** Higher values on one variable are associated with higher values on the other.  
+  - **Negative trend:** Higher values on one variable are associated with lower values on the other.  
+  - **No trend:** No consistent direction in the relationship.
+
+- **Strength**  
+  - **Strong:** Points lie close to an imaginary line or curve.  
+  - **Weak:** Points are widely scattered.  
+  - Consider whether the strength is **constant or changes** across the range (e.g., heteroscedasticity).
+  
+---
+
+.pull-left[
+
+
+```{r, echo=FALSE, eval=TRUE, fig.height=6,fig.width=6}
+
+require(MASS)
+require(MBESS)
+
+corr       <- diag(2)
+corr[1,2]  <- corr[2,1] <- 0.9 
+S          <- cor2cov(cor.mat = corr, sd = c(10,10))
+
+d <- mvrnorm(50,c(100,40),Sigma = S)
+
+require(ggplot2)
+
+ggplot()+
+  theme_bw()+
+  xlab('X')+
+  ylab('Y')+
+  scale_y_continuous(limits = c(0,80))+
+  scale_x_continuous(limits = c(50,150))+
+  theme(panel.grid.major = element_line(linetype="dashed"),
+        panel.grid.minor = element_line(linetype="dashed")) + 
+  geom_point(aes(x = d[,1],y=d[,2]))
+  
+
+```
+
+]
+
+.pull-right[
+
+<br>
+
+Shape:
+
+<br>
+
+Trend:
+
+<br>
+
+Strength:
+
+]
+
+---
+
+.pull-left[
+
+
+```{r, echo=FALSE, eval=TRUE, fig.height=6,fig.width=6}
+
+require(MASS)
+require(MBESS)
+
+corr       <- diag(2)
+corr[1,2]  <- corr[2,1] <- 0.6 
+S          <- cor2cov(cor.mat = corr, sd = c(10,10))
+
+d <- mvrnorm(50,c(100,40),Sigma = S)
+
+require(ggplot2)
+
+ggplot()+
+  theme_bw()+
+  xlab('X')+
+  ylab('Y')+
+  scale_y_continuous(limits = c(0,80))+
+  scale_x_continuous(limits = c(50,150))+
+  theme(panel.grid.major = element_line(linetype="dashed"),
+        panel.grid.minor = element_line(linetype="dashed")) + 
+  geom_point(aes(x = d[,1],y=d[,2]))
+  
+
+```
+
+]
+
+.pull-right[
+
+<br>
+
+Shape:
+
+<br>
+
+Trend:
+
+<br>
+
+Strength:
+
+]
+
+---
+
+.pull-left[
+
+
+```{r, echo=FALSE, eval=TRUE, fig.height=6,fig.width=6}
+
+require(MASS)
+require(MBESS)
+
+corr       <- diag(2)
+corr[1,2]  <- corr[2,1] <- -.6
+S          <- cor2cov(cor.mat = corr, sd = c(10,10))
+
+d <- mvrnorm(50,c(100,40),Sigma = S)
+
+require(ggplot2)
+
+ggplot()+
+  theme_bw()+
+  xlab('X')+
+  ylab('Y')+
+  scale_y_continuous(limits = c(0,80))+
+  scale_x_continuous(limits = c(50,150))+
+  theme(panel.grid.major = element_line(linetype="dashed"),
+        panel.grid.minor = element_line(linetype="dashed")) + 
+  geom_point(aes(x = d[,1],y=d[,2]))
+  
+
+```
+
+]
+
+.pull-right[
+
+<br>
+
+Shape:
+
+<br>
+
+Trend:
+
+<br>
+
+Strength:
+
+]
+
+
+---
+
+.pull-left[
+
+
+```{r, echo=FALSE, eval=TRUE, fig.height=6,fig.width=6}
+
+require(MASS)
+require(MBESS)
+
+corr       <- diag(2)
+corr[1,2]  <- corr[2,1] <- -0.9
+S          <- cor2cov(cor.mat = corr, sd = c(10,10))
+
+d <- mvrnorm(50,c(100,40),Sigma = S)
+
+require(ggplot2)
+
+ggplot()+
+  theme_bw()+
+  xlab('X')+
+  ylab('Y')+
+  scale_y_continuous(limits = c(0,80))+
+  scale_x_continuous(limits = c(50,150))+
+  theme(panel.grid.major = element_line(linetype="dashed"),
+        panel.grid.minor = element_line(linetype="dashed")) + 
+  geom_point(aes(x = d[,1],y=d[,2]))
+  
+
+```
+
+]
+
+.pull-right[
+
+<br>
+
+Shape:
+
+<br>
+
+Trend:
+
+<br>
+
+Strength:
+
+]
+
+
+---
+
+.pull-left[
+
+
+```{r, echo=FALSE, eval=TRUE, fig.height=6,fig.width=6}
+
+
+corr       <- diag(2)
+corr[1,2]  <- corr[2,1] <- 0
+S          <- cor2cov(cor.mat = corr, sd = c(10,10))
+
+d <- mvrnorm(50,c(100,40),Sigma = S)
+
+ggplot()+
+  theme_bw()+
+  xlab('X')+
+  ylab('Y')+
+  scale_y_continuous(limits = c(0,80))+
+  scale_x_continuous(limits = c(50,150))+
+  theme(panel.grid.major = element_line(linetype="dashed"),
+        panel.grid.minor = element_line(linetype="dashed")) + 
+  geom_point(aes(x = d[,1],y=d[,2]))
+  
+
+```
+
+]
+
+.pull-right[
+
+<br>
+
+Shape:
+
+<br>
+
+Trend:
+
+<br>
+
+Strength:
+
+]
+
+
+---
+
+#### **Covariance**
+
+- **Covariance** is a numerical measure of how two variables co-vary, or how they change together relative to their means.
+
+  - If both variables tend to be above (or below) their means together, the covariance is positive.  
+
+  - If one tends to be above its mean when the other is below, the covariance is negative.
+
+- The sample covariance between \(X\) and \(Y\) is:
+
+$$ Cov(X,Y) = \frac{1}{N-1}\sum (X_i - \bar{X})(Y_i - \bar{Y})$$
+
+- This quantity represents the **average cross-product of deviations** from the mean.
+
+---
+
+.pull-left[
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">country</th>
+    <th class="tg-0lax">doctor</th>
+    <th class="tg-0lax">infmor</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">Australia</td>
+    <td class="tg-0lax">3.8</td>
+    <td class="tg-0lax">3.6</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Austria</td>
+    <td class="tg-0lax">5.3</td>
+    <td class="tg-0lax">3.5</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Belgium</td>
+    <td class="tg-0lax">3.2</td>
+    <td class="tg-0lax">3.4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Canada</td>
+    <td class="tg-0lax">2.8</td>
+    <td class="tg-0lax">4.9</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Czech Republic</td>
+    <td class="tg-0lax">4.1</td>
+    <td class="tg-0lax">3.2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Estonia</td>
+    <td class="tg-0lax">3.5</td>
+    <td class="tg-0lax">2.4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">France</td>
+    <td class="tg-0lax">3.4</td>
+    <td class="tg-0lax">4.5</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Germany</td>
+    <td class="tg-0lax">4.4</td>
+    <td class="tg-0lax">3.8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Hungary</td>
+    <td class="tg-0lax">3.5</td>
+    <td class="tg-0lax">3.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Iceland</td>
+    <td class="tg-0lax">3.9</td>
+    <td class="tg-0lax">2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Ireland</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">3.3</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Israel</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">3.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Italy</td>
+    <td class="tg-0lax">4</td>
+    <td class="tg-0lax">3.1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Korea</td>
+    <td class="tg-0lax">2.5</td>
+    <td class="tg-0lax">3.2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Latvia</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">3.6</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Lithuania</td>
+    <td class="tg-0lax">4.6</td>
+    <td class="tg-0lax">3.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Mexico</td>
+    <td class="tg-0lax">2.4</td>
+    <td class="tg-0lax">14.2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">New Zealand</td>
+    <td class="tg-0lax">3.4</td>
+    <td class="tg-0lax">4.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Norway</td>
+    <td class="tg-0lax">5</td>
+    <td class="tg-0lax">2.4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Slovak Republic</td>
+    <td class="tg-0lax">3.6</td>
+    <td class="tg-0lax">5.8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Slovenia</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">2.1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Spain</td>
+    <td class="tg-0lax">4.4</td>
+    <td class="tg-0lax">3.1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Switzerland</td>
+    <td class="tg-0lax">4.3</td>
+    <td class="tg-0lax">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Turkey</td>
+    <td class="tg-0lax">1.9</td>
+    <td class="tg-0lax">10</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">United Kingdom</td>
+    <td class="tg-0lax">3</td>
+    <td class="tg-0lax">4.3</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">United States</td>
+    <td class="tg-0lax">2.6</td>
+    <td class="tg-0lax">6.5</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Average</td>
+    <td class="tg-0lax">3.57</td>
+    <td class="tg-0lax">4.33</td>
+  </tr>
+</tbody>
+</table>
+]
+
+.pull-right[
+
+.pull-left[
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:0px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:0px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">X - X&#772</th>
+    <th class="tg-0lax">Y - Y&#772</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">0.23</td>
+    <td class="tg-0lax">-0.73</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">1.73</td>
+    <td class="tg-0lax">-0.83</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.37</td>
+    <td class="tg-0lax">-0.93</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.77</td>
+    <td class="tg-0lax">0.57</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.53</td>
+    <td class="tg-0lax">-1.13</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.07</td>
+    <td class="tg-0lax">-1.93</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.17</td>
+    <td class="tg-0lax">0.17</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.83</td>
+    <td class="tg-0lax">-0.53</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.07</td>
+    <td class="tg-0lax">-0.63</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.33</td>
+    <td class="tg-0lax">-2.33</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.27</td>
+    <td class="tg-0lax">-1.03</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.27</td>
+    <td class="tg-0lax">-0.63</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.43</td>
+    <td class="tg-0lax">-1.23</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-1.07</td>
+    <td class="tg-0lax">-1.13</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.27</td>
+    <td class="tg-0lax">-0.73</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">1.03</td>
+    <td class="tg-0lax">-0.63</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-1.17</td>
+    <td class="tg-0lax">9.87</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.17</td>
+    <td class="tg-0lax">0.37</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">1.43</td>
+    <td class="tg-0lax">-1.93</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.03</td>
+    <td class="tg-0lax">1.47</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.27</td>
+    <td class="tg-0lax">-2.23</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.83</td>
+    <td class="tg-0lax">-1.23</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.73</td>
+    <td class="tg-0lax">-0.33</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-1.67</td>
+    <td class="tg-0lax">5.67</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.57</td>
+    <td class="tg-0lax">-0.03</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.97</td>
+    <td class="tg-0lax">2.17</td>
+  </tr>
+</tbody>
+</table>
+]
+
+.pull-right[
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:0px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:0px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">(X - X&#772)(Y - Y&#772)</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">-0.170</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-1.445</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.345</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.435</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.602</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.134</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.028</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.444</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.044</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.772</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.279</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.171</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.532</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">1.213</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.198</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.654</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-11.535</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.062</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-2.768</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.045</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.602</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-1.026</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-0.245</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-9.457</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">0.020</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">-2.099</td>
+  </tr>
+</tbody>
+</table>
+
+]
+
+<br>
+
+$$ \frac{1}{N-1}\sum (X_i - \bar{X})(Y_i - \bar{Y}) = \frac{-29.22}{26-1} = -1.17$$
+
+]
+
+---
+
+### **Basic Properties of Covariance**
+
+- **Symmetry**  
+
+$$Cov(X,Y) = Cov(Y,X)$$
+
+- **Relationship to variance**  
+
+$$Cov(X,X) = Var(X)$$
+
+- **Range**  
+  Covariance can take any value from $(-\infty, +\infty)$.
+
+- **Unit dependence**  
+  The magnitude of covariance depends on the units of $X$ and $Y$, so it is not inherently interpretable without reference to their scales.
+
+- **Interpretation**  
+  - Positive covariance → variables increase/decrease together  
+  - Negative covariance → variables move in opposite directions  
+  - Zero → no linear relationship
+
+---
+
+Suppose you are collaborating with a researcher in Europe and you each plot height and weight for the same 30 individuals, but using different units.
+
+```{r, echo=FALSE,eval=TRUE,fig.align='center',out.width="60%"}
+
+knitr::include_graphics(here('resources/images/covariance.png'))
+
+```
+
+- The covariance values differ even though the underlying data (the people measured) are identical.
+
+- This occurs because covariance is unit-dependent — it scales with the measurement units of the variables.
+
+- Therefore, covariance by itself is not standardized and not directly comparable across studies or contexts unless the variables are measured in the same units.
+
+- Covariance tells us only the direction of the relationship (positive or negative), not its magnitude on a common scale.
+
+---
+
+#### **Correlation**
+
+$$ r = \frac{\frac{1}{N-1}\sum (X_i - \bar{X})(Y_i - \bar{Y})}{\hat{\sigma_x} \hat{\sigma_y}}$$
+- Correlation is a standardized form of covariance, obtained by dividing covariance by the product of the standard deviations of the two variables.
+
+- Because it removes the influence of measurement units, correlation is independent of the scale or metric of both variables.
+
+- The correlation coefficient ranges from **–1 to +1**:
+
+  - +1: perfect positive linear association  
+  
+  - -1: perfect negative linear association  
+  
+  - 0 : no linear association
+  
+- Because correlation is unitless and bounded, it is easier to interpret than covariance.
+
+---
+
+```{r, echo=FALSE,eval=TRUE,fig.align='center',out.width="80%"}
+
+knitr::include_graphics(here('resources/images/correlation.png'))
+
+```
+
+---
+
+.pull-left[
+
+.tiny[
+$$ \frac{1}{N-1}\sum (X_i - \bar{X})(Y_i - \bar{Y}) = \frac{-29.22}{26-1} = -1.17$$
+
+$$ r = \frac{\frac{1}{N-1}\sum (X_i - \bar{X})(Y_i - \bar{Y})}{\hat{\sigma_x} \hat{\sigma_y}} = \frac{-1.17}{0.81 \times 2.57} = -0.563$$
+]
+
+]
+
+.pull-right[
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">LOCATION</th>
+    <th class="tg-0lax">doctor</th>
+    <th class="tg-0lax">infmor</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">Australia</td>
+    <td class="tg-0lax">3.8</td>
+    <td class="tg-0lax">3.6</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Austria</td>
+    <td class="tg-0lax">5.3</td>
+    <td class="tg-0lax">3.5</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Belgium</td>
+    <td class="tg-0lax">3.2</td>
+    <td class="tg-0lax">3.4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Canada</td>
+    <td class="tg-0lax">2.8</td>
+    <td class="tg-0lax">4.9</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Czech Republic</td>
+    <td class="tg-0lax">4.1</td>
+    <td class="tg-0lax">3.2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Estonia</td>
+    <td class="tg-0lax">3.5</td>
+    <td class="tg-0lax">2.4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">France</td>
+    <td class="tg-0lax">3.4</td>
+    <td class="tg-0lax">4.5</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Germany</td>
+    <td class="tg-0lax">4.4</td>
+    <td class="tg-0lax">3.8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Hungary</td>
+    <td class="tg-0lax">3.5</td>
+    <td class="tg-0lax">3.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Iceland</td>
+    <td class="tg-0lax">3.9</td>
+    <td class="tg-0lax">2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Ireland</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">3.3</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Israel</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">3.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Italy</td>
+    <td class="tg-0lax">4</td>
+    <td class="tg-0lax">3.1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Korea</td>
+    <td class="tg-0lax">2.5</td>
+    <td class="tg-0lax">3.2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Latvia</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">3.6</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Lithuania</td>
+    <td class="tg-0lax">4.6</td>
+    <td class="tg-0lax">3.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Mexico</td>
+    <td class="tg-0lax">2.4</td>
+    <td class="tg-0lax">14.2</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">New Zealand</td>
+    <td class="tg-0lax">3.4</td>
+    <td class="tg-0lax">4.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Norway</td>
+    <td class="tg-0lax">5</td>
+    <td class="tg-0lax">2.4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Slovak Republic</td>
+    <td class="tg-0lax">3.6</td>
+    <td class="tg-0lax">5.8</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Slovenia</td>
+    <td class="tg-0lax">3.3</td>
+    <td class="tg-0lax">2.1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Spain</td>
+    <td class="tg-0lax">4.4</td>
+    <td class="tg-0lax">3.1</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Switzerland</td>
+    <td class="tg-0lax">4.3</td>
+    <td class="tg-0lax">4</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Turkey</td>
+    <td class="tg-0lax">1.9</td>
+    <td class="tg-0lax">10</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">United Kingdom</td>
+    <td class="tg-0lax">3</td>
+    <td class="tg-0lax">4.3</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">United States</td>
+    <td class="tg-0lax">2.6</td>
+    <td class="tg-0lax">6.5</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+    <td class="tg-0lax"></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Average</td>
+    <td class="tg-0lax">3.57</td>
+    <td class="tg-0lax">4.33</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Standard Deviation</td>
+    <td class="tg-0lax">0.81</td>
+    <td class="tg-0lax">2.57</td>
+  </tr>
+</tbody>
+</table>
+
+]
+
+---
+
+[https://www.guessthecorrelation.com/](https://www.guessthecorrelation.com/)
+
+```{r, echo=FALSE,eval=TRUE,fig.align='center',fig.height=4,fig.width=4}
+
+knitr::include_graphics(here('resources/images/guess_correlation.png'))
+
+```
+
+---
+
+### Statistical Inference for Correlation
+
+- We can test whether or not the correlation coefficient is significantly different than zero at the population level.
+
+.indent[
+.indent[
+.indent[
+.indent[
+.indent[
+.indent[
+$H_0: \rho = 0$
+
+]]]]]]
+
+- The sampling distribution of sample correlation is a *t*-distribution with N-2 degrees of freedom.
+
+.indent[
+
+$t = r \times \sqrt{\frac{N-1}{1-r^2}}$
+
+]
+
+<br>
+
+```{r,echo=FALSE,fig.width=9,fig.height=3}
+
+require(gridExtra)
+
+p1 <- ggplot(NULL, aes(c(-3.5,3.5))) +
+  geom_area(stat = "function", fun = dt, fill = "grey80", xlim = c(-2,3.5),args = list(df = 21)) +
+  geom_area(stat = "function", fun = dt, fill = "#00998a", xlim = c(-3.5,-2),args = list(df = 21)) +
+  labs(x = "t-score", y = "Density")+
+  ggtitle(expression(H[A]: rho < 0))+
+  theme_bw()+
+  scale_x_continuous(breaks=c(-3,-2,-1,0,1,2,3))+
+  labs(subtitle = 't(N-2)')
+
+p2 <- ggplot(NULL, aes(c(-3.5,3.5))) +
+  geom_area(stat = "function", fun = dt, fill = "grey80", xlim = c(-3.5,2),args = list(df = 21)) +
+  geom_area(stat = "function", fun = dt, fill = "#00998a", xlim = c(2,3.5),args = list(df = 21)) +
+  labs(x = "t-score", y = "Density")+
+  ggtitle(expression(H[A]: rho > 0))+
+  theme_bw()+
+  scale_x_continuous(breaks=c(-3,-2,-1,0,1,2,3))+
+  labs(subtitle = 't(N-2)')
+
+p3 <- ggplot(NULL, aes(c(-3.5,3.5))) +
+  geom_area(stat = "function", fun = dt, fill = "#00998a", xlim = c(2,3.5),args = list(df = 21)) +
+  geom_area(stat = "function", fun = dt, fill = "grey80", xlim = c(-2,2),args = list(df = 21)) +
+  geom_area(stat = "function", fun = dt, fill = "#00998a", xlim = c(-3.5,-2),args = list(df = 21)) +
+  labs(x = "t-score", y = "Density")+
+  ggtitle(expression(H[A]: rho != 0))+
+  theme_bw()+
+  scale_x_continuous(breaks=c(-3,-2,-1,0,1,2,3))+
+  labs(subtitle = 't(N-2)')
+
+grid.arrange(p1,p2,p3,ncol=3,nrow=1)
+```
+
+
+---
+
+The correlation between the total number of physicians and under-five mortality rate was found to be -0.563 for 26 OECD countries. 
+
+**Is this significantly different than zero?**
+
+.pull-left[
+$H_0: \rho = 0$
+
+$H_A: \rho \neq 0$
+]
+
+.pull-right[
+$t = (-0.563) \times \sqrt{\frac{26-1}{1-(-0.563)^2}}=-3.40$
+]
+
+<br>
+
+.pull-left[
+
+```{r,echo=FALSE}
+
+ggplot(NULL, aes(c(-4,4))) +
+  geom_area(stat = "function", fun = dt, fill = "#00998a", xlim = c(3.4,4),args = list(df = 24)) +
+  geom_area(stat = "function", fun = dt, fill = "grey80", xlim = c(-3.4,3.4),args = list(df = 24)) +
+  geom_area(stat = "function", fun = dt, fill = "#00998a", xlim = c(-3.4,-4),args = list(df = 24)) +
+  labs(x = "t-score", y = "Density")+
+  theme_bw()+
+  scale_x_continuous(breaks=c(-3,-2,-1,0,1,2,3))
+```
+]
+
+.pull-right[
+
+.single[
+
+.tiny[
+```{r}
+
+pt(q = 3.4, 
+   df=24,
+   lower.tail=FALSE)*2
+
+```
+]
+
+]
+
+]
+
+
+There was a significant relationship in 2019 between the total number of physicians per 1,000 inhabitant and under-five mortality rate per 1000 live births, **r = -0.56, t(24) = -3.4, p = 0.0024**.
+
+---
+
+You can calculate correlation between two variables by using the `cor()` function from the base R. No extra package needed.
+
+But, it only calculates the correlation coefficient and doesn't provide any inferential statistics for its significance.
+
+.single[
+
+```{r, echo=TRUE,eval=TRUE, comment='',fig.width=4,fig.height=4}
+
+# Import the dataset
+
+d <- read.csv(file = here('./resources/datasets/infant_mortality.csv'),
+              header = TRUE)
+
+head(d)
+
+cor(x = d$doctor,
+    y = d$infmor)
+```
+
+]
+
+---
+
+Alternatively, you can use the `rcorr()` function from the `Hmisc` package.
+
+.single[
+.tiny[
+
+```{r, echo=TRUE,eval=TRUE, comment='',fig.width=4,fig.height=4}
+
+# Import the dataset
+
+d <- read.csv(file = here('./resources/datasets/infant_mortality.csv'),
+              header = TRUE)
+
+head(d)
+
+# install.packages("Hmisc")
+
+require(Hmisc)
+
+rcorr(x = d$doctor,
+      y = d$infmor,
+      type="pearson")
+```
+
+]
+]
+
+It reports the p-value from the *t*-test of significance.
+
+It doesn't report the t-statistic or degrees of freedom, so you should compute them. 
+
+---
+
+### Correlation Matrix
+
+For a dataset with `n` numeric variables:
+
+- There exists a `n x n` symmetric correlation matrix summarizing all pairwise correlations among the variables.
+
+- The diagonal elements of the correlation matrix are always equal to 1, because the correlation of any variable with itself is perfect.
+
+- The upper and lower off-diagonal elements are identical, since correlation is a symmetric measure, $\rho_{ij} = \rho_{ji}$.
+
+- Therefore, only $\frac{n(n-1)}{2}$ unique correlation estimates are needed to describe all pairwise relationships.
+
+- For example, with five numeric variables, the full 5×5 correlation matrix is:
+
+$$\mathbf{R} =
+\begin{bmatrix}
+1 & \rho_{12} & \rho_{13} & \rho_{14} & \rho_{15} \\
+\rho_{21} & 1 & \rho_{23} & \rho_{24} & \rho_{25} \\
+\rho_{31} & \rho_{32} & 1 & \rho_{34} & \rho_{35} \\
+\rho_{41} & \rho_{42} & \rho_{43} & 1 & \rho_{45} \\
+\rho_{51} & \rho_{52} & \rho_{53} & \rho_{54} & 1 \\
+\end{bmatrix}$$
+
+---
+
+**Example: Life Expectancy dataset**
+
+Suppose we select the following five variables from a life expectancy dataset:
+
+- `adult mortality`: number of deaths between ages 15–60 per 1,000 population
+
+- `under_five_deaths`: number of deaths under age 5 per 1,000 population
+
+- `measles`: reported cases of measles per 1,000 population
+
+- `polio`: polio (Pol3) immunization coverage among 1-year-olds (%)
+
+- `diphtheria`: diphtheria–tetanus–pertussis (DTP3) immunization coverage among 1-year-olds (%)
+
+---
+
+.single[
+
+.tiny[
+
+```{r, echo=TRUE,eval=TRUE, comment='',fig.width=4,fig.height=4}
+
+d <- read.csv(file   = here('./resources/datasets/life_expectancy.csv'),
+              header = TRUE)
+
+d_sub <- d[,c('adult_mortality','under_five_deaths','measles','polio','diphtheria')]
+
+
+my.corr <- cor(x = d_sub)
+
+my.corr
+
+round(my.corr,2)
+```
+
+]
+]
+
+---
+
+When you need to test the significance of the correlations, you can use the rcorr() function from the Hmisc package.
+
+.single[
+
+.tiny2[
+
+```{r, echo=TRUE,eval=TRUE, comment='',fig.width=4,fig.height=4}
+
+my.corr <- rcorr(x = as.matrix(d_sub))
+
+# 5 x 5 correlation matrix
+
+my.corr$r
+
+# Sample size for each correlation
+
+my.corr$n
+
+# p-values for significance of each correlation
+
+my.corr$P
+
+```
+
+]
+]
+
+---
+
+### APA Format Reporting of Correlations
+
+[Sample Correlation Table](https://apastyle.apa.org/style-grammar-guidelines/tables-figures/sample-tables#correlation)
+
+```{r, echo=FALSE,eval=TRUE,fig.align='center',fig.height=5,fig.width=8}
+
+knitr::include_graphics(here('resources/images/APA_correlation.png'))
+
+```
+---
+
+
+#### **Handling missing data when computing correlations**
+
+<center> Observed Sample </center>
+
+| V1 | V2 | V3 |
+|----|----|----|
+| 5  | NA | 9  |
+| 3  | 2  | NA |
+| 4  | 8  | 5  |
+| NA | 3  | NA |
+| 1  | 2  | 6  |
+| NA | 9  | 4  |
+| NA | 5  | NA |
+| 3  | NA | 8  |
+| 2  | 6  | 5  |
+| NA | 8  | 4  |
+
+There are two ways dealing with missing data when computing correlations
+
+- **Listwise deletion**
+
+- **Pairwise deletion**
+
+---
+
+**Listwise deletion**: any row with a missing value is removed from data and then the correlations are computed.
+
+.pull-left[
+
+<center> Observed Sample </center>
+
+| V1 | V2 | V3 |
+|----|----|----|
+| 5  | NA | 9  |
+| 3  | 2  | NA |
+| 4  | 8  | 5  |
+| NA | 3  | NA |
+| 1  | 2  | 6  |
+| NA | 9  | 4  |
+| NA | 5  | NA |
+| 3  | NA | 8  |
+| 2  | 6  | 5  |
+| NA | 8  | 4  |
+
+]
+
+.pull-right[
+
+<center> Analytical Sample </center>
+
+| V1 | V2 | V3 |
+|----|----|----|
+| 4  | 8  | 5  |
+| 1  | 2  | 6  |
+| 2  | 6  | 5  |
+
+]
+
+---
+
+**Pairwise deletion**: rows with missing data are removed per pair of variables, then the correlation is computed for each pair.
+
+.pull-left[
+
+<center> Observed Sample </center>
+
+| V1 | V2 | V3 |
+|----|----|----|
+| 5  | NA | 9  |
+| 3  | 2  | NA |
+| 4  | 8  | 5  |
+| NA | 3  | NA |
+| 1  | 2  | 6  |
+| NA | 9  | 4  |
+| NA | 5  | NA |
+| 3  | NA | 8  |
+| 2  | 6  | 5  |
+| NA | 8  | 4  |
+
+
+]
+
+.pull-right[
+
+.pull-left[
+
+<center> Analytical Sample </center>
+<center> for V1 and V2 </center>
+
+
+| V1 | V2 |
+|----|----|
+| 3  | 2  |
+| 4  | 8  |
+| 1  | 2  |
+| 2  | 6  |
+
+]
+
+.pull-right[
+
+<center> Analytical Sample </center>
+<center> for V1 and V3 </center>
+
+| V1 | V3 |
+|----|----|
+| 5  | 9  |
+| 4  | 5  |
+| 1  | 6  |
+| 3  | 8  |
+| 2  | 5  |
+]
+
+<br>
+
+<center> Analytical Sample </center>
+<center> for V2 and V3 </center>
+
+| V2 | V3 |
+|----|----|
+| 8  | 5  |
+| 2  | 6  |
+| 9  | 4  |
+| 6  | 5  |
+| 8  | 4  |
+
+
+]
+
+---
+
+#### **Handling Missing Data in Correlation Analysis**
+
+**Listwise Deletion**
+
+- **Pro:**  
+  All correlations are calculated using the **same complete set of cases**, ensuring consistency across variable pairs.  
+- **Con:**  
+  May substantially **reduce sample size**, especially when multiple variables contain missing values.  
+  This loss of data can decrease statistical power.
+
+**Pairwise Deletion**
+
+- **Pro:**  
+  Uses all available data for each variable pair, preserving as many observations as possible for correlation calculations, thereby minimizing data loss  
+- **Con:**  
+  Different correlations may rely on **different subsets of observations**, leading to inconsistency across the correlation matrix.  
+  Results may also be **biased** if the missingness is not random (not MCAR).
+
+---
+
+
+**Example: Life Expectancy dataset**
+
+Suppose we select the following five variables from a life expectancy dataset:
+
+- `life_expectancy`: life expectancy in age
+
+- `bmi`: average Body Mass Index of entire population
+
+- `percentage_expenditure`: Expenditure on health as a percentage of Gross Domestic Product per capita(%)
+
+- `gdp`: Gross Domestic Product per capita (in USD)
+
+- `hepatitis_b`: Hepatitis B (HepB) immunization coverage among 1-year-olds (%)
+
+---
+
+### Working with `cor()` function
+
+.single[
+.tiny[
+
+```{r, echo=TRUE,eval=TRUE, comment='',fig.width=4,fig.height=4}
+
+d <- read.csv(file   = here('./resources/datasets/life_expectancy.csv'),
+              header = TRUE)
+
+d_sub <- d[,c('life_expectancy','bmi','percentage_expenditure','gdp','hepatitis_b')]
+
+
+my.corr <- cor(x = d_sub)
+
+round(my.corr,2)
+
+```
+]
+]
+
+---
+
+If your dataset contains missing values, you must specify how the `cor()` function should handle them when computing correlations.
+
+**Listwise deletion**
+
+.single[
+.tiny[
+
+```{r, echo=TRUE,eval=TRUE, comment='',fig.width=4,fig.height=4}
+
+my.corr <- cor(x   = d_sub,
+               use = 'complete' )
+
+round(my.corr,2)
+
+```
+]
+]
+
+
+However, `cor()` does not report the number of observations retained after listwise deletion.
+
+To see how many observations were actually used:
+
+.single[
+.tiny[
+
+```{r, echo=TRUE,eval=TRUE, comment='',fig.width=4,fig.height=4}
+
+nrow(na.omit(d_sub))
+
+```
+]
+]
+
+This command returns the number of complete cases in your dataset.
+
+---
+
+**Pairwise deletion**
+
+.single[
+.tiny[
+
+```{r, echo=TRUE,eval=TRUE, comment='',fig.width=4,fig.height=4}
+
+my.corr <- cor(x   = d_sub,
+               use = 'pairwise' )
+
+round(my.corr,2)
+
+```
+]
+]
+
+`cor()` does not report the number of observations used for each pair of variables.
+
+You can write some custom code to get that information, but it requires some programming.
+
+---
+
+### Working with `rcorr()` function
+
+`rcorr()` function always use pairwise deletion in the presence of missing data.
+
+.single[
+.tiny2[
+
+```{r, echo=TRUE,eval=TRUE, comment='',fig.width=4,fig.height=4}
+
+my.corr <- rcorr(x   = as.matrix(d_sub))
+
+my.corr
+
+```
+]
+]
+
+
+
+

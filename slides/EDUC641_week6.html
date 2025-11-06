@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Relationship between two continuous variables</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Cengiz Zopluoglu" />
+    <script src="EDUC641_week6_files/header-attrs-2.20/header-attrs.js"></script>
+    <link href="EDUC641_week6_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="EDUC641_week6_files/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="EDUC641_week6_files/remark-css-0.0.1/ki-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my_custom.css" type="text/css" />
+    <link rel="stylesheet" href="xaringanthemer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Relationship between two continuous variables
+]
+.subtitle[
+## EDUC 641: Week 6
+]
+.author[
+### Cengiz Zopluoglu
+]
+
+---
+
+
+
+&lt;style&gt;
+
+#infobox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background: #E6F6DC 5px center/3em no-repeat;
+}
+
+.left-column2 {
+  width: 75%;
+  height: 92%;
+  float: left;
+  padding-top: 1em;
+}
+
+.right-column2 {
+  width: 20%;
+  float: right;
+  padding-top: 1em;
+}
+
+.remark-code {
+  font-size: 18px;
+}
+
+.tiny .remark-code { /*Change made here*/
+  font-size: 85% !important;
+}
+
+.tiny2 .remark-code { /*Change made here*/
+  font-size: 70% !important;
+}
+
+.indent {
+  margin-left: 2em;
+}
+
+.single {
+  line-height: 1 ;
+}
+
+
+.double {
+  line-height: 2 ;
+}
+
+&lt;/style&gt;
+
+
+
+### Goals
+
+
+---
+
+class: middle, inverse
+
+# Covariance and Correlation
+
+---
+
+### Historical Origin
+
+- **Francis Galton (1822–1911)** is widely credited with introducing the statistical concept of *correlation* in the late 19th century.
+
+- In his 1888 paper [*“Co-relations and their Measurement, chiefly from Anthropometric Data”*](https://galton.org/essays/1880-1889/galton-1888-co-relations-royal-soc/galton_corr.html?utm_source=chatgpt.com), Galton used the term **“co-relation or correlation of structure”** and attempted to formally define and measure the degree to which two variables vary together.
+
+- Galton noted that the phrase **co-relation** was already used in biology but had not yet been formally defined or quantified.
+
+- The hyphenated **co-relation** appears in his 1888 paper; over time, it evolved into the modern spelling **correlation.**
+
+### Pearson Correlation
+
+- While Galton introduced and named the idea of co-relation, **Karl Pearson** formalized the **product-moment correlation coefficient** in 1896, building on Galton’s ideas and earlier mathematical work by French physicist Auguste Bravais.
+
+- The **Pearson correlation coefficient** (`\(\rho\)`) is now the most widely used measure of linear association between **continuous variables**.
+
+---
+
+### Scatterplot
+
+- A **scatterplot** is a graphical tool used to visualize the relationship between two quantitative variables.
+
+- Each point represents a single observation, located according to its values on the two variables, forming (x, y) coordinates.
+
+- By convention, the **predictor** (independent variable) is placed on the **x-axis**, and the **outcome** (dependent or criterion variable) on the **y-axis**.
+
+- Scatterplots help us visually assess:
+  - Trend/Direction of the pattern
+  - Linearity vs. non-linearity
+  - Strength of association
+  - Outliers and unusual patterns
+  - Possible clusters or heteroscedasticity
+  
+- Example variables (2019):
+  - Physicians per 1,000 inhabitants  
+  - Under-five mortality rate per 1,000 live births
+
+---
+
+.pull-left[
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:15px;
+  overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:15px;
+  font-weight:normal;overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+&lt;/style&gt;
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-0lax"&gt;country&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;doctor&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;infmor&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Australia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.8&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.6&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Austria&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;5.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.5&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Belgium&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.2&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Canada&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.8&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.9&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Czech Republic&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.1&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Estonia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;France&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.5&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Germany&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.8&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Hungary&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Iceland&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.9&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Ireland&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Israel&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Italy&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Korea&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Latvia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.6&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Lithuania&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.6&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Mexico&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;14.2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;New Zealand&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Norway&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Slovak Republic&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.6&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;5.8&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Slovenia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Spain&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Switzerland&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Turkey&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;1.9&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;10&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;United Kingdom&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.3&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;United States&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.6&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;6.5&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+.pull-right[
+
+&lt;img src="EDUC641_week6_files/figure-html/unnamed-chunk-1-1.svg" style="display: block; margin: auto;" /&gt;
+
+Imagine that we represent each country in a two-dimensional space using the pairs of values as X-Y coordinates.
+
+]
+
+
+---
+
+.pull-left[
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:15px;
+  overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:15px;
+  font-weight:normal;overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+&lt;/style&gt;
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-0lax"&gt;country&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;doctor&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;infmor&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Australia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.8&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.6&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Austria&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;5.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.5&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Belgium&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.2&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Canada&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.8&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.9&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Czech Republic&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.1&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Estonia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;France&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.5&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Germany&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.8&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Hungary&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Iceland&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.9&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Ireland&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Israel&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Italy&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Korea&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Latvia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.6&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Lithuania&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.6&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Mexico&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;14.2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;New Zealand&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Norway&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Slovak Republic&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.6&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;5.8&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Slovenia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Spain&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Switzerland&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Turkey&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;1.9&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;10&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;United Kingdom&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.3&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;United States&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.6&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;6.5&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+.pull-right[
+
+
+&lt;img src="EDUC641_week6_files/figure-html/unnamed-chunk-2-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+#### **Describing the Pattern in a Scatterplot**
+
+When describing the relationship in a scatterplot, consider three features: **shape**, **trend**, and **strength**.
+
+- **Shape**: Describe the form of the relationship:  
+  - Linear  
+  - Curvilinear (e.g., quadratic, exponential)  
+  - Clusters or subgroups  
+  - Outliers  
+
+- **Trend (Direction)**  
+  - **Positive trend:** Higher values on one variable are associated with higher values on the other.  
+  - **Negative trend:** Higher values on one variable are associated with lower values on the other.  
+  - **No trend:** No consistent direction in the relationship.
+
+- **Strength**  
+  - **Strong:** Points lie close to an imaginary line or curve.  
+  - **Weak:** Points are widely scattered.  
+  - Consider whether the strength is **constant or changes** across the range (e.g., heteroscedasticity).
+  
+---
+
+.pull-left[
+
+
+&lt;img src="EDUC641_week6_files/figure-html/unnamed-chunk-3-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+&lt;br&gt;
+
+Shape:
+
+&lt;br&gt;
+
+Trend:
+
+&lt;br&gt;
+
+Strength:
+
+]
+
+---
+
+.pull-left[
+
+
+&lt;img src="EDUC641_week6_files/figure-html/unnamed-chunk-4-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+&lt;br&gt;
+
+Shape:
+
+&lt;br&gt;
+
+Trend:
+
+&lt;br&gt;
+
+Strength:
+
+]
+
+---
+
+.pull-left[
+
+
+&lt;img src="EDUC641_week6_files/figure-html/unnamed-chunk-5-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+&lt;br&gt;
+
+Shape:
+
+&lt;br&gt;
+
+Trend:
+
+&lt;br&gt;
+
+Strength:
+
+]
+
+
+---
+
+.pull-left[
+
+
+&lt;img src="EDUC641_week6_files/figure-html/unnamed-chunk-6-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+&lt;br&gt;
+
+Shape:
+
+&lt;br&gt;
+
+Trend:
+
+&lt;br&gt;
+
+Strength:
+
+]
+
+
+---
+
+.pull-left[
+
+
+&lt;img src="EDUC641_week6_files/figure-html/unnamed-chunk-7-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+&lt;br&gt;
+
+Shape:
+
+&lt;br&gt;
+
+Trend:
+
+&lt;br&gt;
+
+Strength:
+
+]
+
+
+---
+
+#### **Covariance**
+
+- **Covariance** is a numerical measure of how two variables co-vary, or how they change together relative to their means.
+
+  - If both variables tend to be above (or below) their means together, the covariance is positive.  
+
+  - If one tends to be above its mean when the other is below, the covariance is negative.
+
+- The sample covariance between \(X\) and \(Y\) is:
+
+$$ Cov(X,Y) = \frac{1}{N-1}\sum (X_i - \bar{X})(Y_i - \bar{Y})$$
+
+- This quantity represents the **average cross-product of deviations** from the mean.
+
+---
+
+.pull-left[
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+&lt;/style&gt;
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-0lax"&gt;country&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;doctor&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;infmor&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Australia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.8&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.6&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Austria&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;5.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.5&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Belgium&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.2&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Canada&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.8&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.9&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Czech Republic&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.1&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Estonia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;France&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.5&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Germany&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.8&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Hungary&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Iceland&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.9&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Ireland&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Israel&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Italy&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Korea&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Latvia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.6&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Lithuania&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.6&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Mexico&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;14.2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;New Zealand&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Norway&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Slovak Republic&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.6&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;5.8&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Slovenia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Spain&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Switzerland&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Turkey&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;1.9&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;10&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;United Kingdom&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.3&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;United States&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.6&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;6.5&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Average&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.57&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.33&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+.pull-right[
+
+.pull-left[
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:0px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:0px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+&lt;/style&gt;
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-0lax"&gt;X - X&amp;#772&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;Y - Y&amp;#772&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.23&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-0.73&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;1.73&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-0.83&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.37&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-0.93&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.77&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;0.57&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.53&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-1.13&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.07&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-1.93&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.17&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;0.17&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.83&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-0.53&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.07&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-0.63&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.33&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-2.33&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.27&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-1.03&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.27&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-0.63&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.43&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-1.23&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-1.07&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-1.13&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.27&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-0.73&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;1.03&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-0.63&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-1.17&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;9.87&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.17&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;0.37&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;1.43&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-1.93&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.03&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;1.47&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.27&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-2.23&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.83&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-1.23&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.73&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-0.33&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-1.67&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;5.67&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.57&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;-0.03&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.97&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.17&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+.pull-right[
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:0px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:0px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+&lt;/style&gt;
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-0lax"&gt;(X - X&amp;#772)(Y - Y&amp;#772)&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.170&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-1.445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.345&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.435&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.602&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.134&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.028&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.444&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.044&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.772&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.279&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.171&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.532&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;1.213&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.198&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.654&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-11.535&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.062&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-2.768&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.045&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.602&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-1.026&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-0.245&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-9.457&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;0.020&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;-2.099&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+&lt;br&gt;
+
+$$ \frac{1}{N-1}\sum (X_i - \bar{X})(Y_i - \bar{Y}) = \frac{-29.22}{26-1} = -1.17$$
+
+]
+
+---
+
+### **Basic Properties of Covariance**
+
+- **Symmetry**  
+
+`$$Cov(X,Y) = Cov(Y,X)$$`
+
+- **Relationship to variance**  
+
+`$$Cov(X,X) = Var(X)$$`
+
+- **Range**  
+  Covariance can take any value from `\((-\infty, +\infty)\)`.
+
+- **Unit dependence**  
+  The magnitude of covariance depends on the units of `\(X\)` and `\(Y\)`, so it is not inherently interpretable without reference to their scales.
+
+- **Interpretation**  
+  - Positive covariance → variables increase/decrease together  
+  - Negative covariance → variables move in opposite directions  
+  - Zero → no linear relationship
+
+---
+
+Suppose you are collaborating with a researcher in Europe and you each plot height and weight for the same 30 individuals, but using different units.
+
+&lt;img src="../resources/images/covariance.PNG" width="60%" style="display: block; margin: auto;" /&gt;
+
+- The covariance values differ even though the underlying data (the people measured) are identical.
+
+- This occurs because covariance is unit-dependent — it scales with the measurement units of the variables.
+
+- Therefore, covariance by itself is not standardized and not directly comparable across studies or contexts unless the variables are measured in the same units.
+
+- Covariance tells us only the direction of the relationship (positive or negative), not its magnitude on a common scale.
+
+---
+
+#### **Correlation**
+
+$$ r = \frac{\frac{1}{N-1}\sum (X_i - \bar{X})(Y_i - \bar{Y})}{\hat{\sigma_x} \hat{\sigma_y}}$$
+- Correlation is a standardized form of covariance, obtained by dividing covariance by the product of the standard deviations of the two variables.
+
+- Because it removes the influence of measurement units, correlation is independent of the scale or metric of both variables.
+
+- The correlation coefficient ranges from **–1 to +1**:
+
+  - +1: perfect positive linear association  
+  
+  - -1: perfect negative linear association  
+  
+  - 0 : no linear association
+  
+- Because correlation is unitless and bounded, it is easier to interpret than covariance.
+
+---
+
+&lt;img src="../resources/images/correlation.PNG" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+.pull-left[
+
+.tiny[
+$$ \frac{1}{N-1}\sum (X_i - \bar{X})(Y_i - \bar{Y}) = \frac{-29.22}{26-1} = -1.17$$
+
+$$ r = \frac{\frac{1}{N-1}\sum (X_i - \bar{X})(Y_i - \bar{Y})}{\hat{\sigma_x} \hat{\sigma_y}} = \frac{-1.17}{0.81 \times 2.57} = -0.563$$
+]
+
+]
+
+.pull-right[
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:0px 4px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+&lt;/style&gt;
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-0lax"&gt;LOCATION&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;doctor&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;infmor&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Australia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.8&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.6&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Austria&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;5.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.5&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Belgium&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.2&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Canada&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.8&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.9&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Czech Republic&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.1&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Estonia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;France&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.5&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Germany&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.8&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Hungary&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Iceland&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.9&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Ireland&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Israel&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Italy&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Korea&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Latvia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.6&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Lithuania&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.6&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Mexico&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;14.2&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;New Zealand&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.7&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Norway&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Slovak Republic&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.6&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;5.8&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Slovenia&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Spain&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.1&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Switzerland&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Turkey&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;1.9&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;10&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;United Kingdom&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.3&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;United States&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.6&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;6.5&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Average&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;3.57&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;4.33&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;Standard Deviation&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;0.81&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;2.57&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+---
+
+[https://www.guessthecorrelation.com/](https://www.guessthecorrelation.com/)
+
+&lt;img src="../resources/images/guess_correlation.png" width="669" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Statistical Inference for Correlation
+
+- We can test whether or not the correlation coefficient is significantly different than zero at the population level.
+
+.indent[
+.indent[
+.indent[
+.indent[
+.indent[
+.indent[
+`\(H_0: \rho = 0\)`
+
+]]]]]]
+
+- The sampling distribution of sample correlation is a *t*-distribution with N-2 degrees of freedom.
+
+.indent[
+
+`\(t = r \times \sqrt{\frac{N-1}{1-r^2}}\)`
+
+]
+
+&lt;br&gt;
+
+&lt;img src="EDUC641_week6_files/figure-html/unnamed-chunk-11-1.svg" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+The correlation between the total number of physicians and under-five mortality rate was found to be -0.563 for 26 OECD countries. 
+
+**Is this significantly different than zero?**
+
+.pull-left[
+`\(H_0: \rho = 0\)`
+
+`\(H_A: \rho \neq 0\)`
+]
+
+.pull-right[
+`\(t = (-0.563) \times \sqrt{\frac{26-1}{1-(-0.563)^2}}=-3.40\)`
+]
+
+&lt;br&gt;
+
+.pull-left[
+
+&lt;img src="EDUC641_week6_files/figure-html/unnamed-chunk-12-1.svg" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+.single[
+
+.tiny[
+
+```r
+pt(q = 3.4, 
+   df=24,
+   lower.tail=FALSE)*2
+```
+
+```
+#&gt; [1] 0.002357594
+```
+]
+
+]
+
+]
+
+
+There was a significant relationship in 2019 between the total number of physicians per 1,000 inhabitant and under-five mortality rate per 1000 live births, **r = -0.56, t(24) = -3.4, p = 0.0024**.
+
+---
+
+You can calculate correlation between two variables by using the `cor()` function from the base R. No extra package needed.
+
+But, it only calculates the correlation coefficient and doesn't provide any inferential statistics for its significance.
+
+.single[
+
+
+```r
+# Import the dataset
+
+d &lt;- read.csv(file = here('./resources/datasets/infant_mortality.csv'),
+              header = TRUE)
+
+head(d)
+```
+
+```
+         country doctor infmor
+1      Australia    3.8    3.6
+2        Austria    5.3    3.5
+3        Belgium    3.2    3.4
+4         Canada    2.8    4.9
+5 Czech Republic    4.1    3.2
+6        Estonia    3.5    2.4
+```
+
+```r
+cor(x = d$doctor,
+    y = d$infmor)
+```
+
+```
+[1] -0.5625062
+```
+
+]
+
+---
+
+Alternatively, you can use the `rcorr()` function from the `Hmisc` package.
+
+.single[
+.tiny[
+
+
+```r
+# Import the dataset
+
+d &lt;- read.csv(file = here('./resources/datasets/infant_mortality.csv'),
+              header = TRUE)
+
+head(d)
+```
+
+```
+         country doctor infmor
+1      Australia    3.8    3.6
+2        Austria    5.3    3.5
+3        Belgium    3.2    3.4
+4         Canada    2.8    4.9
+5 Czech Republic    4.1    3.2
+6        Estonia    3.5    2.4
+```
+
+```r
+# install.packages("Hmisc")
+
+require(Hmisc)
+
+rcorr(x = d$doctor,
+      y = d$infmor,
+      type="pearson")
+```
+
+```
+      x     y
+x  1.00 -0.56
+y -0.56  1.00
+
+n= 26 
+
+
+P
+  x      y     
+x        0.0028
+y 0.0028       
+```
+
+]
+]
+
+It reports the p-value from the *t*-test of significance.
+
+It doesn't report the t-statistic or degrees of freedom, so you should compute them. 
+
+---
+
+### Correlation Matrix
+
+For a dataset with `n` numeric variables:
+
+- There exists a `n x n` symmetric correlation matrix summarizing all pairwise correlations among the variables.
+
+- The diagonal elements of the correlation matrix are always equal to 1, because the correlation of any variable with itself is perfect.
+
+- The upper and lower off-diagonal elements are identical, since correlation is a symmetric measure, `\(\rho_{ij} = \rho_{ji}\)`.
+
+- Therefore, only `\(\frac{n(n-1)}{2}\)` unique correlation estimates are needed to describe all pairwise relationships.
+
+- For example, with five numeric variables, the full 5×5 correlation matrix is:
+
+`$$\mathbf{R} =
+\begin{bmatrix}
+1 &amp; \rho_{12} &amp; \rho_{13} &amp; \rho_{14} &amp; \rho_{15} \\
+\rho_{21} &amp; 1 &amp; \rho_{23} &amp; \rho_{24} &amp; \rho_{25} \\
+\rho_{31} &amp; \rho_{32} &amp; 1 &amp; \rho_{34} &amp; \rho_{35} \\
+\rho_{41} &amp; \rho_{42} &amp; \rho_{43} &amp; 1 &amp; \rho_{45} \\
+\rho_{51} &amp; \rho_{52} &amp; \rho_{53} &amp; \rho_{54} &amp; 1 \\
+\end{bmatrix}$$`
+
+---
+
+**Example: Life Expectancy dataset**
+
+Suppose we select the following five variables from a life expectancy dataset:
+
+- `adult mortality`: number of deaths between ages 15–60 per 1,000 population
+
+- `under_five_deaths`: number of deaths under age 5 per 1,000 population
+
+- `measles`: reported cases of measles per 1,000 population
+
+- `polio`: polio (Pol3) immunization coverage among 1-year-olds (%)
+
+- `diphtheria`: diphtheria–tetanus–pertussis (DTP3) immunization coverage among 1-year-olds (%)
+
+---
+
+.single[
+
+.tiny[
+
+
+```r
+d &lt;- read.csv(file   = here('./resources/datasets/life_expectancy.csv'),
+              header = TRUE)
+
+d_sub &lt;- d[,c('adult_mortality','under_five_deaths','measles','polio','diphtheria')]
+
+
+my.corr &lt;- cor(x = d_sub)
+
+my.corr
+```
+
+```
+                  adult_mortality under_five_deaths       measles       polio
+adult_mortality        1.00000000         0.2101702  0.0550505884 -0.37858149
+under_five_deaths      0.21017023         1.0000000  0.7657338626 -0.14648172
+measles                0.05505059         0.7657339  1.0000000000 -0.02753727
+polio                 -0.37858149        -0.1464817 -0.0275372744  1.00000000
+diphtheria            -0.32797139        -0.1370574 -0.0009479256  0.66094649
+                     diphtheria
+adult_mortality   -0.3279713856
+under_five_deaths -0.1370574213
+measles           -0.0009479256
+polio              0.6609464929
+diphtheria         1.0000000000
+```
+
+```r
+round(my.corr,2)
+```
+
+```
+                  adult_mortality under_five_deaths measles polio diphtheria
+adult_mortality              1.00              0.21    0.06 -0.38      -0.33
+under_five_deaths            0.21              1.00    0.77 -0.15      -0.14
+measles                      0.06              0.77    1.00 -0.03       0.00
+polio                       -0.38             -0.15   -0.03  1.00       0.66
+diphtheria                  -0.33             -0.14    0.00  0.66       1.00
+```
+
+]
+]
+
+---
+
+When you need to test the significance of the correlations, you can use the rcorr() function from the Hmisc package.
+
+.single[
+
+.tiny2[
+
+
+```r
+my.corr &lt;- rcorr(x = as.matrix(d_sub))
+
+# 5 x 5 correlation matrix
+
+my.corr$r
+```
+
+```
+                  adult_mortality under_five_deaths       measles       polio
+adult_mortality        1.00000000         0.2101702  0.0550505884 -0.37858149
+under_five_deaths      0.21017023         1.0000000  0.7657338626 -0.14648172
+measles                0.05505059         0.7657339  1.0000000000 -0.02753727
+polio                 -0.37858149        -0.1464817 -0.0275372744  1.00000000
+diphtheria            -0.32797139        -0.1370574 -0.0009479256  0.66094649
+                     diphtheria
+adult_mortality   -0.3279713856
+under_five_deaths -0.1370574213
+measles           -0.0009479256
+polio              0.6609464929
+diphtheria         1.0000000000
+```
+
+```r
+# Sample size for each correlation
+
+my.corr$n
+```
+
+```
+                  adult_mortality under_five_deaths measles polio diphtheria
+adult_mortality               180               180     180   180        180
+under_five_deaths             180               180     180   180        180
+measles                       180               180     180   180        180
+polio                         180               180     180   180        180
+diphtheria                    180               180     180   180        180
+```
+
+```r
+# p-values for significance of each correlation
+
+my.corr$P
+```
+
+```
+                  adult_mortality under_five_deaths   measles        polio
+adult_mortality                NA       0.004628915 0.4629533 1.604153e-07
+under_five_deaths    4.628915e-03                NA 0.0000000 4.974338e-02
+measles              4.629533e-01       0.000000000        NA 7.136585e-01
+polio                1.604153e-07       0.049743378 0.7136585           NA
+diphtheria           6.973657e-06       0.066553801 0.9899237 0.000000e+00
+                    diphtheria
+adult_mortality   6.973657e-06
+under_five_deaths 6.655380e-02
+measles           9.899237e-01
+polio             0.000000e+00
+diphtheria                  NA
+```
+
+]
+]
+
+---
+
+### APA Format Reporting of Correlations
+
+[Sample Correlation Table](https://apastyle.apa.org/style-grammar-guidelines/tables-figures/sample-tables#correlation)
+
+&lt;img src="../resources/images/APA_correlation.png" width="1427" style="display: block; margin: auto;" /&gt;
+---
+
+
+#### **Handling missing data when computing correlations**
+
+&lt;center&gt; Observed Sample &lt;/center&gt;
+
+| V1 | V2 | V3 |
+|----|----|----|
+| 5  | NA | 9  |
+| 3  | 2  | NA |
+| 4  | 8  | 5  |
+| NA | 3  | NA |
+| 1  | 2  | 6  |
+| NA | 9  | 4  |
+| NA | 5  | NA |
+| 3  | NA | 8  |
+| 2  | 6  | 5  |
+| NA | 8  | 4  |
+
+There are two ways dealing with missing data when computing correlations
+
+- **Listwise deletion**
+
+- **Pairwise deletion**
+
+---
+
+**Listwise deletion**: any row with a missing value is removed from data and then the correlations are computed.
+
+.pull-left[
+
+&lt;center&gt; Observed Sample &lt;/center&gt;
+
+| V1 | V2 | V3 |
+|----|----|----|
+| 5  | NA | 9  |
+| 3  | 2  | NA |
+| 4  | 8  | 5  |
+| NA | 3  | NA |
+| 1  | 2  | 6  |
+| NA | 9  | 4  |
+| NA | 5  | NA |
+| 3  | NA | 8  |
+| 2  | 6  | 5  |
+| NA | 8  | 4  |
+
+]
+
+.pull-right[
+
+&lt;center&gt; Analytical Sample &lt;/center&gt;
+
+| V1 | V2 | V3 |
+|----|----|----|
+| 4  | 8  | 5  |
+| 1  | 2  | 6  |
+| 2  | 6  | 5  |
+
+]
+
+---
+
+**Pairwise deletion**: rows with missing data are removed per pair of variables, then the correlation is computed for each pair.
+
+.pull-left[
+
+&lt;center&gt; Observed Sample &lt;/center&gt;
+
+| V1 | V2 | V3 |
+|----|----|----|
+| 5  | NA | 9  |
+| 3  | 2  | NA |
+| 4  | 8  | 5  |
+| NA | 3  | NA |
+| 1  | 2  | 6  |
+| NA | 9  | 4  |
+| NA | 5  | NA |
+| 3  | NA | 8  |
+| 2  | 6  | 5  |
+| NA | 8  | 4  |
+
+
+]
+
+.pull-right[
+
+.pull-left[
+
+&lt;center&gt; Analytical Sample &lt;/center&gt;
+&lt;center&gt; for V1 and V2 &lt;/center&gt;
+
+
+| V1 | V2 |
+|----|----|
+| 3  | 2  |
+| 4  | 8  |
+| 1  | 2  |
+| 2  | 6  |
+
+]
+
+.pull-right[
+
+&lt;center&gt; Analytical Sample &lt;/center&gt;
+&lt;center&gt; for V1 and V3 &lt;/center&gt;
+
+| V1 | V3 |
+|----|----|
+| 5  | 9  |
+| 4  | 5  |
+| 1  | 6  |
+| 3  | 8  |
+| 2  | 5  |
+]
+
+&lt;br&gt;
+
+&lt;center&gt; Analytical Sample &lt;/center&gt;
+&lt;center&gt; for V2 and V3 &lt;/center&gt;
+
+| V2 | V3 |
+|----|----|
+| 8  | 5  |
+| 2  | 6  |
+| 9  | 4  |
+| 6  | 5  |
+| 8  | 4  |
+
+
+]
+
+---
+
+#### **Handling Missing Data in Correlation Analysis**
+
+**Listwise Deletion**
+
+- **Pro:**  
+  All correlations are calculated using the **same complete set of cases**, ensuring consistency across variable pairs.  
+- **Con:**  
+  May substantially **reduce sample size**, especially when multiple variables contain missing values.  
+  This loss of data can decrease statistical power.
+
+**Pairwise Deletion**
+
+- **Pro:**  
+  Uses all available data for each variable pair, preserving as many observations as possible for correlation calculations, thereby minimizing data loss  
+- **Con:**  
+  Different correlations may rely on **different subsets of observations**, leading to inconsistency across the correlation matrix.  
+  Results may also be **biased** if the missingness is not random (not MCAR).
+
+---
+
+
+**Example: Life Expectancy dataset**
+
+Suppose we select the following five variables from a life expectancy dataset:
+
+- `life_expectancy`: life expectancy in age
+
+- `bmi`: average Body Mass Index of entire population
+
+- `percentage_expenditure`: Expenditure on health as a percentage of Gross Domestic Product per capita(%)
+
+- `gdp`: Gross Domestic Product per capita (in USD)
+
+- `hepatitis_b`: Hepatitis B (HepB) immunization coverage among 1-year-olds (%)
+
+---
+
+### Working with `cor()` function
+
+.single[
+.tiny[
+
+
+```r
+d &lt;- read.csv(file   = here('./resources/datasets/life_expectancy.csv'),
+              header = TRUE)
+
+d_sub &lt;- d[,c('life_expectancy','bmi','percentage_expenditure','gdp','hepatitis_b')]
+
+
+my.corr &lt;- cor(x = d_sub)
+
+round(my.corr,2)
+```
+
+```
+                       life_expectancy bmi percentage_expenditure gdp
+life_expectancy                   1.00  NA                   0.04  NA
+bmi                                 NA   1                     NA  NA
+percentage_expenditure            0.04  NA                   1.00  NA
+gdp                                 NA  NA                     NA   1
+hepatitis_b                         NA  NA                     NA  NA
+                       hepatitis_b
+life_expectancy                 NA
+bmi                             NA
+percentage_expenditure          NA
+gdp                             NA
+hepatitis_b                      1
+```
+]
+]
+
+---
+
+If your dataset contains missing values, you must specify how the `cor()` function should handle them when computing correlations.
+
+**Listwise deletion**
+
+.single[
+.tiny[
+
+
+```r
+my.corr &lt;- cor(x   = d_sub,
+               use = 'complete' )
+
+round(my.corr,2)
+```
+
+```
+                       life_expectancy  bmi percentage_expenditure   gdp
+life_expectancy                   1.00 0.56                   0.06  0.47
+bmi                               0.56 1.00                   0.05  0.37
+percentage_expenditure            0.06 0.05                   1.00 -0.03
+gdp                               0.47 0.37                  -0.03  1.00
+hepatitis_b                       0.41 0.19                   0.05  0.14
+                       hepatitis_b
+life_expectancy               0.41
+bmi                           0.19
+percentage_expenditure        0.05
+gdp                           0.14
+hepatitis_b                   1.00
+```
+]
+]
+
+
+However, `cor()` does not report the number of observations retained after listwise deletion.
+
+To see how many observations were actually used:
+
+.single[
+.tiny[
+
+
+```r
+nrow(na.omit(d_sub))
+```
+
+```
+[1] 144
+```
+]
+]
+
+This command returns the number of complete cases in your dataset.
+
+---
+
+**Pairwise deletion**
+
+.single[
+.tiny[
+
+
+```r
+my.corr &lt;- cor(x   = d_sub,
+               use = 'pairwise' )
+
+round(my.corr,2)
+```
+
+```
+                       life_expectancy  bmi percentage_expenditure   gdp
+life_expectancy                   1.00 0.51                   0.04  0.45
+bmi                               0.51 1.00                   0.04  0.35
+percentage_expenditure            0.04 0.04                   1.00 -0.03
+gdp                               0.45 0.35                  -0.03  1.00
+hepatitis_b                       0.43 0.18                   0.04  0.14
+                       hepatitis_b
+life_expectancy               0.43
+bmi                           0.18
+percentage_expenditure        0.04
+gdp                           0.14
+hepatitis_b                   1.00
+```
+]
+]
+
+`cor()` does not report the number of observations used for each pair of variables.
+
+You can write some custom code to get that information, but it requires some programming.
+
+---
+
+### Working with `rcorr()` function
+
+`rcorr()` function always use pairwise deletion in the presence of missing data.
+
+.single[
+.tiny2[
+
+
+```r
+my.corr &lt;- rcorr(x   = as.matrix(d_sub))
+
+my.corr
+```
+
+```
+                       life_expectancy  bmi percentage_expenditure   gdp
+life_expectancy                   1.00 0.51                   0.04  0.45
+bmi                               0.51 1.00                   0.04  0.35
+percentage_expenditure            0.04 0.04                   1.00 -0.03
+gdp                               0.45 0.35                  -0.03  1.00
+hepatitis_b                       0.43 0.18                   0.04  0.14
+                       hepatitis_b
+life_expectancy               0.43
+bmi                           0.18
+percentage_expenditure        0.04
+gdp                           0.14
+hepatitis_b                   1.00
+
+n
+                       life_expectancy bmi percentage_expenditure gdp
+life_expectancy                    180 178                    180 154
+bmi                                178 178                    178 152
+percentage_expenditure             180 178                    180 154
+gdp                                154 152                    154 154
+hepatitis_b                        171 169                    171 146
+                       hepatitis_b
+life_expectancy                171
+bmi                            169
+percentage_expenditure         171
+gdp                            146
+hepatitis_b                    171
+
+P
+                       life_expectancy bmi    percentage_expenditure gdp   
+life_expectancy                        0.0000 0.5491                 0.0000
+bmi                    0.0000                 0.6256                 0.0000
+percentage_expenditure 0.5491          0.6256                        0.7045
+gdp                    0.0000          0.0000 0.7045                       
+hepatitis_b            0.0000          0.0167 0.5890                 0.0871
+                       hepatitis_b
+life_expectancy        0.0000     
+bmi                    0.0167     
+percentage_expenditure 0.5890     
+gdp                    0.0871     
+hepatitis_b                       
+```
+]
+]
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
