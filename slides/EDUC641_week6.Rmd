@@ -1,6 +1,6 @@
 ---
 title: "Relationship between two continuous variables"
-subtitle: "EDUC 641: Week 6"
+subtitle: "EDUC 641: Week 6 & 7"
 author: "Cengiz Zopluoglu"
 #date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
@@ -2032,6 +2032,253 @@ my.corr
 ```
 ]
 ]
+
+
+---
+
+class: middle, inverse
+
+# Simple Linear Regression
+
+---
+
+### Simple Linear Regression
+
+- This is a very brief introduction to simple linear regression.
+
+- A full, in-depth treatment is provided in EDUC 642.
+
+- Simple linear regression and correlation are closely connected concepts.
+
+- The goal of the simple linear regression is to identify a line that best summarizes the relationship between two variables.
+
+.pull-left[
+
+```{r, echo=FALSE, eval=TRUE, fig.height=3,fig.width=3}
+
+d <- read.csv('B:/UO Teaching/EDUC614/Winter22/Week9/infant_mortality.csv',header=TRUE)
+
+require(ggplot2)
+require(ggrepel)
+
+ggplot(data = d,aes(x = doctor, y =infmor))+
+  theme_bw()+
+  xlab('Number of Doctors')+
+  ylab('Under-five mortality rate')+
+  geom_point(size=1)+
+  geom_function(fun = ~ 10-2*.x,lty=2,size=0.3)+
+  geom_function(fun = ~ 20-4*.x,lty=2,size=0.3)+
+  geom_function(fun = ~ 11-1.8*.x,lty=2,size=0.3)
+```
+]
+
+
+.pull-right[
+
+- There are infinitely many lines we could draw.
+
+- Which line best represents the relationship?
+
+- Regression finds the line that minimizes prediction error (least squares).
+
+]
+
+---
+
+**What is a line?**
+
+- A line represents a mathematical function that maps an input variable $x$ to an output variable $y$.
+
+$$f(x) = y = b + mx $$
+
+- There are two key coefficients in this equation:
+
+  - $m$ : slope of the line
+  - $b$ : intercept 
+  
+- The intercept ( $b$ ) represents the point where the line crosses on the y-axis.
+
+- The slope ( $m$ ) represents the amount of change in $y$ for every one unit increase in $x$.
+
+.pull-left[
+
+```{r, echo=FALSE, eval=TRUE, fig.height=2.5,fig.width=2.5}
+ggplot()+
+  theme_bw()+
+  xlab('x')+
+  ylab('y')+
+  xlim(c(0,10))+
+  ylim(c(0,30))+
+  geom_function(fun = ~ 5 + 2*.x,lty=2,size=0.3)
+```
+]
+
+.pull-right[
+
+.indent[
+$y = 5 + 2x$
+]
+
+| x | y |
+|---|---|
+| 0 | 5 |
+| 1 | 7 |
+| 2 | 9 |
+| 3 | 11|
+
+]
+
+---
+
+The goal of simple linear regression is to find the line that best fits the observed data, modeling the relationship between:
+
+- a predictor variable ($X$)
+
+- an outcome variable ($Y$)
+
+.pull-left[
+
+```{r, echo=FALSE, eval=TRUE, fig.height=4,fig.width=4}
+ggplot(data = d,aes(x = doctor, y =infmor))+
+  theme_bw()+
+  xlab('Number of Doctors')+
+  ylab('Under-five mortality rate')+
+  geom_point(size=1)+
+  geom_function(fun = ~ 10.74-1.79*.x,lty=2,size=0.3)
+```
+]
+
+.pull-right[
+
+$$ \hat{Y_i} = \hat{\beta_0} + \hat{\beta_1}X_i $$
+
+- $\hat{\beta_0}:$ estimated intercept
+
+- $\hat{\beta_1}:$ estimated slope
+
+- $X_i:$ observed value of variable $X$ for the $i^{th}$ observation
+
+- $\hat{Y_i}$: predicted value of variable $Y$ for the $i^{th}$ observation
+
+
+]
+
+We will not cover the derivation of $\hat{\beta_0}$ and $\hat{\beta_1}$ here. Those details are covered in depth in EDUC 642.
+
+---
+
+**R Implementation**
+
+.single[
+
+.tiny[
+
+```{r, echo=TRUE, eval=TRUE, comment=''}
+# Use the lm() function
+d <- read.csv('B:/UO Teaching/EDUC614/Winter22/Week9/infant_mortality.csv',header=TRUE)
+
+lm(formula = infmor ~ 1 + doctor,
+   data    = d)
+
+```
+
+]
+]
+
+<br>
+
+- The `lm()` function returns two values. The first one is the intercept estimate ( $\hat{\beta_0} = 10.735$ ) and the second one is the slope estimate ( $\hat{\beta_1} = -1.793$ ).
+
+- How do you interpret these numbers?
+
+- What is the model predicted number of under-five mortality rate (per 1,000 liver births) for a country with 4 doctor per 1,000 inhabitants?
+
+---
+
+**Statistical Inference for Regression Coefficients**
+
+- The estimated coefficients, $\hat{\beta_0}$ and $\hat{\beta_1}$, are based on sample data, not the population. 
+
+- Due to sampling variability, they may differ from zero just by chance.
+
+- We test whether these coefficients are statistically different from zero in the population (i.e., reflect a real relationship, not random noise).
+
+The null hypothesis for the two coefficients are 
+
+.indent[
+
+  $$H_0: \beta_0 = 0  \text{ vs. } H_A: \beta_0 \neq 0$$
+  
+  $$H_0: \beta_1 = 0 \text{ vs. } H_A: \beta_1 \neq 0$$
+]
+
+
+- We test these two hypotheses with a t-test (df = N-2). 
+
+- If we reject $H_0$, it indicates that the coefficient is statistically significant.
+
+- These results can be obtained using the `lm()` function in R.
+
+---
+
+.single[
+
+.tiny[
+
+```{r, echo=TRUE, eval=TRUE, comment=''}
+
+# Save the output as an R object in your environment
+
+my.model <- lm(formula = infmor ~ 1 + doctor,
+               data    = d)
+
+# Summarize the output
+
+summary(my.model)
+```
+
+]
+]
+
+---
+
+**Effect Size for Simple Linear Regression**
+
+- In R, the `lm()` model output reports **Multiple R-squared**
+
+- $R^²$ quantifies effect size. It reflects the strength of the relationship between the predictor (X) and outcome (Y).
+
+  - For a simple linear regression with one predictor, it is equivalent of correlation between two variables.
+  
+- It can be interpreted as “the proportion of variance in the $Y$ that can be explained/predicted by $X$.”
+
+  -  $R^²=0.62$, 62% of the variance in Y is explained by X.
+
+---
+
+**Reporting the results of Simple Linear Regression**
+
+.single[
+
+.tiny2[
+
+```{r, echo=TRUE, eval=TRUE, comment=''}
+summary(my.model)
+```
+
+]
+]
+
+<br>
+
+|                | Coefficient | Std.Error | t     | p     |
+|----------------|-------------|-----------|-------|-------|
+| Intercept      | 10.74       | 1.97      | 5.46  | <.001 |
+| Slope (doctor) | -1.79       | 0.54      | -3.33 | 0.003 |
+
+<br>
+
+The unstandardized regression coefficient for the number of doctors per 1,000 inhabitant was -1.79 and statistically significant, *t*(24)= -3.33, *p* = 0.003, indicating that for each additional doctor for 1,000 inhabitants, the number of under-five mortaility rate (per 1,000 live births) is reduced by 1.79 in a country. The number of doctors per 1,000 inhabitants explains about 31.6% of the variability in under-five mortality rate across 26 countries.
 
 
 

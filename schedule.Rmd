@@ -178,17 +178,15 @@ tbl(tab,d=tab$week[5])
 
 ```
 
-### Week 6: Describing and testing the relationship between two continuous variables
+### Week 6-7: Describing and testing the relationship between two continuous variables
+
+*No class on Nov 11 (Veterans Day holiday)*
 
 ```{r}
 
 tbl(tab,d=tab$week[6])
 
 ```
-
-### Week 7: Some history
-
-*No class on Nov 11 (Veterans Day holiday)*
 
 ```{r}
 
@@ -213,7 +211,7 @@ tbl(tab,d=tab$week[9])
 
 ```
 
-### Week 10: Wrapping up and critiques of Null Hypothesis Significance Testing
+### Week 10: Wrapping up 
 
 ```{r}
 
