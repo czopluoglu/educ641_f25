@@ -83,15 +83,26 @@ class: center, middle, inverse, title-slide
 
 ### Goals
 
+- Construct and interpret contingency tables, including  
+  - row and column marginal distributions, and  
+  - conditional distributions for one variable given the other.  
+
+- Compute expected cell frequencies under the null hypothesis of independence.  
+
+- Understand and use the chi-square test of independence
+
+- Use the chi-square distribution functions in R (`dchisq()`, `pchisq()`, `qchisq()`) to obtain p-values and critical values.  
+
+- Quantify the strength of association with  
+  - Cramer’s `\(\vartheta\)`,  
+  - relative risk (risk ratio), and  
+  - odds and odds ratios, and interpret them in context.  
+
+- Recognize the assumptions of the chi-square test and when to use alternatives such as Fisher’s exact test and McNemar’s test.  
 
 ---
 
-### When do we look at relationships between two categorical variables?
-
-- When **both variables** in your research question are **categorical**  
-  (measured on a **nominal** or **ordinal** scale).
-  
-- When you want to know whether belonging to one category relate to belonging to another.
+### Associations between two categorical variables
 
 ** Examples of Research Questions **
 
@@ -103,7 +114,9 @@ class: center, middle, inverse, title-slide
 
 - Are **student suspension outcomes** (*suspended* / *not suspended*) independent of **student race/ethnicity** (*Group A*, *Group B*, *Group C*)?  
 
-- Is **access to advanced coursework** (*enrolled in AP/IB* / *not enrolled*)  related to **school socioeconomic context** (*high-income*, *mid-income*, *low-income districts*)? 
+- Is **access to advanced coursework** (*enrolled in AP/IB* / *not enrolled*)  related to **socioeconomic status** (*high-income*, *mid-income*, *low-income*)? 
+
+When both variables in a research question are categorical (measured on a nominal or ordinal scale), we can examine whether membership in the categories of one variable is related to membership in the categories of the other variable.
 
 ---
 
