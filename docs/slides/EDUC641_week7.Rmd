@@ -1,0 +1,2181 @@
+---
+title: "Relationship between two categorical variables"
+subtitle: "EDUC 641: Week 8 & 9"
+author: "Cengiz Zopluoglu"
+#date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  xaringan::moon_reader:
+    css: ['default', 'uo', 'ki-fonts', 'my_custom.css', 'xaringanthemer.css']
+    # self_contained: true
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+
+
+<style>
+
+#infobox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background: #E6F6DC 5px center/3em no-repeat;
+}
+
+.left-column2 {
+  width: 75%;
+  height: 92%;
+  float: left;
+  padding-top: 1em;
+}
+
+.right-column2 {
+  width: 20%;
+  float: right;
+  padding-top: 1em;
+}
+
+.remark-code {
+  font-size: 18px;
+}
+
+.tiny .remark-code { /*Change made here*/
+  font-size: 85% !important;
+}
+
+.tiny2 .remark-code { /*Change made here*/
+  font-size: 70% !important;
+}
+
+.indent {
+  margin-left: 2em;
+}
+
+.single {
+  line-height: 1 ;
+}
+
+
+.double {
+  line-height: 2 ;
+}
+
+</style>
+
+```{R, setup, include = F}
+library(pacman)
+p_load(here, tidyverse, ggplot2, xaringan, knitr, kableExtra, xaringanthemer)
+
+#i_am("slides/EDUC641_week1.Rmd")
+
+
+red_pink <- "#e64173"
+turquoise = "#20B2AA"
+orange = "#FFA500"
+red = "#fb6107"
+blue = "#3b3b9a"
+green = "#8bb174"
+grey_light = "grey70"
+grey_mid = "grey50"
+grey_dark = "grey20"
+purple = "#6A5ACD"
+slate = "#314f4f"
+
+extra_css <- list(
+  ".red"   = list(color = "red"),
+  ".blue"  = list(color = "blue"),
+  ".red-pink" = list(color= "red_pink"),
+  ".grey-light" = list(color= "grey_light"),
+  ".purple" = list(color = "purple"),
+  ".large" = list("font-size" = "120%"),
+  ".small" = list("font-size" = "90%"))
+
+write_extra_css(css = extra_css, outfile = "my_custom.css")
+
+# Knitr options
+opts_chunk$set(
+  comment = "#>",
+  fig.align = "center",
+  fig.height = 6.75,
+  fig.width = 10.5,
+  warning = F,
+  message = F
+)
+opts_chunk$set(dev = "svg")
+options(device = function(file, width, height) {
+  svg(tempfile(), width = width, height = height)
+})
+options(knitr.table.format = "html")
+
+```
+
+### Goals
+
+
+---
+
+### When do we look at relationships between two categorical variables?
+
+- When **both variables** in your research question are **categorical**  
+  (measured on a **nominal** or **ordinal** scale).
+  
+- When you want to know whether belonging to one category relate to belonging to another.
+
+** Examples of Research Questions **
+
+- Does **political party affiliation** (*Democrat*, *Independent*, *Republican*) vary by **sex assigned at birth** (*male*, *female*)?
+
+- Is **education level** (*high school or lower*, *bachelor’s degree*, *master’s or above*) associated with **marital status** (*never married*, *married*, *divorced*, *widowed*)?
+
+- Is **receiving a callback** (*received callback* / *no callback*) associated with **applicant racialized name group**  (*names associated with different racial identities*)?  
+
+- Are **student suspension outcomes** (*suspended* / *not suspended*) independent of **student race/ethnicity** (*Group A*, *Group B*, *Group C*)?  
+
+- Is **access to advanced coursework** (*enrolled in AP/IB* / *not enrolled*)  related to **school socioeconomic context** (*high-income*, *mid-income*, *low-income districts*)? 
+
+---
+
+### Are Emily and Greg more employable than Lakisha and Jamal?
+
+**Study context**
+
+- Field experiment replying to real job ads in Boston & Chicago
+
+- Randomly assigned racialized first/last names to otherwise similar résumés  
+
+- Sent ~5,000 résumés to more than 1,300 ads; measured **callback** for interview  
+
+- We’ll use the aggregate contingency table (based on Table 1) for today’s example  
+
+**Source**: [Bertrand & Mullainathan, 2003, NBER Working Paper 9873](https://www.nber.org/system/files/working_papers/w9873/w9873.pdf)
+
+**Research hypothesis:**
+
+There is a significant relationship between receiving a callback (yes vs. no) and racialized name group (White vs. African American).
+
+---
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center">2,199</td>
+    <td class="tg-center">246</td>
+    <td class="tg-center">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center">2,281</td>
+    <td class="tg-center">164</td>
+    <td class="tg-center">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center">4,480</td>
+    <td class="tg-center">410</td>
+    <td class="tg-center"><strong>4,890</strong></td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+
+- When you have two categorical variables, the data can be summarized in a two-way table. 
+
+- This table is called a contingency table.
+
+- The table above is a 2 x 2 contingency table.
+
+- The dimensions of the table are equal to the number of levels for both categorical variables.
+
+---
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,199</td>
+    <td class="tg-center" style="color:#DCDCDC;">246</td>
+    <td class="tg-center">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,281</td>
+    <td class="tg-center" style="color:#DCDCDC;">164</td>
+    <td class="tg-center">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">4,480</td>
+    <td class="tg-center" style="color:#DCDCDC;">410</td>
+    <td class="tg-center" style="color:#DCDCDC;">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+
+**Row Marginals**: the total number of observations in each row.
+
+There are 2,445 applications with White-associated names.
+
+There are 2,445 applications with African American-associated names personality.
+
+These numbers represent the **marginal distribution for racial soundingness of names**.
+
+---
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,199</td>
+    <td class="tg-center" style="color:#DCDCDC;">246</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,281</td>
+    <td class="tg-center" style="color:#DCDCDC;">164</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center">4,480</td>
+    <td class="tg-center">410</td>
+    <td class="tg-center" style="color:#DCDCDC;">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+**Column Marginals**: the total number of observations in each column.
+
+There are 4,480 applications with no call-back response.
+
+There are 410 applications with a call-back response.
+
+
+These numbers represent the **marginal distribution for call-back response**.
+
+---
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center">2,199</td>
+    <td class="tg-center">246</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,281</td>
+    <td class="tg-center" style="color:#DCDCDC;">164</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">4,480</td>
+    <td class="tg-center" style="color:#DCDCDC;">410</td>
+    <td class="tg-center" style="color:#DCDCDC;">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+Conditional distribution of **Call-back response** for **White-associated Names**
+
+---
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,199</td>
+    <td class="tg-center" style="color:#DCDCDC;">246</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center">2,281</td>
+    <td class="tg-center">164</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">4,480</td>
+    <td class="tg-center" style="color:#DCDCDC;">410</td>
+    <td class="tg-center" style="color:#DCDCDC;">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+Conditional distribution of **Call-back response** for **African American-associated Names**
+
+---
+
+**Null and Alternative Hypotheses**:
+
+$H_0$: Call-back response is not associated with racialized name group.
+
+$H_A$: Call-back response is associated with racialized name group.
+
+<br>
+
+Two variables are **independent** (no association) when the **conditional distribution** of one variable is **the same for every level** of the other variable.
+
+In this context, the callback rate should be the same for both racialized name groups if there is no relationship.
+
+---
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center"></td>
+    <td class="tg-center""></td>
+    <td class="tg-center"">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center"></td>
+    <td class="tg-center"></td>
+    <td class="tg-center">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center">4,480</td>
+    <td class="tg-center">410</td>
+    <td class="tg-center">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+Suppose we fix the value of row and columns marginals.
+
+Assuming that the null hypothesis is true (there is no association between call-back response and racialized name group), what value would you expect to see in each cell?
+
+---
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center">?</td>
+    <td class="tg-center""></td>
+    <td class="tg-center"">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center"></td>
+    <td class="tg-center"></td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center">4,480</td>
+    <td class="tg-center" style="color:#DCDCDC;">410</td>
+    <td class="tg-center">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+
+An easy way of computing the expected values for each cell under the null hypothesis is to multiply the corresponding row and column marginal values and divide it by the total number of observations.
+
+$$\frac{2445*4480}{4890} = 2240$$
+---
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center"></td>
+    <td class="tg-center">?</td>
+    <td class="tg-center">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center"></td>
+    <td class="tg-center"></td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">4,480</td>
+    <td class="tg-center">410</td>
+    <td class="tg-center">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+
+$$\frac{2445*410}{4890} = 205$$
+---
+
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center"></td>
+    <td class="tg-center"></td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center">?</td>
+    <td class="tg-center"></td>
+    <td class="tg-center">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center">4,480</td>
+    <td class="tg-center" style="color:#DCDCDC;">410</td>
+    <td class="tg-center">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+
+$$\frac{2445*4480}{4890} = 2240$$
+---
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center"></td>
+    <td class="tg-center"></td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center"></td>
+    <td class="tg-center">?</td>
+    <td class="tg-center">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">4,480</td>
+    <td class="tg-center">410</td>
+    <td class="tg-center">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+<br>
+
+
+$$\frac{2445*410}{4890} = 205$$
+---
+
+.center[**Expected Frequencies under H<sub>0</sub>**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center">2240</td>
+    <td class="tg-center">205</td>
+    <td class="tg-center"">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center">2240</td>
+    <td class="tg-center">205</td>
+    <td class="tg-center">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center">4,480</td>
+    <td class="tg-center">410</td>
+    <td class="tg-center">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+This table shows the **expected frequencies** we would observe if the two variables were truly **independent**.
+
+In other words, this is what the data would look like **if the null hypothesis were true**.
+---
+.center[**Observed Frequencies**]
+
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center">2199</td>
+    <td class="tg-center">246</td>
+    <td class="tg-center"">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center">2281</td>
+    <td class="tg-center">164</td>
+    <td class="tg-center">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center">4,480</td>
+    <td class="tg-center">410</td>
+    <td class="tg-center">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+.center[**Expected Frequencies under H<sub>0</sub>**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center">2240</td>
+    <td class="tg-center">205</td>
+    <td class="tg-center"">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center">2240</td>
+    <td class="tg-center">205</td>
+    <td class="tg-center">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center">4,480</td>
+    <td class="tg-center">410</td>
+    <td class="tg-center">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+How different the observed values are from the expected values under H0?
+
+---
+
+.pull-left[
+
+.center[**Observed Frequencies**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center">2199</td>
+    <td class="tg-center" style="color:#DCDCDC;">246</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2281</td>
+    <td class="tg-center" style="color:#DCDCDC;">164</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">4,480</td>
+    <td class="tg-center" style="color:#DCDCDC;">410</td>
+    <td class="tg-center" style="color:#DCDCDC;">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+.center[**Expected Frequencies under H<sub>0</sub>**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center">2240</td>
+    <td class="tg-center" style="color:#DCDCDC;">205</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2240</td>
+    <td class="tg-center" style="color:#DCDCDC;">205</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">4,480</td>
+    <td class="tg-center" style="color:#DCDCDC;">410</td>
+    <td class="tg-center" style="color:#DCDCDC;">4,890</td>
+  </tr>
+</tbody>
+</table>
+]
+
+
+.pull-right[
+
+**A Measure of Discrepancy Between Observed Frequencies and Expected Frequencies under $H_0$**
+
+$$ \frac{(Observed - Expected)^2}{Expected} = \frac{(2199 - 2240)^2}{2240} = 0.75 $$
+
+]
+
+---
+
+
+.pull-left[
+
+.center[**Observed Frequencies**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2199</td>
+    <td class="tg-center">246</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2281</td>
+    <td class="tg-center" style="color:#DCDCDC;">164</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">4,480</td>
+    <td class="tg-center" style="color:#DCDCDC;">410</td>
+    <td class="tg-center" style="color:#DCDCDC;">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+.center[**Expected Frequencies under H<sub>0</sub>**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2240</td>
+    <td class="tg-center" >205</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2240</td>
+    <td class="tg-center" style="color:#DCDCDC;">205</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">4,480</td>
+    <td class="tg-center" style="color:#DCDCDC;">410</td>
+    <td class="tg-center" style="color:#DCDCDC;">4,890</td>
+  </tr>
+</tbody>
+</table>
+]
+
+
+.pull-right[
+
+**A Measure of Discrepancy Between Observed Frequencies and Expected Frequencies under $H_0$**
+
+$$ \frac{(Observed - Expected)^2}{Expected} = \frac{(246 - 205)^2}{205} = 8.2 $$
+
+]
+
+---
+
+.pull-left[
+
+.center[**Observed Frequencies**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2199</td>
+    <td class="tg-center" style="color:#DCDCDC;">246</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center"> 2281</td>
+    <td class="tg-center" style="color:#DCDCDC;">164</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">4,480</td>
+    <td class="tg-center" style="color:#DCDCDC;">410</td>
+    <td class="tg-center" style="color:#DCDCDC;">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+.center[**Expected Frequencies under H<sub>0</sub>**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2240</td>
+    <td class="tg-center" style="color:#DCDCDC;">205</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center">2240</td>
+    <td class="tg-center" style="color:#DCDCDC;">205</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">4,480</td>
+    <td class="tg-center" style="color:#DCDCDC;">410</td>
+    <td class="tg-center" style="color:#DCDCDC;">4,890</td>
+  </tr>
+</tbody>
+</table>
+]
+
+
+.pull-right[
+
+**A Measure of Discrepancy Between Observed Frequencies and Expected Frequencies under $H_0$**
+
+$$ \frac{(Observed - Expected)^2}{Expected} = \frac{(2281 - 2240)^2}{2281} = 0.75 $$
+
+]
+
+---
+
+.pull-left[
+
+.center[**Observed Frequencies**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2199</td>
+    <td class="tg-center" style="color:#DCDCDC;">246</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center"  style="color:#DCDCDC;"> 2281</td>
+    <td class="tg-center">164</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">4,480</td>
+    <td class="tg-center" style="color:#DCDCDC;">410</td>
+    <td class="tg-center" style="color:#DCDCDC;">4,890</td>
+  </tr>
+</tbody>
+</table>
+
+.center[**Expected Frequencies under H<sub>0</sub>**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2240</td>
+    <td class="tg-center" style="color:#DCDCDC;">205</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center" style="color:#DCDCDC;">2240</td>
+    <td class="tg-center">205</td>
+    <td class="tg-center" style="color:#DCDCDC;">2,445</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">4,480</td>
+    <td class="tg-center" style="color:#DCDCDC;">410</td>
+    <td class="tg-center" style="color:#DCDCDC;">4,890</td>
+  </tr>
+</tbody>
+</table>
+]
+
+
+.pull-right[
+
+**A Measure of Discrepancy Between Observed Frequencies and Expected Frequencies under $H_0$**
+
+$$ \frac{(Observed - Expected)^2}{Expected} = \frac{(164 - 205)^2}{205} = 8.2 $$
+
+]
+
+---
+
+.pull-left[
+
+.center[**Observed Frequencies**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center">O<sub>11</td>
+    <td class="tg-center">O<sub>12</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>1.</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center"> O<sub>21</td>
+    <td class="tg-center">O<sub>22</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>2.</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>.1</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>.2</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>..</td>
+  </tr>
+</tbody>
+</table>
+]
+
+.pull-right[
+
+.center[**Expected Frequencies**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center">E<sub>11</td>
+    <td class="tg-center">E<sub>12</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>1.</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center">E<sub>21</td>
+    <td class="tg-center">E<sub>22</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>2.</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>.1</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>.2</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>..</td>
+  </tr>
+</tbody>
+</table>
+]
+
+
+<br>
+
+.center[**Total Amount of Discrepancy**]
+
+$$\sum_{i} \sum_{j} \frac{(O_{ij} - E_{ij})^2}{E_{ij}}$$
+
+- $O_{ij}$: observed cell frequency for the $i^{th}$ row $j^{th}$ column
+
+- $E_{ij}$: expected cell frequency for the $i^{th}$ row $j^{th}$ column
+
+---
+
+
+.pull-left[
+
+.center[**Observed Frequencies**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center">2199</td>
+    <td class="tg-center">246</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>1.</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center">2281</td>
+    <td class="tg-center">164</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>2.</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>.1</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>.2</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>..</td>
+  </tr>
+</tbody>
+</table>
+]
+
+.pull-right[
+
+.center[**Expected Frequencies**]
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" colspan="3">Callback Outcome</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td class="tg-center" style="color:red; font-weight:bold;">No</td>
+    <td class="tg-center" style="color:green; font-weight:bold;">Yes</td>
+    <td class="tg-center" style="font-weight:bold;">Total</td>
+  </tr>
+  <tr>
+    <td>White-associated Names</td>
+    <td class="tg-center">2240</td>
+    <td class="tg-center">205</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>1.</td>
+  </tr>
+  <tr>
+    <td>African American-associated Names</td>
+    <td class="tg-center">2240</td>
+    <td class="tg-center">205</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>2.</td>
+  </tr>
+  <tr>
+    <td><strong>Total</strong></td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>.1</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>.2</td>
+    <td class="tg-center" style="color:#DCDCDC;">n<sub>..</td>
+  </tr>
+</tbody>
+</table>
+]
+
+
+<br>
+
+$$\sum_{i} \sum_{j} \frac{(O_{ij} - E_{ij})^2}{E_{ij}} = \frac{(2199-2240)^2}{2240} + \frac{(246-205)^2}{205} + \frac{(2281-2240)^2}{2240}+\frac{(164-205)^2}{205} = 17.901$$
+
+- So what does a value of 17.901 mean?
+
+- Is this a large discrepancy or a small one?
+
+- What should we compare it to?
+
+- What would be the **sampling distribution** of this statistic under the null hypothesis?
+
+---
+
+[**Demonstration of Sampling Distribution of Discrepancy Statistic for Random Two-way Tables**](https://czopluoglu.github.io/educ641_f25/resources/r_scripts/Week 8_sampling distribution demo_twoway tables.r)
+
+---
+
+
+Under the null hypothesis (and for sufficiently large samples), the sample discrepancy statistic is approximately distributed as a chi-square random variable.
+
+$$\sum_{i} \sum_{j} \frac{(O_{ij} - E_{ij})^2}{E_{ij}} \approx \chi^2_{df = (I-1)(J-1)}$$
+
+- I: number of rows in the contingency table
+
+- J: number of columns in the contingency table
+
+- Degrees of freedom = $(I-1)(J-1)$
+
+
+```{r, echo=FALSE,eval=TRUE, comment='',fig.width=6,fig.height=4}
+
+require(ggplot2)
+
+x <- seq(0.01,20,by=.01)
+
+y1 <- dchisq(x,df=3)
+y2 <- dchisq(x,df=4)
+y3 <- dchisq(x,df=10)
+
+ggplot()+
+  geom_line(aes(x=x,y=y1,color = 'Chi(3)')) + 
+  geom_line(aes(x=x,y=y2,color = 'Chi(4)')) + 
+  geom_line(aes(x=x,y=y3,color = 'Chi(10)')) + 
+  theme_bw()+
+  xlab('')+
+  ylab('Density')+
+  theme(legend.title = element_blank())+
+  scale_color_manual(values = c('Chi(3)'     = '#009E73',
+                                'Chi(4)'    = '#E69F00',
+                                'Chi(10)'    = '#56B4E9'),
+                     labels = c('Chi(3)','Chi(4)','Chi(10)'))
+```
+
+---
+
+We can use three R functions for the chi-square distribution:
+
+- `dchisq()` → density at a given $\chi^2$ value  
+
+- `pchisq()` → cumulative probability up to a given $\chi^2$ value  
+
+- `qchisq()` → quantile (critical value) for a given probability
+
+These are analogous to 
+
+  - `dnorm()`, `pnorm()`, and `qnorm()` for the normal distribution, or
+  
+  - `dt()`, `pt()`, and `qt()` for the *t* distribution.
+
+---
+
+.pull-left[
+```{r, echo=FALSE,eval=TRUE, comment='',fig.width=4,fig.height=4}
+
+require(ggplot2)
+
+x <- seq(0,10,by=.01)
+
+y <- dchisq(x, df= 3)
+
+ggplot()+
+  geom_line(aes(x=x,y=y)) + 
+  geom_segment(aes(x=5,y=0,xend=5,yend=dchisq(5,3)),lty=2)+
+  theme_bw()+
+  xlab('Chi-square statistic')+
+  ylab('Density')+
+  ggtitle(expression(chi^2 ~ '(df = 3)'))
+
+
+```
+]
+
+.pull-right[
+
+<br>
+<br>
+<br>
+
+```{r, echo=TRUE,eval=TRUE, comment=''}
+
+dchisq(x = 5,
+       df= 3)
+```
+
+]
+
+---
+
+.pull-left[
+```{r, echo=FALSE,eval=TRUE, comment='',fig.width=4,fig.height=4}
+
+ggplot(NULL, aes(c(0,10))) +
+  geom_area(stat = "function", fun = dchisq, fill = "#00998a", xlim = c(5,10),args = list(df=3)) +
+  geom_area(stat = "function", fun = dchisq, fill =  "grey80", xlim = c(0,5),args = list(df=3)) +
+  labs(x = expression(chi^2), y = "Density")+
+  ggtitle(expression(chi^2 ~ '(df = 3)'))+
+  theme_bw()+
+  scale_x_continuous(breaks=0:10)
+  
+```
+]
+
+.pull-right[
+$$
+P( \chi^2 \geq 5) = ?
+$$
+
+```{r, echo=TRUE,eval=TRUE, comment=''}
+
+pchisq(q   = 5, 
+       df  = 3, 
+       lower.tail = FALSE)
+```
+
+]
+
+---
+
+#### **Back to our example**
+
+- Assume that the **null hypothesis is true** (callback outcome is independent of racialized name group).
+
+- Our sample discrepancy statistic (chi-square) is, $\chi^2_{\text{obs}} = 17.901$
+
+- Degrees of freedom, $df = (2 - 1)(2 - 1) = 1$
+
+- Question:  
+  > What is the probability of observing a sample chi-square statistic **at least as large as 17.901** if the null hypothesis is true?
+
+.tiny[
+```{r, echo=TRUE, eval=TRUE, comment=''}
+pchisq(q          = 17.901, 
+       df         = 1, 
+       lower.tail = FALSE)
+
+```
+]
+
+**Conclusion:** 
+
+- The p-value is extremely small (very close to 0).
+
+- We reject the null hypothesis.
+
+- The data provide strong evidence of a significant association between racialized name group and callback outcome.
+
+---
+
+
+### Cramer’s $\vartheta$
+
+The chi-square test tells us whether an association exists.  
+
+Cramer’s $\vartheta$ provides a **standardized effect size**:
+
+$$\vartheta = \sqrt{\frac{\chi^2}{N(L-1)}}$$
+
+- N: total sample size
+- L: the smaller of the number of rows or columns in the contingency table
+  - For a **2 × 2** table, L = 2.
+
+$$ \vartheta = \sqrt{\frac{17.901}{4890(2-1)}} = 0.061 $$
+
+- $\vartheta$ ranges from **0** (no association) to **1** (perfect association).
+
+---
+
+### Relative Risk (Risk ratio)
+
+Relative risk is the ratio of the probability of an event in one group to the probability of the same event in another group.
+For our data:
+
+- **White-associated names**
+  $$\text{Risk}_W = \frac{246}{2445} = 0.101$$
+
+- **African American–associated names**
+  $$\text{Risk}_{AA} = \frac{164}{2445} = 0.067$$
+- **Relative Risk**
+
+$$RR = \frac{\text{Risk}_W}{\text{Risk}_{AA}}
+     = \frac{0.101}{0.067}
+     = 1.51$$
+
+**Interpretation**
+
+Applicants with White-associated names were about 1.5 times as likely to receive a callback as applicants with African American–associated names.
+
+---
+
+### Odds
+
+Odds compare the probability of the event to the probability of **not** having the event:
+
+For our example:
+
+- **White-associated names**
+  $$\text{Odds}_W = \frac{246/2445}{2199/2445} = \frac{0.1006}{0.8994}=0.112$$
+
+- **African American–associated names**
+  $$\text{Odds}_{AA} = \frac{164/2445}{2281/2445} = \frac{0.0671}{0.9329} =0.072$$
+### Odds Ratio (OR)
+
+$$OR = \frac{\text{Odds}_W}{\text{Odds}_{AA}}
+   = \frac{0.112}{0.072}
+   = 1.55$$
+
+**Interpretation**
+
+The odds of receiving a callback were **55% higher** for White-associated names compared to African American–associated names.
+
+---
+
+### **Risk vs. Odds**
+
+- **Risk:**  
+  “How likely is a callback?”
+
+- **Odds:**  
+  “How likely is a callback **relative to not** receiving one?”
+
+**In our data**
+
+- Relative Risk = 1.51  
+- Odds Ratio = 1.55
+
+Both tell the same story:
+
+> Applicants with White-associated names are **substantially more likely**  
+> to receive a callback than those with African American–associated names.
+
+---
+
+#### **APA Format Write-up**
+
+A chi-square test of independence was conducted to examine whether callback outcome was associated with racialized name group. The test was statistically significant, $\chi^2_{(1)}$ = 17.90, p < .001, indicating that callback rates differed by name group. The effect size, measured by Cramer’s $\vartheta$, was equal to 0.06.
+
+Applicants with White-associated names were 1.51 times more likely to receive a callback than applicants with African American–associated names (RR = 1.51). Similarly, the odds of receiving a callback were 1.55 times higher for White-associated names compared with African American–associated names (OR = 1.55).
+
+---
+
+**Assumptions of the Chi-Square Test of Independence**
+
+- Independent observations: Each individual (or case) must contribute to one and only one cell in the contingency table.
+
+- Adequate expected cell frequencies
+
+  - For a 2 × 2 table: all expected cell counts should be at least 5.  
+
+  - For larger tables:  
+  
+    - All expected counts should be greater than 1, and  
+    
+    - No more than 20% of cells should have expected counts below 5.
+
+If these assumptions are violated, the chi-square approximation may be inaccurate, and p-values may not be valid.
+
+**Alternatives When Assumptions Are Not Met**
+
+- **Fisher’s Exact Test** (`?fisher.test`)  
+  Use when expected frequencies are very small.
+
+- **McNemar’s Test** (`?mcnemar.test`)  
+  Use when observations are **not independent**, such as with matched pairs or repeated measures on the same individuals.
+
+---
+
+#### **R Implementation**
+
+.single[
+
+.tiny[
+
+```{r, echo=TRUE,eval=TRUE, comment=''}
+
+# Create the contingency table by cell frequencies
+
+my.tab <- as.table(rbind(c(2199, 246), 
+                         c(2281,164)))
+
+dimnames(my.tab) <- list(racial_group = c("White", "African American"),
+                         callback     = c("No","Yes"))
+
+my.tab
+
+# Create the contingency table by cell frequencies
+
+fit <- chisq.test(my.tab,
+                  correct = FALSE)
+
+fit
+
+#fit$observed 
+
+#fit$expected
+
+```
+
+]
+]
+
+---
+
+.single[
+
+.tiny[
+
+```{r, echo=TRUE,eval=TRUE, comment=''}
+
+# Alternatively, you can read the dataset and then 
+# create two-way table from the dataset
+
+
+d <- read.csv(here('resources/datasets/callback.csv'))
+
+head(d)
+
+# Create the contingency table by cell frequencies
+
+my.tab <- table(d$racial_group,d$callback)
+my.tab
+
+# Create the contingency table by cell frequencies
+
+fit <- chisq.test(my.tab,
+                  correct = FALSE)
+
+fit
+
+#fit$observed 
+
+#fit$expected
+
+```
+
+]
+]
+
+---
+
+### In-class Practice 
+
+Variables:
+
+- Socioeconomic status (Low-income / Middle-income / High-income)
+
+- Student outcome: Participation in AP/IB or not (Enrolled in advanced coursework / Not enrolled)
+
+Research question:
+
+> Is student enrollment in advanced coursework (AP/IB) associated with socioeconomic status?
+
+<br>
+
+.tiny2[
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:18px;
+  overflow:hidden;
+  padding:8px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+</style>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th></th>
+    <th class="tg-center" style="font-weight:bold;">Not enrolled in advanced coursework</th>
+    <th class="tg-center" style="font-weight:bold;">Enrolled in advanced coursework</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Low-income</td>
+    <td class="tg-center">300</td>
+    <td class="tg-center">80</td>
+  </tr>
+  <tr>
+    <td>Middle-income</td>
+    <td class="tg-center">260</td>
+    <td class="tg-center">190</td>
+  </tr>
+  <tr>
+    <td>High-income</td>
+    <td class="tg-center">180</td>
+    <td class="tg-center">340</td>
+  </tr>
+</tbody>
+</table>
+
+]

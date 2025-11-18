@@ -1,0 +1,4891 @@
+ID,racial_group,callback
+1,White,No
+2,White,No
+3,White,No
+4,African American,Yes
+5,African American,No
+6,White,No
+7,White,No
+8,White,No
+9,White,No
+10,African American,No
+11,White,No
+12,African American,No
+13,White,No
+14,African American,No
+15,African American,No
+16,White,No
+17,White,No
+18,African American,Yes
+19,African American,No
+20,African American,No
+21,White,No
+22,African American,No
+23,African American,No
+24,White,No
+25,African American,No
+26,White,No
+27,African American,No
+28,White,No
+29,White,No
+30,White,No
+31,African American,No
+32,African American,No
+33,White,No
+34,White,No
+35,African American,Yes
+36,African American,No
+37,African American,No
+38,African American,No
+39,African American,No
+40,African American,Yes
+41,African American,No
+42,African American,No
+43,African American,No
+44,African American,No
+45,White,No
+46,White,No
+47,White,No
+48,White,No
+49,White,Yes
+50,African American,No
+51,African American,No
+52,White,No
+53,White,No
+54,African American,No
+55,White,No
+56,African American,No
+57,African American,No
+58,African American,No
+59,White,No
+60,White,No
+61,African American,No
+62,African American,Yes
+63,African American,No
+64,African American,No
+65,White,No
+66,White,No
+67,African American,No
+68,White,No
+69,White,No
+70,White,No
+71,White,No
+72,African American,No
+73,White,No
+74,White,No
+75,White,No
+76,African American,No
+77,African American,No
+78,African American,No
+79,African American,No
+80,African American,No
+81,White,No
+82,African American,No
+83,African American,No
+84,White,No
+85,White,No
+86,African American,No
+87,African American,No
+88,African American,No
+89,White,No
+90,White,No
+91,African American,No
+92,White,No
+93,White,No
+94,African American,No
+95,White,No
+96,White,No
+97,White,No
+98,White,No
+99,White,No
+100,White,No
+101,African American,No
+102,White,No
+103,African American,No
+104,African American,No
+105,African American,No
+106,African American,No
+107,White,No
+108,African American,No
+109,African American,No
+110,White,No
+111,African American,No
+112,White,No
+113,White,No
+114,White,No
+115,African American,No
+116,African American,No
+117,African American,No
+118,African American,No
+119,White,No
+120,African American,Yes
+121,African American,No
+122,White,No
+123,White,No
+124,African American,No
+125,White,No
+126,African American,No
+127,African American,No
+128,African American,No
+129,White,No
+130,African American,No
+131,White,Yes
+132,African American,No
+133,White,No
+134,White,No
+135,White,No
+136,White,No
+137,African American,No
+138,African American,No
+139,White,No
+140,White,Yes
+141,African American,No
+142,African American,No
+143,African American,No
+144,White,No
+145,African American,No
+146,White,No
+147,African American,No
+148,African American,Yes
+149,White,Yes
+150,White,No
+151,African American,No
+152,African American,No
+153,White,No
+154,African American,No
+155,White,No
+156,African American,Yes
+157,White,No
+158,White,No
+159,White,No
+160,White,No
+161,White,No
+162,White,No
+163,African American,No
+164,African American,No
+165,African American,No
+166,White,No
+167,White,No
+168,White,No
+169,African American,No
+170,African American,No
+171,African American,No
+172,African American,Yes
+173,African American,No
+174,White,No
+175,African American,No
+176,African American,No
+177,White,No
+178,White,No
+179,White,No
+180,African American,No
+181,African American,No
+182,White,No
+183,White,Yes
+184,White,Yes
+185,African American,No
+186,African American,No
+187,African American,No
+188,African American,No
+189,White,No
+190,White,No
+191,White,No
+192,White,No
+193,African American,No
+194,African American,No
+195,African American,No
+196,African American,No
+197,White,No
+198,White,No
+199,White,No
+200,White,No
+201,African American,No
+202,African American,No
+203,White,No
+204,African American,No
+205,White,No
+206,White,No
+207,White,No
+208,White,No
+209,White,No
+210,African American,No
+211,White,No
+212,African American,No
+213,White,No
+214,African American,No
+215,White,No
+216,African American,No
+217,White,No
+218,White,No
+219,White,No
+220,White,No
+221,White,No
+222,White,No
+223,White,No
+224,White,No
+225,African American,Yes
+226,African American,No
+227,White,No
+228,White,No
+229,African American,No
+230,White,No
+231,African American,Yes
+232,African American,No
+233,African American,No
+234,African American,No
+235,White,Yes
+236,White,No
+237,African American,Yes
+238,African American,No
+239,White,No
+240,African American,No
+241,African American,No
+242,White,No
+243,African American,No
+244,African American,No
+245,African American,No
+246,White,No
+247,African American,No
+248,White,No
+249,African American,No
+250,White,No
+251,White,No
+252,White,No
+253,African American,No
+254,White,Yes
+255,White,No
+256,African American,No
+257,African American,No
+258,White,No
+259,African American,No
+260,African American,No
+261,White,No
+262,White,No
+263,White,No
+264,African American,No
+265,African American,No
+266,White,No
+267,African American,No
+268,White,No
+269,African American,No
+270,White,No
+271,White,No
+272,White,No
+273,White,No
+274,White,No
+275,African American,No
+276,White,No
+277,White,Yes
+278,African American,No
+279,White,No
+280,African American,No
+281,African American,No
+282,African American,No
+283,African American,No
+284,White,No
+285,White,No
+286,White,No
+287,African American,No
+288,White,Yes
+289,White,No
+290,African American,No
+291,African American,No
+292,White,No
+293,African American,No
+294,African American,No
+295,White,No
+296,White,No
+297,White,No
+298,White,No
+299,White,No
+300,White,No
+301,African American,No
+302,White,No
+303,African American,No
+304,White,Yes
+305,African American,No
+306,White,No
+307,White,No
+308,African American,No
+309,White,No
+310,White,No
+311,White,No
+312,African American,No
+313,African American,No
+314,African American,No
+315,White,No
+316,African American,No
+317,African American,No
+318,White,No
+319,White,No
+320,White,No
+321,White,No
+322,White,No
+323,White,No
+324,White,No
+325,African American,No
+326,White,No
+327,White,No
+328,White,No
+329,White,No
+330,African American,No
+331,African American,No
+332,White,No
+333,White,No
+334,White,No
+335,African American,No
+336,African American,No
+337,White,Yes
+338,White,No
+339,White,No
+340,African American,No
+341,White,Yes
+342,White,No
+343,White,Yes
+344,White,No
+345,African American,No
+346,African American,No
+347,White,No
+348,White,No
+349,African American,No
+350,White,No
+351,White,Yes
+352,African American,Yes
+353,African American,No
+354,African American,No
+355,White,No
+356,African American,No
+357,White,No
+358,African American,No
+359,White,No
+360,African American,No
+361,White,No
+362,White,No
+363,White,No
+364,White,No
+365,White,No
+366,African American,No
+367,African American,No
+368,African American,No
+369,African American,No
+370,African American,No
+371,African American,No
+372,African American,No
+373,White,No
+374,White,No
+375,White,No
+376,White,No
+377,African American,No
+378,African American,Yes
+379,White,No
+380,White,No
+381,African American,No
+382,African American,No
+383,African American,No
+384,White,No
+385,African American,No
+386,White,No
+387,African American,No
+388,White,Yes
+389,African American,No
+390,White,No
+391,African American,No
+392,White,No
+393,White,No
+394,African American,No
+395,African American,No
+396,White,No
+397,African American,No
+398,White,No
+399,African American,No
+400,White,No
+401,White,No
+402,White,No
+403,White,No
+404,White,No
+405,African American,No
+406,White,No
+407,White,No
+408,White,No
+409,White,No
+410,White,No
+411,White,No
+412,African American,No
+413,White,No
+414,White,No
+415,White,No
+416,White,No
+417,White,No
+418,African American,No
+419,African American,No
+420,African American,No
+421,African American,No
+422,White,No
+423,African American,No
+424,African American,No
+425,African American,No
+426,African American,No
+427,African American,No
+428,African American,No
+429,White,No
+430,White,No
+431,White,No
+432,White,No
+433,White,No
+434,African American,No
+435,African American,No
+436,African American,No
+437,White,No
+438,African American,No
+439,African American,No
+440,African American,No
+441,White,No
+442,White,No
+443,African American,No
+444,African American,No
+445,White,No
+446,African American,No
+447,White,No
+448,African American,No
+449,African American,Yes
+450,White,No
+451,African American,No
+452,White,No
+453,African American,No
+454,African American,No
+455,White,No
+456,African American,No
+457,White,No
+458,African American,No
+459,African American,Yes
+460,White,No
+461,White,No
+462,African American,No
+463,White,No
+464,White,No
+465,White,No
+466,White,No
+467,African American,No
+468,African American,No
+469,African American,No
+470,African American,No
+471,White,No
+472,White,No
+473,White,Yes
+474,White,No
+475,White,No
+476,White,No
+477,White,No
+478,White,Yes
+479,African American,No
+480,African American,No
+481,White,No
+482,African American,No
+483,White,No
+484,White,No
+485,African American,No
+486,White,No
+487,African American,No
+488,White,Yes
+489,White,No
+490,White,No
+491,White,Yes
+492,White,No
+493,White,No
+494,African American,No
+495,White,No
+496,White,No
+497,African American,No
+498,African American,No
+499,White,Yes
+500,African American,No
+501,African American,No
+502,African American,No
+503,White,No
+504,White,No
+505,African American,Yes
+506,African American,No
+507,White,No
+508,White,No
+509,White,No
+510,White,No
+511,African American,No
+512,African American,No
+513,African American,No
+514,White,No
+515,African American,No
+516,White,No
+517,White,Yes
+518,African American,No
+519,African American,No
+520,African American,No
+521,White,No
+522,White,No
+523,African American,No
+524,African American,No
+525,White,No
+526,White,No
+527,White,No
+528,African American,Yes
+529,White,No
+530,African American,No
+531,White,No
+532,White,No
+533,White,No
+534,White,No
+535,African American,No
+536,White,No
+537,White,No
+538,African American,No
+539,African American,No
+540,White,No
+541,White,Yes
+542,White,No
+543,White,No
+544,White,No
+545,African American,No
+546,White,No
+547,White,No
+548,White,No
+549,African American,No
+550,White,No
+551,African American,No
+552,African American,No
+553,African American,No
+554,White,No
+555,White,No
+556,White,No
+557,African American,No
+558,African American,No
+559,White,No
+560,White,No
+561,White,No
+562,African American,No
+563,White,No
+564,White,No
+565,White,Yes
+566,African American,No
+567,White,No
+568,African American,No
+569,White,Yes
+570,White,No
+571,White,No
+572,African American,No
+573,White,No
+574,White,No
+575,African American,No
+576,African American,No
+577,White,No
+578,African American,No
+579,White,No
+580,White,No
+581,White,No
+582,African American,No
+583,African American,No
+584,African American,No
+585,African American,No
+586,White,No
+587,African American,Yes
+588,African American,No
+589,White,No
+590,African American,No
+591,African American,No
+592,African American,Yes
+593,White,No
+594,African American,No
+595,White,No
+596,White,Yes
+597,African American,No
+598,White,Yes
+599,African American,No
+600,White,No
+601,White,No
+602,African American,No
+603,African American,No
+604,African American,Yes
+605,African American,No
+606,African American,No
+607,White,No
+608,White,No
+609,White,No
+610,White,No
+611,African American,No
+612,African American,No
+613,African American,No
+614,White,No
+615,White,No
+616,African American,No
+617,White,No
+618,White,No
+619,White,No
+620,White,No
+621,White,Yes
+622,African American,No
+623,White,No
+624,White,No
+625,African American,No
+626,African American,No
+627,African American,No
+628,White,No
+629,African American,No
+630,African American,No
+631,White,No
+632,White,No
+633,White,No
+634,African American,No
+635,African American,No
+636,White,No
+637,African American,No
+638,White,No
+639,African American,No
+640,African American,No
+641,African American,No
+642,African American,No
+643,African American,No
+644,African American,No
+645,White,No
+646,African American,No
+647,White,Yes
+648,African American,Yes
+649,African American,No
+650,African American,No
+651,White,No
+652,African American,No
+653,African American,No
+654,African American,No
+655,African American,No
+656,White,No
+657,African American,No
+658,White,No
+659,African American,No
+660,White,No
+661,White,Yes
+662,African American,No
+663,White,No
+664,African American,No
+665,African American,No
+666,White,No
+667,White,No
+668,African American,No
+669,White,No
+670,White,No
+671,African American,No
+672,White,No
+673,White,No
+674,White,No
+675,African American,No
+676,African American,No
+677,African American,No
+678,White,No
+679,African American,No
+680,White,No
+681,White,No
+682,African American,No
+683,African American,No
+684,White,No
+685,African American,No
+686,African American,No
+687,African American,Yes
+688,African American,No
+689,White,No
+690,White,No
+691,African American,No
+692,African American,No
+693,White,No
+694,African American,No
+695,White,No
+696,White,No
+697,African American,No
+698,White,Yes
+699,African American,No
+700,White,No
+701,African American,No
+702,African American,No
+703,White,Yes
+704,White,No
+705,White,No
+706,African American,No
+707,African American,No
+708,White,No
+709,African American,No
+710,African American,No
+711,African American,No
+712,African American,No
+713,White,No
+714,African American,No
+715,White,No
+716,African American,No
+717,African American,No
+718,White,No
+719,White,No
+720,African American,No
+721,White,No
+722,African American,No
+723,White,No
+724,White,No
+725,White,Yes
+726,White,No
+727,African American,No
+728,African American,No
+729,African American,Yes
+730,White,No
+731,African American,No
+732,White,No
+733,White,No
+734,African American,No
+735,White,No
+736,White,No
+737,White,No
+738,African American,No
+739,African American,No
+740,African American,Yes
+741,African American,Yes
+742,African American,No
+743,African American,No
+744,African American,No
+745,White,No
+746,White,No
+747,White,No
+748,White,No
+749,African American,No
+750,African American,No
+751,African American,No
+752,White,No
+753,African American,No
+754,White,No
+755,White,No
+756,African American,No
+757,African American,No
+758,African American,No
+759,African American,Yes
+760,White,No
+761,White,No
+762,African American,No
+763,African American,No
+764,White,No
+765,African American,No
+766,African American,No
+767,African American,Yes
+768,African American,Yes
+769,African American,No
+770,White,No
+771,African American,No
+772,African American,No
+773,White,No
+774,White,No
+775,White,No
+776,African American,No
+777,White,Yes
+778,White,No
+779,African American,No
+780,White,No
+781,African American,No
+782,African American,No
+783,White,No
+784,White,No
+785,African American,No
+786,White,No
+787,White,No
+788,African American,No
+789,White,No
+790,White,No
+791,White,No
+792,African American,No
+793,African American,No
+794,White,No
+795,White,No
+796,White,Yes
+797,White,No
+798,African American,No
+799,White,No
+800,White,No
+801,White,No
+802,African American,No
+803,White,No
+804,White,No
+805,White,No
+806,African American,No
+807,White,Yes
+808,White,No
+809,African American,No
+810,African American,No
+811,White,No
+812,White,No
+813,White,No
+814,African American,No
+815,White,Yes
+816,White,No
+817,White,No
+818,African American,No
+819,White,No
+820,White,No
+821,White,No
+822,African American,No
+823,White,No
+824,White,No
+825,African American,No
+826,African American,No
+827,White,No
+828,White,No
+829,White,No
+830,White,No
+831,African American,No
+832,African American,Yes
+833,White,No
+834,White,No
+835,White,No
+836,African American,No
+837,African American,No
+838,African American,No
+839,White,No
+840,White,No
+841,White,No
+842,African American,No
+843,African American,No
+844,African American,No
+845,White,Yes
+846,African American,No
+847,White,No
+848,African American,No
+849,African American,No
+850,White,No
+851,White,No
+852,African American,No
+853,White,No
+854,African American,No
+855,African American,No
+856,White,No
+857,African American,No
+858,African American,No
+859,African American,No
+860,African American,No
+861,African American,No
+862,African American,No
+863,White,No
+864,African American,Yes
+865,African American,No
+866,African American,No
+867,White,No
+868,White,No
+869,White,No
+870,African American,No
+871,African American,No
+872,African American,Yes
+873,White,No
+874,African American,No
+875,African American,No
+876,White,No
+877,White,Yes
+878,African American,No
+879,African American,No
+880,African American,No
+881,White,No
+882,White,No
+883,African American,No
+884,African American,No
+885,White,No
+886,African American,No
+887,African American,No
+888,White,No
+889,African American,No
+890,White,No
+891,African American,No
+892,African American,No
+893,African American,No
+894,African American,No
+895,White,No
+896,African American,No
+897,White,No
+898,White,Yes
+899,White,No
+900,White,No
+901,African American,No
+902,African American,No
+903,White,No
+904,White,No
+905,White,Yes
+906,White,No
+907,White,No
+908,African American,No
+909,African American,No
+910,African American,No
+911,White,No
+912,White,No
+913,African American,No
+914,African American,No
+915,White,Yes
+916,African American,Yes
+917,White,No
+918,African American,No
+919,White,No
+920,African American,No
+921,African American,No
+922,White,No
+923,African American,No
+924,White,Yes
+925,White,No
+926,African American,Yes
+927,African American,No
+928,White,No
+929,White,No
+930,African American,No
+931,White,No
+932,White,No
+933,African American,No
+934,African American,No
+935,African American,No
+936,African American,No
+937,White,No
+938,White,No
+939,White,No
+940,White,No
+941,White,No
+942,African American,No
+943,White,No
+944,African American,No
+945,White,No
+946,White,No
+947,African American,Yes
+948,African American,No
+949,African American,Yes
+950,White,No
+951,African American,No
+952,White,No
+953,African American,No
+954,African American,No
+955,White,No
+956,White,No
+957,White,Yes
+958,White,No
+959,White,No
+960,African American,No
+961,White,No
+962,White,No
+963,African American,No
+964,African American,No
+965,White,No
+966,African American,No
+967,White,No
+968,African American,No
+969,African American,No
+970,African American,No
+971,White,No
+972,White,No
+973,African American,No
+974,African American,No
+975,African American,No
+976,African American,No
+977,White,No
+978,African American,No
+979,African American,No
+980,African American,No
+981,African American,No
+982,White,No
+983,White,Yes
+984,White,No
+985,African American,No
+986,White,No
+987,African American,Yes
+988,White,No
+989,African American,No
+990,White,No
+991,African American,No
+992,African American,No
+993,African American,No
+994,African American,No
+995,White,No
+996,White,No
+997,White,No
+998,White,No
+999,African American,No
+1000,White,No
+1001,White,No
+1002,White,Yes
+1003,African American,No
+1004,African American,No
+1005,White,Yes
+1006,African American,No
+1007,White,No
+1008,White,No
+1009,African American,No
+1010,White,No
+1011,White,No
+1012,White,No
+1013,African American,No
+1014,White,No
+1015,African American,No
+1016,African American,No
+1017,White,No
+1018,White,No
+1019,White,No
+1020,African American,No
+1021,African American,No
+1022,White,Yes
+1023,White,No
+1024,White,No
+1025,White,No
+1026,African American,No
+1027,White,No
+1028,White,No
+1029,African American,No
+1030,African American,No
+1031,African American,No
+1032,African American,No
+1033,White,No
+1034,White,No
+1035,White,No
+1036,White,No
+1037,African American,No
+1038,African American,Yes
+1039,White,Yes
+1040,White,No
+1041,African American,No
+1042,White,No
+1043,African American,No
+1044,White,No
+1045,White,No
+1046,White,No
+1047,White,No
+1048,African American,No
+1049,White,No
+1050,African American,No
+1051,African American,No
+1052,African American,No
+1053,White,No
+1054,White,No
+1055,African American,No
+1056,White,No
+1057,White,No
+1058,African American,No
+1059,African American,No
+1060,White,No
+1061,African American,No
+1062,White,No
+1063,African American,No
+1064,White,No
+1065,White,No
+1066,African American,No
+1067,African American,No
+1068,African American,Yes
+1069,African American,No
+1070,African American,No
+1071,White,No
+1072,African American,No
+1073,African American,Yes
+1074,African American,No
+1075,White,No
+1076,African American,No
+1077,African American,No
+1078,African American,No
+1079,African American,No
+1080,African American,No
+1081,African American,No
+1082,African American,No
+1083,White,No
+1084,African American,No
+1085,African American,No
+1086,African American,No
+1087,African American,No
+1088,White,No
+1089,White,Yes
+1090,White,No
+1091,African American,No
+1092,White,No
+1093,White,Yes
+1094,African American,No
+1095,White,No
+1096,White,No
+1097,White,No
+1098,African American,No
+1099,African American,No
+1100,White,No
+1101,African American,No
+1102,African American,No
+1103,African American,No
+1104,African American,No
+1105,White,No
+1106,White,No
+1107,African American,No
+1108,White,No
+1109,White,Yes
+1110,African American,No
+1111,African American,No
+1112,White,No
+1113,White,Yes
+1114,African American,No
+1115,White,No
+1116,White,No
+1117,African American,No
+1118,White,No
+1119,African American,No
+1120,African American,No
+1121,African American,No
+1122,White,No
+1123,African American,No
+1124,White,No
+1125,African American,No
+1126,White,No
+1127,African American,No
+1128,White,No
+1129,African American,Yes
+1130,African American,No
+1131,African American,No
+1132,African American,No
+1133,White,No
+1134,White,Yes
+1135,African American,No
+1136,White,No
+1137,White,No
+1138,White,No
+1139,African American,Yes
+1140,African American,No
+1141,White,No
+1142,White,No
+1143,African American,No
+1144,White,Yes
+1145,African American,No
+1146,African American,No
+1147,White,No
+1148,African American,No
+1149,White,No
+1150,White,No
+1151,African American,No
+1152,African American,No
+1153,White,No
+1154,African American,No
+1155,White,No
+1156,White,No
+1157,African American,No
+1158,White,No
+1159,African American,No
+1160,White,No
+1161,White,Yes
+1162,White,No
+1163,African American,No
+1164,African American,No
+1165,African American,No
+1166,White,No
+1167,African American,Yes
+1168,African American,No
+1169,White,No
+1170,White,No
+1171,White,No
+1172,African American,No
+1173,White,No
+1174,African American,Yes
+1175,White,Yes
+1176,White,No
+1177,African American,No
+1178,African American,No
+1179,African American,Yes
+1180,White,No
+1181,White,No
+1182,African American,No
+1183,White,No
+1184,African American,No
+1185,White,No
+1186,African American,No
+1187,African American,No
+1188,African American,No
+1189,African American,No
+1190,White,No
+1191,White,Yes
+1192,African American,No
+1193,African American,No
+1194,White,No
+1195,African American,No
+1196,African American,No
+1197,White,No
+1198,African American,Yes
+1199,White,No
+1200,White,No
+1201,White,No
+1202,African American,No
+1203,White,No
+1204,African American,No
+1205,African American,No
+1206,African American,No
+1207,White,No
+1208,White,No
+1209,White,No
+1210,African American,No
+1211,White,No
+1212,White,No
+1213,White,Yes
+1214,African American,No
+1215,African American,No
+1216,African American,No
+1217,African American,No
+1218,African American,No
+1219,White,No
+1220,White,No
+1221,African American,No
+1222,White,No
+1223,African American,No
+1224,White,No
+1225,White,No
+1226,African American,Yes
+1227,White,Yes
+1228,White,No
+1229,African American,No
+1230,White,No
+1231,White,Yes
+1232,White,Yes
+1233,White,No
+1234,White,No
+1235,African American,No
+1236,African American,No
+1237,White,No
+1238,White,No
+1239,White,No
+1240,White,No
+1241,White,Yes
+1242,African American,No
+1243,African American,No
+1244,African American,No
+1245,African American,No
+1246,African American,No
+1247,White,No
+1248,White,No
+1249,White,Yes
+1250,White,No
+1251,White,No
+1252,African American,No
+1253,African American,No
+1254,White,No
+1255,African American,No
+1256,African American,No
+1257,White,No
+1258,African American,No
+1259,African American,No
+1260,African American,No
+1261,White,No
+1262,White,Yes
+1263,African American,No
+1264,White,No
+1265,White,No
+1266,White,No
+1267,White,No
+1268,White,No
+1269,African American,No
+1270,African American,Yes
+1271,White,No
+1272,White,No
+1273,White,No
+1274,White,No
+1275,White,No
+1276,African American,No
+1277,White,No
+1278,White,No
+1279,White,No
+1280,White,No
+1281,White,No
+1282,White,No
+1283,African American,No
+1284,African American,No
+1285,White,No
+1286,African American,No
+1287,White,No
+1288,African American,No
+1289,African American,No
+1290,African American,Yes
+1291,White,No
+1292,White,No
+1293,White,Yes
+1294,African American,No
+1295,White,No
+1296,White,No
+1297,White,No
+1298,White,No
+1299,African American,No
+1300,White,No
+1301,White,Yes
+1302,African American,No
+1303,White,Yes
+1304,White,No
+1305,African American,No
+1306,African American,No
+1307,White,No
+1308,African American,No
+1309,African American,Yes
+1310,African American,No
+1311,African American,No
+1312,White,No
+1313,African American,No
+1314,African American,No
+1315,White,No
+1316,African American,No
+1317,African American,No
+1318,African American,No
+1319,White,No
+1320,White,No
+1321,White,No
+1322,White,Yes
+1323,White,No
+1324,African American,No
+1325,African American,No
+1326,White,No
+1327,African American,No
+1328,African American,No
+1329,White,No
+1330,White,No
+1331,African American,No
+1332,African American,No
+1333,African American,No
+1334,White,No
+1335,African American,No
+1336,White,No
+1337,White,No
+1338,White,No
+1339,African American,No
+1340,White,No
+1341,White,No
+1342,White,No
+1343,African American,No
+1344,African American,No
+1345,White,No
+1346,White,No
+1347,African American,No
+1348,African American,No
+1349,African American,No
+1350,African American,No
+1351,White,No
+1352,White,No
+1353,African American,Yes
+1354,White,Yes
+1355,African American,No
+1356,African American,No
+1357,African American,No
+1358,White,No
+1359,African American,No
+1360,African American,No
+1361,White,No
+1362,White,Yes
+1363,African American,No
+1364,African American,No
+1365,White,No
+1366,White,No
+1367,White,No
+1368,African American,No
+1369,White,No
+1370,White,No
+1371,White,No
+1372,White,No
+1373,White,Yes
+1374,White,No
+1375,African American,No
+1376,White,Yes
+1377,White,No
+1378,White,Yes
+1379,White,No
+1380,African American,No
+1381,African American,No
+1382,African American,No
+1383,African American,No
+1384,African American,No
+1385,African American,No
+1386,White,No
+1387,White,No
+1388,African American,No
+1389,White,No
+1390,White,No
+1391,African American,No
+1392,White,No
+1393,African American,Yes
+1394,White,No
+1395,White,No
+1396,White,No
+1397,African American,No
+1398,African American,No
+1399,African American,No
+1400,African American,No
+1401,White,No
+1402,African American,No
+1403,White,No
+1404,White,No
+1405,White,No
+1406,African American,No
+1407,White,No
+1408,African American,No
+1409,White,No
+1410,African American,No
+1411,African American,No
+1412,White,No
+1413,African American,No
+1414,White,No
+1415,African American,No
+1416,White,No
+1417,White,No
+1418,White,No
+1419,White,Yes
+1420,White,No
+1421,African American,No
+1422,White,No
+1423,African American,No
+1424,African American,No
+1425,White,No
+1426,African American,No
+1427,White,No
+1428,African American,No
+1429,White,No
+1430,White,No
+1431,African American,No
+1432,White,No
+1433,White,No
+1434,African American,No
+1435,White,Yes
+1436,African American,No
+1437,White,No
+1438,White,No
+1439,African American,No
+1440,White,No
+1441,White,No
+1442,African American,No
+1443,White,No
+1444,African American,No
+1445,White,No
+1446,White,No
+1447,White,No
+1448,African American,No
+1449,White,No
+1450,African American,No
+1451,White,No
+1452,African American,Yes
+1453,African American,No
+1454,White,No
+1455,White,Yes
+1456,African American,No
+1457,White,Yes
+1458,African American,No
+1459,African American,No
+1460,White,No
+1461,White,No
+1462,African American,No
+1463,African American,No
+1464,African American,No
+1465,African American,No
+1466,African American,No
+1467,African American,No
+1468,White,No
+1469,White,No
+1470,White,No
+1471,White,Yes
+1472,African American,No
+1473,African American,No
+1474,African American,No
+1475,White,No
+1476,African American,No
+1477,White,No
+1478,African American,No
+1479,White,No
+1480,African American,No
+1481,African American,No
+1482,African American,No
+1483,White,No
+1484,African American,No
+1485,White,No
+1486,African American,No
+1487,White,Yes
+1488,White,No
+1489,African American,No
+1490,African American,No
+1491,African American,No
+1492,White,No
+1493,African American,No
+1494,White,No
+1495,White,No
+1496,African American,Yes
+1497,White,No
+1498,African American,No
+1499,White,No
+1500,White,No
+1501,African American,No
+1502,African American,No
+1503,White,No
+1504,African American,No
+1505,White,Yes
+1506,White,No
+1507,White,No
+1508,White,No
+1509,White,No
+1510,White,No
+1511,White,No
+1512,White,No
+1513,White,Yes
+1514,White,No
+1515,White,No
+1516,African American,No
+1517,African American,No
+1518,African American,No
+1519,African American,No
+1520,African American,No
+1521,African American,No
+1522,African American,No
+1523,African American,Yes
+1524,White,Yes
+1525,African American,No
+1526,White,No
+1527,White,No
+1528,African American,No
+1529,African American,No
+1530,White,No
+1531,African American,No
+1532,African American,Yes
+1533,African American,No
+1534,White,No
+1535,African American,No
+1536,White,No
+1537,White,No
+1538,African American,No
+1539,African American,No
+1540,White,No
+1541,White,No
+1542,White,No
+1543,White,No
+1544,White,No
+1545,White,No
+1546,White,No
+1547,White,No
+1548,White,No
+1549,African American,No
+1550,White,No
+1551,White,No
+1552,African American,Yes
+1553,African American,No
+1554,White,No
+1555,African American,No
+1556,African American,No
+1557,White,No
+1558,White,No
+1559,African American,No
+1560,African American,No
+1561,African American,No
+1562,White,No
+1563,White,No
+1564,African American,No
+1565,White,Yes
+1566,African American,No
+1567,African American,No
+1568,White,No
+1569,African American,No
+1570,White,Yes
+1571,African American,No
+1572,White,No
+1573,White,No
+1574,White,No
+1575,White,No
+1576,White,No
+1577,White,No
+1578,African American,No
+1579,African American,No
+1580,African American,No
+1581,African American,No
+1582,African American,No
+1583,African American,No
+1584,White,No
+1585,White,No
+1586,White,No
+1587,White,Yes
+1588,African American,No
+1589,White,No
+1590,White,No
+1591,White,No
+1592,White,No
+1593,White,No
+1594,African American,No
+1595,African American,No
+1596,African American,No
+1597,White,No
+1598,African American,No
+1599,African American,No
+1600,White,No
+1601,White,No
+1602,White,No
+1603,White,No
+1604,White,No
+1605,White,No
+1606,White,No
+1607,African American,No
+1608,White,No
+1609,White,No
+1610,White,No
+1611,African American,No
+1612,White,No
+1613,African American,No
+1614,White,No
+1615,African American,No
+1616,White,No
+1617,African American,No
+1618,African American,No
+1619,African American,No
+1620,White,No
+1621,White,No
+1622,White,No
+1623,White,No
+1624,African American,No
+1625,African American,No
+1626,White,No
+1627,White,No
+1628,White,No
+1629,African American,Yes
+1630,White,No
+1631,African American,No
+1632,African American,No
+1633,White,No
+1634,African American,No
+1635,White,No
+1636,White,No
+1637,White,No
+1638,White,No
+1639,White,No
+1640,White,No
+1641,African American,No
+1642,White,No
+1643,White,No
+1644,African American,No
+1645,African American,No
+1646,African American,No
+1647,White,Yes
+1648,African American,No
+1649,African American,No
+1650,African American,No
+1651,African American,No
+1652,African American,Yes
+1653,White,No
+1654,White,No
+1655,White,No
+1656,White,No
+1657,White,Yes
+1658,African American,No
+1659,African American,No
+1660,African American,No
+1661,African American,No
+1662,White,No
+1663,White,No
+1664,White,No
+1665,White,No
+1666,African American,No
+1667,White,Yes
+1668,African American,No
+1669,White,No
+1670,White,Yes
+1671,White,No
+1672,White,No
+1673,African American,No
+1674,White,No
+1675,White,No
+1676,African American,No
+1677,African American,No
+1678,White,No
+1679,White,Yes
+1680,White,No
+1681,African American,No
+1682,White,No
+1683,White,No
+1684,White,No
+1685,African American,No
+1686,White,No
+1687,African American,No
+1688,African American,No
+1689,White,No
+1690,African American,No
+1691,African American,No
+1692,African American,No
+1693,African American,No
+1694,White,No
+1695,African American,No
+1696,White,No
+1697,White,No
+1698,African American,No
+1699,African American,Yes
+1700,White,No
+1701,African American,No
+1702,White,No
+1703,White,No
+1704,African American,No
+1705,African American,No
+1706,White,No
+1707,White,No
+1708,White,No
+1709,African American,No
+1710,African American,No
+1711,African American,No
+1712,African American,No
+1713,White,No
+1714,White,No
+1715,White,No
+1716,White,No
+1717,White,Yes
+1718,African American,No
+1719,African American,No
+1720,African American,No
+1721,African American,Yes
+1722,African American,No
+1723,African American,No
+1724,African American,No
+1725,African American,No
+1726,African American,Yes
+1727,African American,No
+1728,White,No
+1729,African American,No
+1730,African American,No
+1731,White,No
+1732,White,Yes
+1733,African American,No
+1734,White,No
+1735,African American,No
+1736,White,No
+1737,African American,No
+1738,African American,No
+1739,White,No
+1740,White,No
+1741,African American,No
+1742,White,No
+1743,African American,No
+1744,African American,No
+1745,White,Yes
+1746,African American,No
+1747,African American,No
+1748,African American,No
+1749,African American,No
+1750,African American,No
+1751,White,No
+1752,African American,No
+1753,African American,No
+1754,White,No
+1755,African American,No
+1756,African American,No
+1757,White,No
+1758,African American,No
+1759,African American,No
+1760,African American,No
+1761,White,Yes
+1762,White,No
+1763,White,No
+1764,African American,No
+1765,White,No
+1766,African American,No
+1767,African American,No
+1768,White,No
+1769,White,No
+1770,White,No
+1771,African American,No
+1772,White,No
+1773,White,No
+1774,African American,No
+1775,African American,No
+1776,White,No
+1777,African American,No
+1778,African American,No
+1779,African American,No
+1780,White,Yes
+1781,African American,No
+1782,White,Yes
+1783,White,No
+1784,African American,Yes
+1785,African American,No
+1786,White,No
+1787,White,No
+1788,White,No
+1789,African American,No
+1790,African American,No
+1791,White,No
+1792,White,Yes
+1793,White,No
+1794,White,No
+1795,African American,No
+1796,White,No
+1797,White,No
+1798,African American,No
+1799,White,No
+1800,African American,No
+1801,White,No
+1802,White,No
+1803,White,No
+1804,White,No
+1805,African American,No
+1806,African American,No
+1807,White,Yes
+1808,African American,No
+1809,White,No
+1810,African American,No
+1811,White,No
+1812,White,No
+1813,African American,No
+1814,White,Yes
+1815,African American,No
+1816,White,No
+1817,African American,No
+1818,African American,No
+1819,African American,No
+1820,White,No
+1821,African American,No
+1822,African American,No
+1823,African American,No
+1824,African American,No
+1825,White,No
+1826,White,No
+1827,African American,No
+1828,White,No
+1829,African American,No
+1830,White,No
+1831,White,No
+1832,White,No
+1833,African American,No
+1834,African American,No
+1835,African American,No
+1836,African American,Yes
+1837,White,No
+1838,White,No
+1839,African American,No
+1840,African American,No
+1841,African American,No
+1842,African American,No
+1843,African American,No
+1844,African American,No
+1845,White,Yes
+1846,White,No
+1847,African American,No
+1848,White,No
+1849,White,No
+1850,African American,No
+1851,African American,No
+1852,White,No
+1853,White,No
+1854,White,No
+1855,White,No
+1856,African American,No
+1857,White,No
+1858,White,No
+1859,African American,No
+1860,African American,No
+1861,White,No
+1862,White,No
+1863,White,No
+1864,African American,No
+1865,White,No
+1866,White,No
+1867,African American,No
+1868,White,No
+1869,White,No
+1870,African American,No
+1871,African American,Yes
+1872,White,No
+1873,African American,No
+1874,African American,No
+1875,White,No
+1876,African American,No
+1877,White,Yes
+1878,African American,No
+1879,African American,No
+1880,African American,No
+1881,African American,No
+1882,African American,No
+1883,White,No
+1884,African American,No
+1885,White,Yes
+1886,African American,No
+1887,African American,No
+1888,African American,No
+1889,African American,No
+1890,African American,No
+1891,White,No
+1892,African American,No
+1893,African American,No
+1894,White,No
+1895,White,No
+1896,African American,No
+1897,White,No
+1898,African American,No
+1899,African American,No
+1900,African American,No
+1901,White,No
+1902,African American,No
+1903,African American,No
+1904,White,No
+1905,White,No
+1906,African American,No
+1907,African American,No
+1908,African American,No
+1909,White,No
+1910,White,No
+1911,White,No
+1912,African American,No
+1913,African American,No
+1914,African American,No
+1915,White,No
+1916,African American,No
+1917,African American,No
+1918,African American,No
+1919,African American,No
+1920,African American,No
+1921,African American,No
+1922,African American,No
+1923,African American,No
+1924,White,No
+1925,White,No
+1926,White,No
+1927,African American,No
+1928,African American,No
+1929,African American,No
+1930,African American,No
+1931,White,No
+1932,White,No
+1933,African American,No
+1934,White,No
+1935,African American,Yes
+1936,White,No
+1937,White,No
+1938,African American,No
+1939,White,No
+1940,White,No
+1941,White,No
+1942,White,No
+1943,White,No
+1944,White,No
+1945,African American,No
+1946,African American,No
+1947,White,No
+1948,White,Yes
+1949,African American,No
+1950,White,No
+1951,African American,No
+1952,White,Yes
+1953,African American,No
+1954,White,No
+1955,African American,No
+1956,White,No
+1957,African American,No
+1958,African American,No
+1959,White,No
+1960,White,No
+1961,African American,No
+1962,African American,No
+1963,African American,No
+1964,White,No
+1965,White,No
+1966,White,No
+1967,White,No
+1968,White,No
+1969,White,No
+1970,White,No
+1971,White,No
+1972,White,No
+1973,African American,Yes
+1974,African American,No
+1975,White,No
+1976,African American,No
+1977,African American,No
+1978,White,No
+1979,White,No
+1980,White,No
+1981,African American,No
+1982,African American,No
+1983,White,No
+1984,African American,No
+1985,African American,No
+1986,White,No
+1987,White,No
+1988,African American,No
+1989,African American,No
+1990,African American,No
+1991,White,No
+1992,White,No
+1993,African American,No
+1994,African American,No
+1995,White,No
+1996,African American,No
+1997,African American,No
+1998,White,No
+1999,African American,No
+2000,African American,No
+2001,African American,No
+2002,African American,No
+2003,White,No
+2004,African American,Yes
+2005,White,No
+2006,African American,Yes
+2007,White,No
+2008,White,No
+2009,White,No
+2010,African American,No
+2011,African American,Yes
+2012,African American,Yes
+2013,African American,No
+2014,African American,No
+2015,African American,No
+2016,White,No
+2017,White,No
+2018,White,Yes
+2019,African American,Yes
+2020,White,No
+2021,African American,No
+2022,African American,No
+2023,African American,No
+2024,African American,No
+2025,White,No
+2026,White,No
+2027,African American,No
+2028,African American,No
+2029,African American,No
+2030,White,Yes
+2031,African American,No
+2032,African American,No
+2033,White,No
+2034,African American,Yes
+2035,White,No
+2036,African American,No
+2037,White,No
+2038,White,No
+2039,African American,No
+2040,African American,No
+2041,African American,No
+2042,White,No
+2043,African American,No
+2044,African American,No
+2045,African American,No
+2046,African American,No
+2047,White,No
+2048,African American,No
+2049,African American,No
+2050,White,Yes
+2051,African American,No
+2052,White,No
+2053,African American,No
+2054,African American,No
+2055,African American,No
+2056,African American,No
+2057,White,No
+2058,African American,No
+2059,White,Yes
+2060,African American,No
+2061,African American,No
+2062,African American,No
+2063,African American,No
+2064,White,No
+2065,White,No
+2066,White,No
+2067,African American,No
+2068,White,No
+2069,African American,No
+2070,African American,No
+2071,White,No
+2072,African American,No
+2073,White,No
+2074,African American,Yes
+2075,African American,No
+2076,White,No
+2077,White,Yes
+2078,White,No
+2079,White,No
+2080,African American,No
+2081,White,No
+2082,African American,No
+2083,White,No
+2084,African American,No
+2085,African American,No
+2086,African American,No
+2087,African American,No
+2088,White,No
+2089,African American,No
+2090,White,No
+2091,White,No
+2092,White,Yes
+2093,African American,No
+2094,White,No
+2095,White,No
+2096,White,Yes
+2097,White,No
+2098,White,No
+2099,African American,No
+2100,White,No
+2101,White,No
+2102,White,No
+2103,White,No
+2104,African American,No
+2105,White,No
+2106,White,No
+2107,White,Yes
+2108,White,No
+2109,African American,No
+2110,African American,No
+2111,White,No
+2112,African American,No
+2113,White,No
+2114,White,No
+2115,White,No
+2116,African American,No
+2117,White,Yes
+2118,White,No
+2119,African American,No
+2120,White,No
+2121,African American,No
+2122,White,No
+2123,White,No
+2124,African American,No
+2125,White,No
+2126,White,No
+2127,African American,Yes
+2128,White,No
+2129,African American,No
+2130,White,No
+2131,African American,No
+2132,White,No
+2133,African American,No
+2134,African American,No
+2135,African American,No
+2136,White,No
+2137,White,No
+2138,White,No
+2139,African American,No
+2140,African American,No
+2141,White,No
+2142,African American,No
+2143,African American,No
+2144,White,No
+2145,White,No
+2146,African American,No
+2147,African American,No
+2148,White,No
+2149,White,No
+2150,White,No
+2151,African American,No
+2152,White,No
+2153,White,No
+2154,African American,No
+2155,White,No
+2156,White,No
+2157,African American,No
+2158,African American,No
+2159,African American,No
+2160,White,No
+2161,African American,No
+2162,African American,No
+2163,African American,No
+2164,African American,No
+2165,African American,No
+2166,African American,No
+2167,African American,No
+2168,White,No
+2169,White,No
+2170,White,No
+2171,White,No
+2172,African American,No
+2173,African American,No
+2174,White,No
+2175,African American,No
+2176,African American,No
+2177,White,No
+2178,African American,No
+2179,White,Yes
+2180,African American,No
+2181,African American,Yes
+2182,White,No
+2183,African American,No
+2184,African American,No
+2185,White,No
+2186,White,Yes
+2187,African American,No
+2188,White,No
+2189,White,No
+2190,African American,No
+2191,African American,No
+2192,White,No
+2193,White,Yes
+2194,White,No
+2195,African American,No
+2196,White,No
+2197,White,No
+2198,White,No
+2199,White,No
+2200,White,No
+2201,White,No
+2202,African American,No
+2203,White,No
+2204,White,No
+2205,African American,No
+2206,African American,No
+2207,African American,No
+2208,White,No
+2209,African American,No
+2210,White,No
+2211,White,No
+2212,African American,No
+2213,African American,No
+2214,African American,No
+2215,White,Yes
+2216,African American,No
+2217,African American,No
+2218,African American,No
+2219,White,No
+2220,White,No
+2221,African American,No
+2222,White,No
+2223,African American,No
+2224,African American,No
+2225,White,No
+2226,White,Yes
+2227,African American,No
+2228,African American,No
+2229,African American,No
+2230,White,No
+2231,White,No
+2232,African American,No
+2233,African American,No
+2234,White,No
+2235,White,No
+2236,White,No
+2237,African American,No
+2238,African American,No
+2239,White,No
+2240,African American,No
+2241,African American,No
+2242,African American,No
+2243,African American,Yes
+2244,White,No
+2245,White,No
+2246,White,No
+2247,African American,No
+2248,White,Yes
+2249,African American,No
+2250,White,No
+2251,African American,No
+2252,African American,No
+2253,African American,No
+2254,White,No
+2255,White,No
+2256,African American,No
+2257,White,No
+2258,African American,No
+2259,African American,No
+2260,White,No
+2261,African American,No
+2262,White,No
+2263,African American,No
+2264,White,No
+2265,White,No
+2266,African American,No
+2267,White,No
+2268,African American,No
+2269,African American,No
+2270,African American,No
+2271,African American,No
+2272,African American,No
+2273,White,No
+2274,White,No
+2275,African American,No
+2276,African American,No
+2277,White,No
+2278,White,No
+2279,White,No
+2280,White,No
+2281,White,No
+2282,White,No
+2283,White,No
+2284,African American,No
+2285,African American,Yes
+2286,White,Yes
+2287,African American,No
+2288,White,No
+2289,African American,No
+2290,White,No
+2291,African American,Yes
+2292,African American,Yes
+2293,White,No
+2294,African American,No
+2295,African American,No
+2296,White,No
+2297,White,No
+2298,White,No
+2299,African American,No
+2300,White,No
+2301,White,Yes
+2302,African American,Yes
+2303,White,No
+2304,African American,No
+2305,African American,No
+2306,African American,No
+2307,White,No
+2308,African American,No
+2309,White,No
+2310,African American,No
+2311,African American,No
+2312,White,No
+2313,White,No
+2314,White,No
+2315,White,No
+2316,African American,No
+2317,African American,Yes
+2318,White,No
+2319,African American,No
+2320,White,No
+2321,African American,No
+2322,White,Yes
+2323,White,No
+2324,White,Yes
+2325,White,No
+2326,White,No
+2327,White,No
+2328,African American,No
+2329,White,No
+2330,African American,No
+2331,African American,No
+2332,African American,No
+2333,African American,No
+2334,African American,No
+2335,White,No
+2336,White,No
+2337,White,No
+2338,African American,No
+2339,African American,Yes
+2340,African American,Yes
+2341,African American,No
+2342,White,No
+2343,White,No
+2344,White,No
+2345,African American,No
+2346,White,No
+2347,White,No
+2348,White,No
+2349,White,No
+2350,White,No
+2351,White,No
+2352,African American,No
+2353,African American,No
+2354,African American,No
+2355,African American,No
+2356,White,Yes
+2357,White,No
+2358,White,No
+2359,White,No
+2360,African American,No
+2361,African American,No
+2362,White,No
+2363,White,No
+2364,White,No
+2365,White,Yes
+2366,White,No
+2367,White,No
+2368,African American,No
+2369,White,No
+2370,African American,No
+2371,White,Yes
+2372,African American,No
+2373,White,Yes
+2374,White,No
+2375,African American,Yes
+2376,White,Yes
+2377,African American,No
+2378,African American,No
+2379,African American,No
+2380,African American,Yes
+2381,White,No
+2382,African American,No
+2383,African American,No
+2384,African American,No
+2385,African American,No
+2386,African American,Yes
+2387,White,No
+2388,African American,No
+2389,African American,No
+2390,White,No
+2391,African American,No
+2392,White,No
+2393,White,No
+2394,White,No
+2395,White,Yes
+2396,African American,No
+2397,White,Yes
+2398,White,No
+2399,White,No
+2400,White,No
+2401,African American,No
+2402,African American,No
+2403,White,Yes
+2404,White,Yes
+2405,African American,No
+2406,African American,No
+2407,African American,No
+2408,White,No
+2409,White,No
+2410,White,No
+2411,African American,No
+2412,African American,No
+2413,White,No
+2414,African American,No
+2415,White,No
+2416,African American,No
+2417,African American,No
+2418,White,Yes
+2419,African American,No
+2420,White,No
+2421,African American,No
+2422,White,No
+2423,African American,No
+2424,African American,No
+2425,African American,No
+2426,African American,No
+2427,White,Yes
+2428,African American,No
+2429,African American,No
+2430,White,No
+2431,African American,No
+2432,White,No
+2433,African American,No
+2434,White,No
+2435,White,No
+2436,African American,Yes
+2437,White,No
+2438,White,No
+2439,African American,No
+2440,White,No
+2441,White,No
+2442,White,No
+2443,African American,No
+2444,White,No
+2445,African American,No
+2446,African American,No
+2447,African American,No
+2448,White,No
+2449,White,No
+2450,White,No
+2451,White,No
+2452,White,No
+2453,African American,No
+2454,African American,No
+2455,African American,No
+2456,White,No
+2457,White,No
+2458,White,Yes
+2459,African American,Yes
+2460,African American,No
+2461,African American,No
+2462,African American,No
+2463,White,Yes
+2464,African American,No
+2465,African American,No
+2466,African American,No
+2467,African American,No
+2468,White,No
+2469,White,No
+2470,White,No
+2471,African American,No
+2472,African American,No
+2473,White,No
+2474,African American,No
+2475,African American,No
+2476,White,No
+2477,White,No
+2478,African American,No
+2479,African American,No
+2480,African American,No
+2481,African American,No
+2482,White,No
+2483,African American,No
+2484,White,No
+2485,African American,No
+2486,African American,No
+2487,White,No
+2488,White,Yes
+2489,White,No
+2490,White,No
+2491,White,Yes
+2492,African American,No
+2493,White,No
+2494,White,No
+2495,African American,No
+2496,African American,No
+2497,White,No
+2498,African American,No
+2499,African American,No
+2500,African American,No
+2501,African American,No
+2502,White,Yes
+2503,White,No
+2504,White,No
+2505,White,No
+2506,African American,No
+2507,White,No
+2508,White,Yes
+2509,African American,No
+2510,African American,No
+2511,African American,No
+2512,White,No
+2513,White,No
+2514,African American,No
+2515,African American,Yes
+2516,African American,Yes
+2517,White,No
+2518,African American,No
+2519,White,Yes
+2520,White,No
+2521,White,No
+2522,African American,Yes
+2523,African American,No
+2524,White,No
+2525,White,No
+2526,African American,No
+2527,African American,No
+2528,White,No
+2529,White,No
+2530,White,No
+2531,White,No
+2532,White,No
+2533,White,No
+2534,White,No
+2535,African American,No
+2536,White,No
+2537,White,Yes
+2538,White,No
+2539,African American,Yes
+2540,African American,No
+2541,White,No
+2542,African American,No
+2543,African American,No
+2544,White,No
+2545,White,No
+2546,White,No
+2547,African American,No
+2548,White,No
+2549,White,No
+2550,African American,No
+2551,White,No
+2552,White,Yes
+2553,White,No
+2554,White,Yes
+2555,White,No
+2556,African American,No
+2557,African American,No
+2558,African American,Yes
+2559,African American,No
+2560,African American,No
+2561,African American,No
+2562,White,No
+2563,White,No
+2564,African American,No
+2565,African American,Yes
+2566,African American,No
+2567,White,No
+2568,White,No
+2569,White,No
+2570,African American,No
+2571,White,No
+2572,African American,No
+2573,African American,No
+2574,African American,No
+2575,African American,No
+2576,White,No
+2577,White,No
+2578,White,No
+2579,African American,No
+2580,African American,No
+2581,White,No
+2582,African American,No
+2583,African American,No
+2584,White,No
+2585,White,No
+2586,African American,No
+2587,White,No
+2588,African American,No
+2589,African American,No
+2590,African American,Yes
+2591,African American,No
+2592,African American,No
+2593,African American,Yes
+2594,African American,No
+2595,White,No
+2596,African American,No
+2597,White,No
+2598,African American,No
+2599,African American,No
+2600,African American,No
+2601,African American,No
+2602,African American,No
+2603,African American,No
+2604,White,No
+2605,White,No
+2606,White,No
+2607,White,No
+2608,African American,No
+2609,African American,No
+2610,White,No
+2611,White,No
+2612,African American,No
+2613,African American,No
+2614,African American,No
+2615,White,No
+2616,White,No
+2617,African American,No
+2618,White,No
+2619,White,No
+2620,African American,No
+2621,White,No
+2622,White,No
+2623,African American,No
+2624,White,No
+2625,White,No
+2626,African American,No
+2627,White,No
+2628,African American,No
+2629,African American,No
+2630,White,No
+2631,African American,No
+2632,African American,No
+2633,African American,No
+2634,African American,No
+2635,African American,No
+2636,African American,No
+2637,White,No
+2638,African American,No
+2639,African American,No
+2640,African American,No
+2641,African American,No
+2642,African American,No
+2643,African American,No
+2644,African American,No
+2645,White,No
+2646,African American,No
+2647,African American,No
+2648,African American,No
+2649,White,No
+2650,African American,No
+2651,African American,No
+2652,African American,No
+2653,African American,No
+2654,White,No
+2655,White,No
+2656,White,No
+2657,White,No
+2658,African American,No
+2659,African American,No
+2660,African American,No
+2661,African American,No
+2662,African American,No
+2663,African American,No
+2664,African American,No
+2665,White,No
+2666,African American,No
+2667,White,No
+2668,White,No
+2669,White,No
+2670,White,Yes
+2671,White,No
+2672,African American,No
+2673,African American,No
+2674,White,No
+2675,African American,No
+2676,White,No
+2677,African American,No
+2678,African American,No
+2679,African American,Yes
+2680,White,No
+2681,White,No
+2682,African American,No
+2683,African American,No
+2684,African American,No
+2685,African American,No
+2686,African American,No
+2687,African American,No
+2688,White,No
+2689,African American,No
+2690,White,No
+2691,African American,No
+2692,White,No
+2693,White,No
+2694,White,No
+2695,African American,No
+2696,White,No
+2697,White,No
+2698,African American,No
+2699,White,No
+2700,African American,No
+2701,White,No
+2702,African American,No
+2703,African American,No
+2704,White,No
+2705,White,No
+2706,African American,No
+2707,African American,No
+2708,African American,No
+2709,White,No
+2710,African American,No
+2711,African American,No
+2712,White,No
+2713,African American,No
+2714,White,No
+2715,African American,No
+2716,African American,Yes
+2717,African American,No
+2718,White,No
+2719,African American,Yes
+2720,White,No
+2721,African American,No
+2722,African American,No
+2723,White,No
+2724,White,No
+2725,African American,No
+2726,African American,No
+2727,African American,No
+2728,African American,No
+2729,White,No
+2730,White,No
+2731,White,No
+2732,White,No
+2733,White,No
+2734,African American,No
+2735,African American,No
+2736,White,No
+2737,African American,No
+2738,African American,No
+2739,African American,No
+2740,African American,No
+2741,White,No
+2742,African American,No
+2743,African American,No
+2744,White,No
+2745,White,No
+2746,White,No
+2747,African American,No
+2748,African American,No
+2749,African American,Yes
+2750,White,No
+2751,White,No
+2752,White,Yes
+2753,African American,No
+2754,African American,No
+2755,African American,Yes
+2756,African American,No
+2757,African American,No
+2758,African American,No
+2759,African American,No
+2760,African American,No
+2761,White,No
+2762,African American,No
+2763,White,No
+2764,White,No
+2765,White,No
+2766,African American,No
+2767,White,No
+2768,White,No
+2769,African American,No
+2770,White,No
+2771,African American,No
+2772,White,Yes
+2773,African American,No
+2774,White,Yes
+2775,White,Yes
+2776,African American,No
+2777,White,No
+2778,White,No
+2779,White,No
+2780,African American,No
+2781,African American,No
+2782,African American,No
+2783,White,No
+2784,African American,No
+2785,White,No
+2786,African American,No
+2787,White,No
+2788,African American,No
+2789,White,No
+2790,African American,No
+2791,African American,No
+2792,White,No
+2793,African American,No
+2794,White,No
+2795,White,No
+2796,White,No
+2797,White,No
+2798,White,No
+2799,White,No
+2800,White,No
+2801,White,No
+2802,African American,No
+2803,White,No
+2804,African American,No
+2805,African American,No
+2806,African American,No
+2807,African American,No
+2808,African American,No
+2809,African American,No
+2810,African American,No
+2811,White,No
+2812,African American,No
+2813,White,No
+2814,African American,No
+2815,White,No
+2816,White,Yes
+2817,African American,No
+2818,African American,No
+2819,White,Yes
+2820,African American,No
+2821,White,No
+2822,African American,No
+2823,White,No
+2824,African American,No
+2825,African American,No
+2826,White,No
+2827,White,No
+2828,African American,No
+2829,White,No
+2830,African American,No
+2831,White,No
+2832,African American,No
+2833,White,No
+2834,White,No
+2835,White,No
+2836,White,No
+2837,White,No
+2838,African American,No
+2839,White,Yes
+2840,African American,No
+2841,White,No
+2842,White,No
+2843,White,No
+2844,African American,No
+2845,White,No
+2846,African American,No
+2847,African American,No
+2848,African American,No
+2849,White,No
+2850,African American,No
+2851,White,No
+2852,African American,No
+2853,White,No
+2854,African American,No
+2855,White,No
+2856,White,No
+2857,African American,No
+2858,White,No
+2859,White,No
+2860,White,No
+2861,White,No
+2862,African American,No
+2863,African American,No
+2864,African American,No
+2865,African American,No
+2866,African American,No
+2867,White,No
+2868,African American,No
+2869,White,No
+2870,African American,No
+2871,African American,No
+2872,White,No
+2873,White,Yes
+2874,White,No
+2875,White,No
+2876,White,No
+2877,White,No
+2878,White,No
+2879,African American,No
+2880,White,No
+2881,African American,No
+2882,White,No
+2883,African American,No
+2884,White,No
+2885,African American,No
+2886,African American,No
+2887,African American,No
+2888,African American,No
+2889,African American,No
+2890,African American,No
+2891,White,No
+2892,White,Yes
+2893,White,No
+2894,White,No
+2895,White,No
+2896,African American,No
+2897,White,No
+2898,African American,No
+2899,African American,No
+2900,White,No
+2901,White,No
+2902,White,No
+2903,African American,No
+2904,African American,No
+2905,White,No
+2906,African American,No
+2907,African American,No
+2908,White,No
+2909,White,No
+2910,White,No
+2911,White,Yes
+2912,African American,No
+2913,White,No
+2914,African American,No
+2915,African American,No
+2916,African American,No
+2917,White,No
+2918,White,No
+2919,White,No
+2920,African American,No
+2921,African American,No
+2922,White,No
+2923,White,Yes
+2924,African American,No
+2925,White,No
+2926,White,No
+2927,White,No
+2928,White,No
+2929,African American,No
+2930,White,No
+2931,African American,No
+2932,African American,No
+2933,African American,No
+2934,African American,No
+2935,African American,No
+2936,White,No
+2937,White,No
+2938,African American,No
+2939,White,No
+2940,African American,No
+2941,White,No
+2942,African American,Yes
+2943,White,No
+2944,African American,No
+2945,African American,No
+2946,African American,No
+2947,African American,Yes
+2948,White,No
+2949,African American,No
+2950,White,No
+2951,White,No
+2952,African American,No
+2953,White,No
+2954,White,No
+2955,White,No
+2956,White,Yes
+2957,White,Yes
+2958,White,No
+2959,African American,Yes
+2960,White,No
+2961,White,No
+2962,White,No
+2963,African American,No
+2964,White,No
+2965,African American,No
+2966,African American,No
+2967,White,No
+2968,African American,No
+2969,African American,No
+2970,White,No
+2971,White,No
+2972,African American,No
+2973,White,No
+2974,White,No
+2975,White,No
+2976,African American,No
+2977,White,No
+2978,White,No
+2979,White,Yes
+2980,African American,No
+2981,White,No
+2982,White,No
+2983,White,No
+2984,White,No
+2985,White,No
+2986,African American,No
+2987,African American,No
+2988,White,No
+2989,White,No
+2990,African American,No
+2991,African American,No
+2992,White,No
+2993,African American,No
+2994,White,No
+2995,African American,Yes
+2996,White,No
+2997,African American,No
+2998,African American,No
+2999,White,No
+3000,White,No
+3001,White,No
+3002,White,Yes
+3003,African American,No
+3004,African American,No
+3005,White,Yes
+3006,White,No
+3007,African American,No
+3008,White,Yes
+3009,African American,No
+3010,White,No
+3011,African American,No
+3012,African American,No
+3013,African American,No
+3014,White,No
+3015,African American,No
+3016,African American,No
+3017,African American,No
+3018,White,No
+3019,White,No
+3020,African American,No
+3021,White,No
+3022,White,No
+3023,White,No
+3024,African American,No
+3025,African American,Yes
+3026,African American,No
+3027,White,No
+3028,African American,No
+3029,White,No
+3030,African American,No
+3031,African American,Yes
+3032,White,No
+3033,African American,No
+3034,White,No
+3035,African American,No
+3036,White,No
+3037,African American,No
+3038,White,No
+3039,White,Yes
+3040,White,No
+3041,African American,No
+3042,African American,No
+3043,African American,No
+3044,African American,No
+3045,African American,No
+3046,White,No
+3047,White,No
+3048,African American,No
+3049,White,No
+3050,White,No
+3051,White,No
+3052,African American,No
+3053,African American,No
+3054,White,No
+3055,White,No
+3056,White,No
+3057,African American,No
+3058,White,No
+3059,White,No
+3060,African American,Yes
+3061,White,No
+3062,White,No
+3063,African American,No
+3064,African American,Yes
+3065,African American,No
+3066,White,No
+3067,White,No
+3068,African American,No
+3069,African American,No
+3070,White,No
+3071,White,No
+3072,White,Yes
+3073,White,No
+3074,White,Yes
+3075,White,No
+3076,White,No
+3077,White,No
+3078,African American,No
+3079,White,No
+3080,African American,No
+3081,African American,No
+3082,African American,No
+3083,African American,No
+3084,African American,No
+3085,African American,No
+3086,African American,No
+3087,White,No
+3088,White,No
+3089,White,No
+3090,White,No
+3091,White,No
+3092,African American,No
+3093,White,No
+3094,African American,No
+3095,African American,No
+3096,White,No
+3097,African American,No
+3098,White,No
+3099,African American,No
+3100,White,Yes
+3101,African American,No
+3102,White,No
+3103,African American,No
+3104,African American,No
+3105,White,No
+3106,White,No
+3107,African American,No
+3108,African American,No
+3109,White,No
+3110,White,No
+3111,White,Yes
+3112,African American,No
+3113,African American,No
+3114,White,No
+3115,White,No
+3116,African American,No
+3117,White,No
+3118,African American,No
+3119,African American,No
+3120,White,No
+3121,White,No
+3122,African American,No
+3123,White,No
+3124,African American,No
+3125,White,No
+3126,White,No
+3127,African American,No
+3128,White,No
+3129,African American,No
+3130,White,Yes
+3131,African American,No
+3132,White,No
+3133,African American,No
+3134,White,No
+3135,White,No
+3136,African American,No
+3137,White,Yes
+3138,White,No
+3139,African American,No
+3140,African American,Yes
+3141,White,No
+3142,African American,Yes
+3143,African American,No
+3144,African American,No
+3145,African American,No
+3146,White,No
+3147,African American,No
+3148,White,No
+3149,White,No
+3150,African American,No
+3151,African American,No
+3152,African American,No
+3153,African American,No
+3154,White,No
+3155,African American,No
+3156,White,No
+3157,White,No
+3158,White,No
+3159,African American,No
+3160,White,No
+3161,African American,No
+3162,African American,No
+3163,African American,No
+3164,African American,No
+3165,White,No
+3166,White,No
+3167,African American,No
+3168,African American,No
+3169,African American,Yes
+3170,White,No
+3171,White,No
+3172,White,No
+3173,White,No
+3174,African American,No
+3175,White,No
+3176,White,No
+3177,White,No
+3178,White,No
+3179,African American,Yes
+3180,African American,No
+3181,African American,No
+3182,African American,No
+3183,African American,Yes
+3184,African American,No
+3185,African American,No
+3186,African American,No
+3187,African American,No
+3188,White,No
+3189,White,No
+3190,White,No
+3191,African American,No
+3192,White,Yes
+3193,African American,No
+3194,White,No
+3195,African American,No
+3196,African American,No
+3197,White,No
+3198,White,No
+3199,African American,No
+3200,White,No
+3201,African American,No
+3202,White,No
+3203,White,Yes
+3204,White,Yes
+3205,African American,No
+3206,White,No
+3207,White,No
+3208,White,No
+3209,White,No
+3210,African American,No
+3211,African American,No
+3212,African American,No
+3213,White,No
+3214,African American,No
+3215,African American,No
+3216,African American,No
+3217,White,No
+3218,White,No
+3219,White,No
+3220,White,No
+3221,African American,No
+3222,White,No
+3223,White,No
+3224,African American,No
+3225,African American,No
+3226,White,No
+3227,White,No
+3228,African American,No
+3229,African American,No
+3230,White,No
+3231,White,No
+3232,White,Yes
+3233,White,No
+3234,African American,No
+3235,African American,No
+3236,African American,No
+3237,White,No
+3238,African American,No
+3239,African American,No
+3240,White,No
+3241,White,No
+3242,African American,No
+3243,African American,No
+3244,African American,No
+3245,White,No
+3246,African American,No
+3247,African American,No
+3248,White,No
+3249,African American,No
+3250,African American,No
+3251,African American,Yes
+3252,African American,No
+3253,White,No
+3254,White,No
+3255,White,No
+3256,African American,No
+3257,African American,No
+3258,African American,No
+3259,African American,No
+3260,White,No
+3261,African American,No
+3262,African American,No
+3263,White,No
+3264,African American,No
+3265,White,No
+3266,African American,No
+3267,White,Yes
+3268,White,No
+3269,African American,No
+3270,African American,No
+3271,White,No
+3272,African American,No
+3273,White,No
+3274,White,No
+3275,White,Yes
+3276,White,Yes
+3277,African American,No
+3278,White,No
+3279,White,No
+3280,African American,No
+3281,White,No
+3282,African American,No
+3283,White,No
+3284,African American,No
+3285,African American,No
+3286,White,Yes
+3287,African American,Yes
+3288,White,No
+3289,White,No
+3290,African American,No
+3291,African American,No
+3292,White,No
+3293,White,No
+3294,White,No
+3295,White,No
+3296,White,No
+3297,White,Yes
+3298,White,No
+3299,White,No
+3300,White,No
+3301,African American,No
+3302,African American,No
+3303,White,No
+3304,African American,No
+3305,African American,No
+3306,White,No
+3307,White,No
+3308,White,No
+3309,White,Yes
+3310,African American,No
+3311,White,No
+3312,African American,No
+3313,African American,No
+3314,African American,No
+3315,White,No
+3316,White,No
+3317,African American,No
+3318,African American,No
+3319,White,No
+3320,African American,No
+3321,White,No
+3322,White,No
+3323,White,No
+3324,White,No
+3325,White,No
+3326,White,No
+3327,White,No
+3328,White,Yes
+3329,White,No
+3330,African American,No
+3331,White,Yes
+3332,African American,No
+3333,White,No
+3334,African American,No
+3335,White,No
+3336,African American,No
+3337,African American,No
+3338,White,No
+3339,African American,No
+3340,African American,No
+3341,African American,No
+3342,African American,No
+3343,African American,No
+3344,African American,No
+3345,White,No
+3346,White,No
+3347,African American,No
+3348,African American,No
+3349,African American,No
+3350,White,No
+3351,African American,No
+3352,African American,No
+3353,White,Yes
+3354,White,No
+3355,African American,No
+3356,White,Yes
+3357,African American,No
+3358,African American,No
+3359,White,No
+3360,African American,No
+3361,African American,No
+3362,African American,No
+3363,White,No
+3364,White,No
+3365,African American,No
+3366,White,No
+3367,White,No
+3368,African American,No
+3369,White,No
+3370,White,Yes
+3371,African American,No
+3372,White,Yes
+3373,African American,No
+3374,African American,No
+3375,White,No
+3376,African American,No
+3377,White,No
+3378,White,No
+3379,African American,No
+3380,White,No
+3381,White,No
+3382,White,No
+3383,White,No
+3384,African American,No
+3385,White,No
+3386,White,No
+3387,White,Yes
+3388,White,No
+3389,White,No
+3390,African American,No
+3391,White,No
+3392,African American,No
+3393,African American,No
+3394,White,No
+3395,African American,No
+3396,White,No
+3397,White,No
+3398,White,No
+3399,African American,No
+3400,White,No
+3401,White,No
+3402,African American,No
+3403,African American,No
+3404,African American,No
+3405,African American,No
+3406,African American,No
+3407,African American,No
+3408,African American,No
+3409,White,No
+3410,White,No
+3411,White,No
+3412,White,No
+3413,White,No
+3414,African American,No
+3415,African American,No
+3416,White,No
+3417,White,No
+3418,African American,No
+3419,White,No
+3420,White,No
+3421,White,No
+3422,African American,No
+3423,African American,No
+3424,White,No
+3425,White,No
+3426,African American,No
+3427,African American,No
+3428,African American,No
+3429,White,No
+3430,White,No
+3431,White,No
+3432,White,No
+3433,African American,No
+3434,White,No
+3435,African American,No
+3436,African American,No
+3437,African American,No
+3438,White,No
+3439,White,No
+3440,White,No
+3441,White,Yes
+3442,African American,No
+3443,African American,No
+3444,African American,No
+3445,African American,Yes
+3446,White,No
+3447,African American,No
+3448,African American,No
+3449,African American,No
+3450,White,No
+3451,African American,Yes
+3452,White,No
+3453,African American,No
+3454,White,No
+3455,White,No
+3456,White,No
+3457,African American,No
+3458,African American,No
+3459,White,Yes
+3460,White,No
+3461,White,No
+3462,African American,No
+3463,African American,No
+3464,White,No
+3465,African American,No
+3466,White,No
+3467,White,No
+3468,African American,No
+3469,African American,No
+3470,African American,No
+3471,White,No
+3472,African American,No
+3473,African American,Yes
+3474,White,Yes
+3475,African American,No
+3476,White,No
+3477,African American,No
+3478,African American,No
+3479,White,No
+3480,African American,No
+3481,African American,Yes
+3482,African American,No
+3483,White,No
+3484,White,No
+3485,White,No
+3486,African American,Yes
+3487,White,No
+3488,African American,No
+3489,White,No
+3490,African American,No
+3491,White,No
+3492,White,No
+3493,African American,No
+3494,African American,No
+3495,White,No
+3496,African American,No
+3497,African American,No
+3498,African American,No
+3499,White,No
+3500,White,Yes
+3501,White,No
+3502,White,No
+3503,White,No
+3504,White,No
+3505,White,No
+3506,White,No
+3507,White,No
+3508,White,No
+3509,White,No
+3510,White,No
+3511,African American,No
+3512,White,No
+3513,African American,No
+3514,White,No
+3515,African American,No
+3516,African American,No
+3517,White,No
+3518,African American,No
+3519,White,No
+3520,White,No
+3521,White,No
+3522,African American,No
+3523,White,No
+3524,African American,No
+3525,White,No
+3526,White,No
+3527,African American,No
+3528,African American,No
+3529,White,No
+3530,White,No
+3531,African American,Yes
+3532,White,No
+3533,African American,No
+3534,African American,No
+3535,African American,No
+3536,White,No
+3537,African American,No
+3538,White,No
+3539,African American,No
+3540,White,No
+3541,White,No
+3542,African American,No
+3543,White,No
+3544,African American,No
+3545,African American,No
+3546,White,No
+3547,African American,No
+3548,African American,No
+3549,White,No
+3550,White,Yes
+3551,African American,No
+3552,African American,No
+3553,African American,No
+3554,White,No
+3555,African American,No
+3556,White,No
+3557,White,No
+3558,White,No
+3559,African American,No
+3560,White,No
+3561,White,Yes
+3562,African American,No
+3563,African American,No
+3564,African American,No
+3565,African American,No
+3566,White,No
+3567,White,No
+3568,White,No
+3569,African American,No
+3570,African American,No
+3571,White,No
+3572,White,No
+3573,White,No
+3574,White,No
+3575,African American,No
+3576,African American,Yes
+3577,African American,No
+3578,White,No
+3579,White,No
+3580,White,No
+3581,White,No
+3582,African American,No
+3583,African American,No
+3584,White,No
+3585,White,No
+3586,African American,No
+3587,African American,Yes
+3588,White,No
+3589,African American,No
+3590,White,No
+3591,African American,No
+3592,African American,No
+3593,White,Yes
+3594,White,No
+3595,White,No
+3596,African American,Yes
+3597,African American,No
+3598,White,No
+3599,White,No
+3600,White,No
+3601,White,No
+3602,White,No
+3603,White,No
+3604,African American,No
+3605,African American,No
+3606,African American,No
+3607,African American,No
+3608,African American,No
+3609,African American,No
+3610,White,Yes
+3611,African American,No
+3612,African American,No
+3613,White,No
+3614,African American,No
+3615,White,No
+3616,White,No
+3617,White,No
+3618,African American,No
+3619,African American,No
+3620,African American,Yes
+3621,African American,No
+3622,African American,No
+3623,African American,No
+3624,African American,No
+3625,African American,No
+3626,White,No
+3627,White,No
+3628,African American,No
+3629,White,No
+3630,African American,No
+3631,African American,No
+3632,White,No
+3633,White,No
+3634,African American,No
+3635,White,No
+3636,White,Yes
+3637,White,No
+3638,African American,No
+3639,African American,No
+3640,African American,No
+3641,African American,No
+3642,African American,No
+3643,African American,No
+3644,White,No
+3645,African American,No
+3646,African American,No
+3647,White,No
+3648,African American,No
+3649,White,No
+3650,African American,No
+3651,African American,No
+3652,African American,No
+3653,White,No
+3654,White,No
+3655,African American,No
+3656,African American,No
+3657,African American,No
+3658,White,No
+3659,White,No
+3660,African American,No
+3661,African American,No
+3662,African American,No
+3663,White,No
+3664,African American,No
+3665,African American,No
+3666,African American,No
+3667,White,No
+3668,White,No
+3669,White,No
+3670,White,No
+3671,African American,No
+3672,African American,No
+3673,African American,No
+3674,White,No
+3675,African American,No
+3676,White,No
+3677,White,No
+3678,African American,No
+3679,African American,No
+3680,White,No
+3681,African American,No
+3682,African American,No
+3683,White,No
+3684,African American,No
+3685,African American,No
+3686,African American,No
+3687,African American,No
+3688,White,No
+3689,African American,No
+3690,White,No
+3691,African American,No
+3692,White,No
+3693,White,No
+3694,White,Yes
+3695,White,No
+3696,White,No
+3697,White,No
+3698,African American,No
+3699,African American,No
+3700,White,No
+3701,African American,No
+3702,African American,No
+3703,White,No
+3704,White,No
+3705,White,No
+3706,African American,No
+3707,African American,No
+3708,White,No
+3709,African American,No
+3710,African American,No
+3711,African American,No
+3712,White,No
+3713,White,No
+3714,White,No
+3715,White,No
+3716,African American,No
+3717,African American,No
+3718,White,No
+3719,African American,No
+3720,African American,No
+3721,African American,No
+3722,White,No
+3723,White,No
+3724,African American,No
+3725,White,No
+3726,African American,No
+3727,African American,No
+3728,White,No
+3729,White,No
+3730,African American,No
+3731,African American,No
+3732,White,No
+3733,White,No
+3734,African American,No
+3735,White,No
+3736,African American,No
+3737,African American,No
+3738,African American,No
+3739,African American,No
+3740,White,No
+3741,African American,No
+3742,White,No
+3743,African American,No
+3744,African American,No
+3745,African American,No
+3746,White,No
+3747,White,No
+3748,White,No
+3749,African American,No
+3750,African American,No
+3751,African American,No
+3752,White,No
+3753,African American,No
+3754,African American,Yes
+3755,African American,No
+3756,White,No
+3757,African American,No
+3758,White,No
+3759,White,No
+3760,African American,Yes
+3761,White,Yes
+3762,White,No
+3763,African American,No
+3764,African American,No
+3765,African American,No
+3766,White,No
+3767,African American,No
+3768,African American,No
+3769,White,No
+3770,African American,No
+3771,White,No
+3772,African American,No
+3773,African American,No
+3774,African American,No
+3775,White,No
+3776,White,No
+3777,African American,Yes
+3778,White,No
+3779,African American,No
+3780,White,No
+3781,African American,No
+3782,African American,No
+3783,African American,No
+3784,African American,No
+3785,White,No
+3786,African American,No
+3787,White,No
+3788,White,No
+3789,White,No
+3790,White,No
+3791,White,No
+3792,White,No
+3793,African American,No
+3794,White,No
+3795,African American,No
+3796,White,No
+3797,White,No
+3798,White,No
+3799,White,No
+3800,African American,No
+3801,African American,No
+3802,African American,No
+3803,White,No
+3804,African American,No
+3805,White,No
+3806,African American,No
+3807,African American,No
+3808,White,No
+3809,African American,No
+3810,African American,No
+3811,African American,No
+3812,African American,No
+3813,African American,No
+3814,African American,No
+3815,African American,No
+3816,African American,No
+3817,African American,No
+3818,White,No
+3819,White,No
+3820,African American,No
+3821,White,No
+3822,White,No
+3823,White,No
+3824,African American,No
+3825,White,No
+3826,White,No
+3827,African American,No
+3828,African American,No
+3829,African American,No
+3830,White,No
+3831,African American,Yes
+3832,African American,No
+3833,African American,No
+3834,White,No
+3835,African American,No
+3836,White,Yes
+3837,White,No
+3838,White,No
+3839,White,No
+3840,White,No
+3841,African American,No
+3842,White,No
+3843,African American,No
+3844,African American,No
+3845,White,No
+3846,African American,No
+3847,African American,No
+3848,White,No
+3849,White,No
+3850,African American,No
+3851,White,No
+3852,White,No
+3853,White,No
+3854,African American,No
+3855,White,No
+3856,African American,No
+3857,African American,No
+3858,White,No
+3859,African American,No
+3860,White,No
+3861,African American,No
+3862,African American,No
+3863,African American,No
+3864,African American,No
+3865,White,No
+3866,African American,Yes
+3867,White,No
+3868,African American,No
+3869,White,Yes
+3870,African American,No
+3871,White,No
+3872,African American,No
+3873,White,No
+3874,White,No
+3875,African American,No
+3876,White,Yes
+3877,White,No
+3878,African American,No
+3879,White,No
+3880,African American,No
+3881,White,No
+3882,African American,No
+3883,White,No
+3884,White,No
+3885,White,No
+3886,African American,No
+3887,White,No
+3888,African American,No
+3889,White,No
+3890,White,No
+3891,African American,No
+3892,White,No
+3893,White,No
+3894,White,No
+3895,African American,No
+3896,White,No
+3897,White,Yes
+3898,African American,No
+3899,White,No
+3900,White,No
+3901,White,No
+3902,White,No
+3903,White,Yes
+3904,African American,No
+3905,White,No
+3906,African American,No
+3907,African American,Yes
+3908,White,No
+3909,White,No
+3910,White,No
+3911,African American,Yes
+3912,African American,No
+3913,African American,No
+3914,White,No
+3915,White,No
+3916,African American,No
+3917,White,No
+3918,African American,No
+3919,African American,No
+3920,White,Yes
+3921,African American,No
+3922,African American,Yes
+3923,African American,No
+3924,White,No
+3925,African American,No
+3926,African American,No
+3927,African American,No
+3928,White,No
+3929,White,Yes
+3930,African American,No
+3931,African American,No
+3932,White,No
+3933,African American,No
+3934,African American,No
+3935,White,Yes
+3936,African American,No
+3937,White,No
+3938,African American,No
+3939,White,No
+3940,African American,No
+3941,African American,No
+3942,African American,No
+3943,White,No
+3944,White,No
+3945,White,Yes
+3946,White,No
+3947,White,No
+3948,African American,No
+3949,African American,No
+3950,African American,No
+3951,White,No
+3952,African American,No
+3953,White,No
+3954,African American,No
+3955,African American,No
+3956,African American,Yes
+3957,African American,No
+3958,White,No
+3959,White,No
+3960,African American,No
+3961,African American,No
+3962,African American,No
+3963,African American,No
+3964,African American,No
+3965,African American,No
+3966,White,No
+3967,White,No
+3968,White,No
+3969,African American,No
+3970,African American,No
+3971,White,No
+3972,African American,No
+3973,African American,No
+3974,White,No
+3975,African American,No
+3976,African American,No
+3977,African American,No
+3978,African American,No
+3979,White,No
+3980,African American,No
+3981,White,No
+3982,African American,No
+3983,African American,No
+3984,African American,No
+3985,White,No
+3986,White,No
+3987,African American,No
+3988,African American,No
+3989,White,No
+3990,African American,No
+3991,African American,Yes
+3992,African American,No
+3993,White,No
+3994,African American,No
+3995,White,Yes
+3996,White,No
+3997,White,Yes
+3998,White,No
+3999,African American,No
+4000,African American,No
+4001,White,No
+4002,African American,No
+4003,African American,No
+4004,African American,No
+4005,African American,No
+4006,African American,No
+4007,White,No
+4008,White,No
+4009,White,No
+4010,African American,No
+4011,White,No
+4012,White,No
+4013,African American,No
+4014,African American,Yes
+4015,African American,No
+4016,African American,No
+4017,White,No
+4018,African American,No
+4019,White,No
+4020,African American,No
+4021,African American,No
+4022,White,Yes
+4023,White,No
+4024,African American,No
+4025,African American,No
+4026,African American,No
+4027,African American,No
+4028,African American,Yes
+4029,African American,No
+4030,African American,No
+4031,White,Yes
+4032,White,No
+4033,White,Yes
+4034,White,No
+4035,African American,No
+4036,White,No
+4037,African American,No
+4038,African American,No
+4039,African American,No
+4040,White,No
+4041,White,No
+4042,White,No
+4043,African American,No
+4044,White,No
+4045,African American,No
+4046,White,Yes
+4047,White,No
+4048,White,Yes
+4049,White,No
+4050,African American,No
+4051,African American,No
+4052,African American,No
+4053,White,No
+4054,African American,No
+4055,African American,No
+4056,White,Yes
+4057,White,No
+4058,White,No
+4059,White,No
+4060,White,No
+4061,White,No
+4062,African American,No
+4063,White,No
+4064,African American,No
+4065,African American,No
+4066,African American,No
+4067,White,No
+4068,African American,No
+4069,African American,No
+4070,White,No
+4071,White,Yes
+4072,African American,No
+4073,White,No
+4074,African American,No
+4075,White,No
+4076,African American,No
+4077,African American,No
+4078,White,No
+4079,African American,No
+4080,White,No
+4081,White,No
+4082,African American,No
+4083,African American,Yes
+4084,African American,No
+4085,White,No
+4086,White,No
+4087,African American,No
+4088,White,No
+4089,White,No
+4090,African American,No
+4091,White,No
+4092,White,No
+4093,African American,No
+4094,African American,No
+4095,African American,No
+4096,African American,No
+4097,African American,No
+4098,White,No
+4099,White,No
+4100,White,Yes
+4101,African American,No
+4102,White,No
+4103,White,No
+4104,African American,Yes
+4105,African American,No
+4106,White,No
+4107,African American,No
+4108,White,No
+4109,African American,No
+4110,White,No
+4111,African American,No
+4112,African American,No
+4113,African American,No
+4114,African American,No
+4115,African American,No
+4116,African American,Yes
+4117,African American,No
+4118,African American,No
+4119,White,No
+4120,White,No
+4121,African American,No
+4122,African American,No
+4123,African American,No
+4124,White,No
+4125,White,No
+4126,African American,No
+4127,African American,No
+4128,African American,Yes
+4129,African American,No
+4130,White,No
+4131,African American,Yes
+4132,African American,No
+4133,White,Yes
+4134,White,No
+4135,White,No
+4136,White,No
+4137,African American,No
+4138,White,No
+4139,White,Yes
+4140,White,No
+4141,White,No
+4142,African American,No
+4143,White,No
+4144,White,No
+4145,African American,No
+4146,White,No
+4147,White,No
+4148,White,No
+4149,White,No
+4150,African American,No
+4151,White,No
+4152,White,No
+4153,African American,No
+4154,White,No
+4155,African American,No
+4156,White,No
+4157,African American,No
+4158,African American,No
+4159,White,No
+4160,White,No
+4161,White,No
+4162,White,No
+4163,White,No
+4164,White,No
+4165,African American,No
+4166,White,No
+4167,African American,No
+4168,White,No
+4169,White,No
+4170,African American,No
+4171,African American,No
+4172,White,Yes
+4173,African American,No
+4174,African American,No
+4175,African American,No
+4176,White,No
+4177,African American,No
+4178,White,Yes
+4179,African American,No
+4180,African American,No
+4181,White,No
+4182,African American,No
+4183,African American,No
+4184,African American,No
+4185,White,Yes
+4186,White,No
+4187,African American,No
+4188,White,No
+4189,African American,No
+4190,African American,No
+4191,African American,No
+4192,African American,No
+4193,White,No
+4194,White,No
+4195,White,No
+4196,African American,No
+4197,White,No
+4198,White,No
+4199,White,No
+4200,African American,No
+4201,African American,No
+4202,White,No
+4203,White,No
+4204,White,No
+4205,African American,No
+4206,African American,No
+4207,White,No
+4208,African American,No
+4209,African American,No
+4210,African American,No
+4211,African American,No
+4212,African American,No
+4213,White,No
+4214,White,No
+4215,White,No
+4216,African American,No
+4217,White,No
+4218,African American,No
+4219,White,No
+4220,White,No
+4221,White,No
+4222,White,No
+4223,African American,No
+4224,White,No
+4225,White,No
+4226,African American,No
+4227,African American,No
+4228,African American,No
+4229,African American,No
+4230,White,Yes
+4231,White,Yes
+4232,White,Yes
+4233,White,No
+4234,White,No
+4235,African American,No
+4236,African American,No
+4237,White,Yes
+4238,White,No
+4239,African American,No
+4240,African American,No
+4241,African American,No
+4242,White,No
+4243,White,No
+4244,African American,No
+4245,White,No
+4246,African American,No
+4247,White,No
+4248,African American,No
+4249,White,No
+4250,White,No
+4251,African American,No
+4252,White,No
+4253,African American,Yes
+4254,White,No
+4255,White,No
+4256,African American,No
+4257,African American,No
+4258,African American,No
+4259,African American,No
+4260,African American,No
+4261,African American,No
+4262,African American,No
+4263,African American,No
+4264,African American,No
+4265,African American,No
+4266,White,No
+4267,White,No
+4268,White,No
+4269,African American,No
+4270,African American,No
+4271,African American,No
+4272,White,No
+4273,White,No
+4274,African American,No
+4275,White,No
+4276,White,No
+4277,White,No
+4278,White,No
+4279,African American,No
+4280,White,No
+4281,African American,No
+4282,African American,No
+4283,African American,No
+4284,White,No
+4285,African American,No
+4286,White,No
+4287,White,No
+4288,White,No
+4289,White,No
+4290,African American,No
+4291,White,No
+4292,White,No
+4293,White,No
+4294,White,No
+4295,White,No
+4296,African American,No
+4297,White,No
+4298,White,No
+4299,White,No
+4300,African American,No
+4301,White,No
+4302,African American,No
+4303,African American,No
+4304,African American,No
+4305,White,No
+4306,White,No
+4307,African American,No
+4308,White,No
+4309,White,No
+4310,White,No
+4311,African American,No
+4312,White,No
+4313,White,No
+4314,African American,No
+4315,African American,No
+4316,African American,No
+4317,White,No
+4318,White,No
+4319,African American,No
+4320,White,No
+4321,African American,No
+4322,White,No
+4323,African American,No
+4324,White,No
+4325,White,No
+4326,White,No
+4327,White,No
+4328,African American,No
+4329,White,No
+4330,African American,No
+4331,White,No
+4332,African American,No
+4333,African American,No
+4334,African American,No
+4335,African American,No
+4336,African American,No
+4337,White,No
+4338,African American,No
+4339,African American,No
+4340,African American,No
+4341,White,No
+4342,White,No
+4343,African American,No
+4344,White,No
+4345,African American,No
+4346,African American,No
+4347,White,No
+4348,White,No
+4349,African American,No
+4350,African American,No
+4351,African American,No
+4352,White,No
+4353,African American,No
+4354,African American,No
+4355,African American,No
+4356,White,No
+4357,African American,No
+4358,White,No
+4359,African American,No
+4360,African American,No
+4361,African American,No
+4362,African American,No
+4363,African American,No
+4364,White,No
+4365,African American,Yes
+4366,White,No
+4367,White,No
+4368,White,No
+4369,White,No
+4370,African American,No
+4371,White,No
+4372,White,No
+4373,White,No
+4374,African American,No
+4375,White,No
+4376,African American,No
+4377,White,No
+4378,White,No
+4379,White,No
+4380,White,No
+4381,African American,No
+4382,African American,No
+4383,African American,No
+4384,African American,No
+4385,African American,No
+4386,African American,No
+4387,African American,No
+4388,White,No
+4389,African American,No
+4390,White,Yes
+4391,African American,No
+4392,White,No
+4393,African American,No
+4394,African American,No
+4395,White,No
+4396,White,No
+4397,White,No
+4398,African American,No
+4399,White,No
+4400,White,No
+4401,White,No
+4402,African American,No
+4403,White,No
+4404,White,No
+4405,African American,No
+4406,White,Yes
+4407,African American,No
+4408,White,No
+4409,White,No
+4410,African American,No
+4411,African American,No
+4412,White,No
+4413,White,No
+4414,African American,No
+4415,African American,No
+4416,African American,No
+4417,White,No
+4418,African American,No
+4419,White,No
+4420,White,No
+4421,African American,No
+4422,African American,No
+4423,White,No
+4424,White,No
+4425,African American,No
+4426,White,No
+4427,African American,No
+4428,African American,No
+4429,African American,No
+4430,African American,No
+4431,White,No
+4432,African American,No
+4433,African American,No
+4434,White,No
+4435,White,No
+4436,African American,No
+4437,African American,No
+4438,African American,No
+4439,White,No
+4440,African American,Yes
+4441,White,No
+4442,African American,No
+4443,White,No
+4444,African American,No
+4445,African American,No
+4446,White,Yes
+4447,African American,No
+4448,African American,No
+4449,African American,No
+4450,African American,No
+4451,African American,No
+4452,White,No
+4453,White,No
+4454,African American,No
+4455,White,No
+4456,African American,No
+4457,African American,No
+4458,African American,No
+4459,African American,No
+4460,White,No
+4461,African American,No
+4462,African American,No
+4463,White,No
+4464,White,No
+4465,African American,No
+4466,White,No
+4467,White,No
+4468,African American,No
+4469,African American,No
+4470,White,No
+4471,White,No
+4472,White,No
+4473,African American,No
+4474,White,No
+4475,African American,Yes
+4476,African American,No
+4477,African American,No
+4478,African American,No
+4479,White,No
+4480,White,No
+4481,African American,No
+4482,African American,No
+4483,African American,No
+4484,African American,No
+4485,White,Yes
+4486,African American,No
+4487,White,No
+4488,African American,No
+4489,African American,No
+4490,African American,No
+4491,African American,No
+4492,White,No
+4493,White,Yes
+4494,African American,No
+4495,African American,No
+4496,White,No
+4497,White,No
+4498,African American,No
+4499,White,No
+4500,White,No
+4501,African American,No
+4502,African American,No
+4503,White,No
+4504,White,No
+4505,African American,No
+4506,White,No
+4507,African American,No
+4508,African American,No
+4509,African American,No
+4510,African American,No
+4511,White,No
+4512,African American,No
+4513,African American,Yes
+4514,White,No
+4515,African American,No
+4516,White,Yes
+4517,African American,No
+4518,African American,No
+4519,White,No
+4520,African American,No
+4521,African American,No
+4522,African American,No
+4523,African American,No
+4524,African American,No
+4525,African American,No
+4526,White,No
+4527,African American,No
+4528,African American,No
+4529,White,Yes
+4530,White,No
+4531,White,No
+4532,African American,No
+4533,African American,No
+4534,African American,No
+4535,White,No
+4536,African American,No
+4537,White,No
+4538,White,No
+4539,White,No
+4540,White,No
+4541,White,No
+4542,White,No
+4543,African American,No
+4544,White,No
+4545,White,No
+4546,African American,No
+4547,African American,No
+4548,White,No
+4549,White,No
+4550,African American,No
+4551,African American,No
+4552,White,No
+4553,African American,No
+4554,African American,No
+4555,African American,No
+4556,White,No
+4557,White,No
+4558,White,No
+4559,African American,No
+4560,African American,No
+4561,African American,No
+4562,African American,No
+4563,African American,No
+4564,White,No
+4565,White,No
+4566,African American,No
+4567,White,No
+4568,African American,No
+4569,African American,No
+4570,African American,No
+4571,White,No
+4572,White,No
+4573,African American,No
+4574,White,No
+4575,White,No
+4576,African American,No
+4577,African American,No
+4578,African American,No
+4579,White,Yes
+4580,African American,No
+4581,African American,No
+4582,African American,No
+4583,White,No
+4584,African American,No
+4585,White,No
+4586,White,No
+4587,African American,No
+4588,African American,No
+4589,African American,No
+4590,White,No
+4591,African American,No
+4592,White,No
+4593,African American,No
+4594,White,No
+4595,African American,No
+4596,White,No
+4597,African American,No
+4598,African American,Yes
+4599,African American,No
+4600,African American,No
+4601,White,No
+4602,White,No
+4603,White,No
+4604,White,No
+4605,White,No
+4606,African American,No
+4607,African American,No
+4608,African American,Yes
+4609,African American,No
+4610,White,No
+4611,White,Yes
+4612,White,No
+4613,White,No
+4614,White,No
+4615,African American,No
+4616,White,No
+4617,African American,No
+4618,White,No
+4619,African American,No
+4620,African American,No
+4621,White,No
+4622,African American,No
+4623,African American,Yes
+4624,White,No
+4625,African American,No
+4626,White,Yes
+4627,White,No
+4628,White,No
+4629,African American,No
+4630,White,No
+4631,African American,No
+4632,African American,No
+4633,White,No
+4634,White,No
+4635,African American,No
+4636,African American,No
+4637,White,No
+4638,African American,No
+4639,White,No
+4640,White,No
+4641,African American,No
+4642,African American,No
+4643,White,No
+4644,African American,Yes
+4645,African American,No
+4646,African American,Yes
+4647,African American,No
+4648,White,No
+4649,White,No
+4650,African American,No
+4651,White,No
+4652,African American,Yes
+4653,White,No
+4654,African American,No
+4655,White,No
+4656,African American,No
+4657,African American,No
+4658,African American,No
+4659,African American,No
+4660,African American,No
+4661,African American,No
+4662,White,Yes
+4663,White,No
+4664,African American,No
+4665,African American,No
+4666,White,No
+4667,African American,No
+4668,African American,No
+4669,White,No
+4670,White,No
+4671,African American,No
+4672,White,No
+4673,African American,No
+4674,African American,No
+4675,White,No
+4676,White,Yes
+4677,White,No
+4678,African American,No
+4679,White,No
+4680,African American,No
+4681,African American,No
+4682,African American,No
+4683,African American,No
+4684,White,No
+4685,African American,No
+4686,African American,Yes
+4687,White,No
+4688,White,No
+4689,African American,No
+4690,African American,No
+4691,White,No
+4692,African American,Yes
+4693,White,Yes
+4694,White,No
+4695,African American,No
+4696,White,No
+4697,White,No
+4698,White,No
+4699,African American,No
+4700,African American,No
+4701,White,No
+4702,White,No
+4703,White,No
+4704,African American,No
+4705,White,No
+4706,White,No
+4707,African American,No
+4708,African American,No
+4709,African American,No
+4710,White,No
+4711,African American,No
+4712,White,No
+4713,African American,No
+4714,White,No
+4715,White,No
+4716,African American,No
+4717,White,Yes
+4718,African American,No
+4719,White,No
+4720,African American,No
+4721,African American,No
+4722,African American,No
+4723,White,No
+4724,African American,No
+4725,White,No
+4726,African American,No
+4727,White,No
+4728,African American,No
+4729,White,No
+4730,African American,No
+4731,White,No
+4732,White,No
+4733,African American,Yes
+4734,African American,No
+4735,African American,No
+4736,White,No
+4737,African American,No
+4738,African American,No
+4739,White,No
+4740,African American,No
+4741,White,No
+4742,African American,No
+4743,African American,No
+4744,African American,Yes
+4745,African American,No
+4746,African American,No
+4747,White,No
+4748,White,No
+4749,African American,No
+4750,African American,No
+4751,African American,Yes
+4752,White,No
+4753,White,No
+4754,African American,No
+4755,African American,No
+4756,White,No
+4757,White,Yes
+4758,African American,No
+4759,White,No
+4760,White,No
+4761,White,No
+4762,African American,Yes
+4763,African American,Yes
+4764,African American,No
+4765,African American,No
+4766,African American,No
+4767,White,No
+4768,African American,No
+4769,African American,No
+4770,African American,No
+4771,African American,No
+4772,White,No
+4773,White,No
+4774,African American,No
+4775,African American,No
+4776,White,No
+4777,White,No
+4778,African American,No
+4779,White,No
+4780,African American,No
+4781,White,No
+4782,White,No
+4783,White,No
+4784,African American,No
+4785,White,No
+4786,African American,No
+4787,White,No
+4788,White,No
+4789,African American,No
+4790,African American,No
+4791,White,No
+4792,African American,No
+4793,African American,No
+4794,White,No
+4795,African American,No
+4796,African American,No
+4797,African American,No
+4798,African American,No
+4799,White,No
+4800,African American,No
+4801,White,Yes
+4802,African American,No
+4803,African American,No
+4804,African American,No
+4805,White,No
+4806,White,No
+4807,African American,No
+4808,White,No
+4809,African American,No
+4810,White,No
+4811,African American,No
+4812,White,No
+4813,White,No
+4814,White,No
+4815,African American,No
+4816,White,No
+4817,White,No
+4818,White,No
+4819,White,No
+4820,White,No
+4821,African American,No
+4822,African American,No
+4823,African American,No
+4824,White,No
+4825,White,No
+4826,African American,No
+4827,White,No
+4828,African American,Yes
+4829,White,No
+4830,African American,No
+4831,African American,No
+4832,African American,No
+4833,White,No
+4834,African American,No
+4835,African American,No
+4836,White,No
+4837,White,No
+4838,African American,No
+4839,White,No
+4840,African American,No
+4841,White,No
+4842,African American,No
+4843,White,No
+4844,White,No
+4845,African American,No
+4846,African American,No
+4847,White,No
+4848,White,No
+4849,White,No
+4850,White,Yes
+4851,White,No
+4852,White,Yes
+4853,African American,No
+4854,White,No
+4855,African American,No
+4856,African American,No
+4857,African American,No
+4858,White,No
+4859,White,No
+4860,White,No
+4861,African American,No
+4862,African American,No
+4863,African American,No
+4864,White,No
+4865,White,No
+4866,White,No
+4867,African American,No
+4868,White,No
+4869,African American,No
+4870,White,No
+4871,White,No
+4872,African American,No
+4873,African American,Yes
+4874,African American,No
+4875,African American,No
+4876,African American,No
+4877,White,No
+4878,White,Yes
+4879,White,Yes
+4880,White,No
+4881,White,No
+4882,White,No
+4883,African American,No
+4884,African American,No
+4885,African American,No
+4886,African American,No
+4887,White,No
+4888,African American,No
+4889,African American,No
+4890,White,No

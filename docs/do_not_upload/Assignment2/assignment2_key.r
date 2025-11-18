@@ -26,7 +26,7 @@ p_value <- pt(t_stat, df = df)
 
 ecls <- read.csv('./do_not_upload/Assignment1/ecls-k-sub.csv')
 
-describe(ecls$X1HEIGHT)
+psych::describe(ecls$X1HEIGHT)
 
 
 summary(ecls$X1HEIGHT)
@@ -76,9 +76,13 @@ mistakes_df$difference <- mistakes_df$silent - mistakes_df$noisy
 
 oneSampleTTest(x = mistakes_df$difference,
                mu = 0,
-               one.sided = "less")
+               one.sided = FALSE)
 
 
+
+oneSampleTTest(x = mistakes_df$difference,
+               mu = 0,
+               one.sided = 'less')
 ################################################################################
 
 ecls <- read.csv('./do_not_upload/Assignment1/ecls-k-sub.csv')
@@ -92,13 +96,24 @@ ecls$X1FIRKDG <- as.factor(ecls$X1FIRKDG)
 str(ecls$X1FIRKDG)
 
 
-describe(ecls$X1RSCALK5)
+psych::describe(ecls$X1RSCALK5)
+summary(ecls$X1RSCALK5)
 ecls$X1RSCALK5 <- recode(ecls$X1RSCALK5, `-9` = NA_real_)
-describe(ecls$X1RSCALK5)
+summary(ecls$X1RSCALK5)
+
+
+
+describeBy(ecls$X1RSCALK5, group = ecls$X1FIRKDG)
+
 
 independentSamplesTTest(formula   = X1RSCALK5 ~ X1FIRKDG, 
                         data      = ecls,                         
                         var.equal = FALSE,
+                        one.sided = FALSE)
+
+independentSamplesTTest(formula   = X1RSCALK5 ~ X1FIRKDG, 
+                        data      = ecls,                         
+                        var.equal = TRUE,
                         one.sided = FALSE)
 
 ################################################################################
@@ -118,6 +133,13 @@ summary(ecls$X2ATTNFS)
 
 
 ecls$growth <- ecls$X2ATTNFS - ecls$X1ATTNFS
+
+
+psych::describe(ecls$X1ATTNFS)
+
+psych::describe(ecls$X2ATTNFS)
+
+psych::describe(ecls$growth)
 
 oneSampleTTest(x = ecls$growth,
                mu = 0,

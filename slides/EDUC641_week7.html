@@ -1,0 +1,2297 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Relationship between two categorical variables</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Cengiz Zopluoglu" />
+    <script src="EDUC641_week7_files/header-attrs-2.20/header-attrs.js"></script>
+    <link href="EDUC641_week7_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="EDUC641_week7_files/remark-css-0.0.1/uo.css" rel="stylesheet" />
+    <link href="EDUC641_week7_files/remark-css-0.0.1/ki-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my_custom.css" type="text/css" />
+    <link rel="stylesheet" href="xaringanthemer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Relationship between two categorical variables
+]
+.subtitle[
+## EDUC 641: Week 8 &amp; 9
+]
+.author[
+### Cengiz Zopluoglu
+]
+
+---
+
+
+
+&lt;style&gt;
+
+#infobox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background: #E6F6DC 5px center/3em no-repeat;
+}
+
+.left-column2 {
+  width: 75%;
+  height: 92%;
+  float: left;
+  padding-top: 1em;
+}
+
+.right-column2 {
+  width: 20%;
+  float: right;
+  padding-top: 1em;
+}
+
+.remark-code {
+  font-size: 18px;
+}
+
+.tiny .remark-code { /*Change made here*/
+  font-size: 85% !important;
+}
+
+.tiny2 .remark-code { /*Change made here*/
+  font-size: 70% !important;
+}
+
+.indent {
+  margin-left: 2em;
+}
+
+.single {
+  line-height: 1 ;
+}
+
+
+.double {
+  line-height: 2 ;
+}
+
+&lt;/style&gt;
+
+
+
+### Goals
+
+
+---
+
+### When do we look at relationships between two categorical variables?
+
+- When **both variables** in your research question are **categorical**  
+  (measured on a **nominal** or **ordinal** scale).
+  
+- When you want to know whether belonging to one category relate to belonging to another.
+
+** Examples of Research Questions **
+
+- Does **political party affiliation** (*Democrat*, *Independent*, *Republican*) vary by **sex assigned at birth** (*male*, *female*)?
+
+- Is **education level** (*high school or lower*, *bachelor’s degree*, *master’s or above*) associated with **marital status** (*never married*, *married*, *divorced*, *widowed*)?
+
+- Is **receiving a callback** (*received callback* / *no callback*) associated with **applicant racialized name group**  (*names associated with different racial identities*)?  
+
+- Are **student suspension outcomes** (*suspended* / *not suspended*) independent of **student race/ethnicity** (*Group A*, *Group B*, *Group C*)?  
+
+- Is **access to advanced coursework** (*enrolled in AP/IB* / *not enrolled*)  related to **school socioeconomic context** (*high-income*, *mid-income*, *low-income districts*)? 
+
+---
+
+### Are Emily and Greg more employable than Lakisha and Jamal?
+
+**Study context**
+
+- Field experiment replying to real job ads in Boston &amp; Chicago
+
+- Randomly assigned racialized first/last names to otherwise similar résumés  
+
+- Sent ~5,000 résumés to more than 1,300 ads; measured **callback** for interview  
+
+- We’ll use the aggregate contingency table (based on Table 1) for today’s example  
+
+**Source**: [Bertrand &amp; Mullainathan, 2003, NBER Working Paper 9873](https://www.nber.org/system/files/working_papers/w9873/w9873.pdf)
+
+**Research hypothesis:**
+
+There is a significant relationship between receiving a callback (yes vs. no) and racialized name group (White vs. African American).
+
+---
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,199&lt;/td&gt;
+    &lt;td class="tg-center"&gt;246&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,281&lt;/td&gt;
+    &lt;td class="tg-center"&gt;164&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;strong&gt;4,890&lt;/strong&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+
+- When you have two categorical variables, the data can be summarized in a two-way table. 
+
+- This table is called a contingency table.
+
+- The table above is a 2 x 2 contingency table.
+
+- The dimensions of the table are equal to the number of levels for both categorical variables.
+
+---
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,199&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;246&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,281&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;164&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+
+**Row Marginals**: the total number of observations in each row.
+
+There are 2,445 applications with White-associated names.
+
+There are 2,445 applications with African American-associated names personality.
+
+These numbers represent the **marginal distribution for racial soundingness of names**.
+
+---
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,199&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;246&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,281&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;164&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+**Column Marginals**: the total number of observations in each column.
+
+There are 4,480 applications with no call-back response.
+
+There are 410 applications with a call-back response.
+
+
+These numbers represent the **marginal distribution for call-back response**.
+
+---
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,199&lt;/td&gt;
+    &lt;td class="tg-center"&gt;246&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,281&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;164&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+Conditional distribution of **Call-back response** for **White-associated Names**
+
+---
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,199&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;246&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,281&lt;/td&gt;
+    &lt;td class="tg-center"&gt;164&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+Conditional distribution of **Call-back response** for **African American-associated Names**
+
+---
+
+**Null and Alternative Hypotheses**:
+
+`\(H_0\)`: Call-back response is not associated with racialized name group.
+
+`\(H_A\)`: Call-back response is associated with racialized name group.
+
+&lt;br&gt;
+
+Two variables are **independent** (no association) when the **conditional distribution** of one variable is **the same for every level** of the other variable.
+
+In this context, the callback rate should be the same for both racialized name groups if there is no relationship.
+
+---
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center""&gt;&lt;/td&gt;
+    &lt;td class="tg-center""&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+Suppose we fix the value of row and columns marginals.
+
+Assuming that the null hypothesis is true (there is no association between call-back response and racialized name group), what value would you expect to see in each cell?
+
+---
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;?&lt;/td&gt;
+    &lt;td class="tg-center""&gt;&lt;/td&gt;
+    &lt;td class="tg-center""&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+
+An easy way of computing the expected values for each cell under the null hypothesis is to multiply the corresponding row and column marginal values and divide it by the total number of observations.
+
+`$$\frac{2445*4480}{4890} = 2240$$`
+---
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;?&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+
+`$$\frac{2445*410}{4890} = 205$$`
+---
+
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;?&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+
+`$$\frac{2445*4480}{4890} = 2240$$`
+---
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;?&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;br&gt;
+
+
+`$$\frac{2445*410}{4890} = 205$$`
+---
+
+.center[**Expected Frequencies under H&lt;sub&gt;0&lt;/sub&gt;**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center"&gt;205&lt;/td&gt;
+    &lt;td class="tg-center""&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center"&gt;205&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+This table shows the **expected frequencies** we would observe if the two variables were truly **independent**.
+
+In other words, this is what the data would look like **if the null hypothesis were true**.
+---
+.center[**Observed Frequencies**]
+
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2199&lt;/td&gt;
+    &lt;td class="tg-center"&gt;246&lt;/td&gt;
+    &lt;td class="tg-center""&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2281&lt;/td&gt;
+    &lt;td class="tg-center"&gt;164&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.center[**Expected Frequencies under H&lt;sub&gt;0&lt;/sub&gt;**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:20px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center"&gt;205&lt;/td&gt;
+    &lt;td class="tg-center""&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center"&gt;205&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+How different the observed values are from the expected values under H0?
+
+---
+
+.pull-left[
+
+.center[**Observed Frequencies**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2199&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;246&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2281&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;164&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.center[**Expected Frequencies under H&lt;sub&gt;0&lt;/sub&gt;**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;205&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;205&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+
+.pull-right[
+
+**A Measure of Discrepancy Between Observed Frequencies and Expected Frequencies under `\(H_0\)`**
+
+$$ \frac{(Observed - Expected)^2}{Expected} = \frac{(2199 - 2240)^2}{2240} = 0.75 $$
+
+]
+
+---
+
+
+.pull-left[
+
+.center[**Observed Frequencies**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2199&lt;/td&gt;
+    &lt;td class="tg-center"&gt;246&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2281&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;164&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.center[**Expected Frequencies under H&lt;sub&gt;0&lt;/sub&gt;**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center" &gt;205&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;205&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+
+.pull-right[
+
+**A Measure of Discrepancy Between Observed Frequencies and Expected Frequencies under `\(H_0\)`**
+
+$$ \frac{(Observed - Expected)^2}{Expected} = \frac{(246 - 205)^2}{205} = 8.2 $$
+
+]
+
+---
+
+.pull-left[
+
+.center[**Observed Frequencies**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2199&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;246&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt; 2281&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;164&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.center[**Expected Frequencies under H&lt;sub&gt;0&lt;/sub&gt;**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;205&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;205&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+
+.pull-right[
+
+**A Measure of Discrepancy Between Observed Frequencies and Expected Frequencies under `\(H_0\)`**
+
+$$ \frac{(Observed - Expected)^2}{Expected} = \frac{(2281 - 2240)^2}{2281} = 0.75 $$
+
+]
+
+---
+
+.pull-left[
+
+.center[**Observed Frequencies**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2199&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;246&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"  style="color:#DCDCDC;"&gt; 2281&lt;/td&gt;
+    &lt;td class="tg-center"&gt;164&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+.center[**Expected Frequencies under H&lt;sub&gt;0&lt;/sub&gt;**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;205&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center"&gt;205&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;2,445&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,480&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;410&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;4,890&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+
+.pull-right[
+
+**A Measure of Discrepancy Between Observed Frequencies and Expected Frequencies under `\(H_0\)`**
+
+$$ \frac{(Observed - Expected)^2}{Expected} = \frac{(164 - 205)^2}{205} = 8.2 $$
+
+]
+
+---
+
+.pull-left[
+
+.center[**Observed Frequencies**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;O&lt;sub&gt;11&lt;/td&gt;
+    &lt;td class="tg-center"&gt;O&lt;sub&gt;12&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;1.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt; O&lt;sub&gt;21&lt;/td&gt;
+    &lt;td class="tg-center"&gt;O&lt;sub&gt;22&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;2.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;.1&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;.2&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;..&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+.pull-right[
+
+.center[**Expected Frequencies**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;E&lt;sub&gt;11&lt;/td&gt;
+    &lt;td class="tg-center"&gt;E&lt;sub&gt;12&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;1.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;E&lt;sub&gt;21&lt;/td&gt;
+    &lt;td class="tg-center"&gt;E&lt;sub&gt;22&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;2.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;.1&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;.2&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;..&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+
+&lt;br&gt;
+
+.center[**Total Amount of Discrepancy**]
+
+`$$\sum_{i} \sum_{j} \frac{(O_{ij} - E_{ij})^2}{E_{ij}}$$`
+
+- `\(O_{ij}\)`: observed cell frequency for the `\(i^{th}\)` row `\(j^{th}\)` column
+
+- `\(E_{ij}\)`: expected cell frequency for the `\(i^{th}\)` row `\(j^{th}\)` column
+
+---
+
+
+.pull-left[
+
+.center[**Observed Frequencies**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2199&lt;/td&gt;
+    &lt;td class="tg-center"&gt;246&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;1.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2281&lt;/td&gt;
+    &lt;td class="tg-center"&gt;164&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;2.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;.1&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;.2&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;..&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+.pull-right[
+
+.center[**Expected Frequencies**]
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" colspan="3"&gt;Callback Outcome&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:red; font-weight:bold;"&gt;No&lt;/td&gt;
+    &lt;td class="tg-center" style="color:green; font-weight:bold;"&gt;Yes&lt;/td&gt;
+    &lt;td class="tg-center" style="font-weight:bold;"&gt;Total&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;White-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center"&gt;205&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;1.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;African American-associated Names&lt;/td&gt;
+    &lt;td class="tg-center"&gt;2240&lt;/td&gt;
+    &lt;td class="tg-center"&gt;205&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;2.&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;strong&gt;Total&lt;/strong&gt;&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;.1&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;.2&lt;/td&gt;
+    &lt;td class="tg-center" style="color:#DCDCDC;"&gt;n&lt;sub&gt;..&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+
+&lt;br&gt;
+
+`$$\sum_{i} \sum_{j} \frac{(O_{ij} - E_{ij})^2}{E_{ij}} = \frac{(2199-2240)^2}{2240} + \frac{(246-205)^2}{205} + \frac{(2281-2240)^2}{2240}+\frac{(164-205)^2}{205} = 17.901$$`
+
+- So what does a value of 17.901 mean?
+
+- Is this a large discrepancy or a small one?
+
+- What should we compare it to?
+
+- What would be the **sampling distribution** of this statistic under the null hypothesis?
+
+---
+
+[**Demonstration of Sampling Distribution of Discrepancy Statistic for Random Two-way Tables**](https://czopluoglu.github.io/educ641_f25/resources/r_scripts/Week 8_sampling distribution demo_twoway tables.r)
+
+---
+
+
+Under the null hypothesis (and for sufficiently large samples), the sample discrepancy statistic is approximately distributed as a chi-square random variable.
+
+`$$\sum_{i} \sum_{j} \frac{(O_{ij} - E_{ij})^2}{E_{ij}} \approx \chi^2_{df = (I-1)(J-1)}$$`
+
+- I: number of rows in the contingency table
+
+- J: number of columns in the contingency table
+
+- Degrees of freedom = `\((I-1)(J-1)\)`
+
+
+&lt;img src="EDUC641_week7_files/figure-html/unnamed-chunk-1-1.svg" style="display: block; margin: auto;" /&gt;
+
+---
+
+We can use three R functions for the chi-square distribution:
+
+- `dchisq()` → density at a given `\(\chi^2\)` value  
+
+- `pchisq()` → cumulative probability up to a given `\(\chi^2\)` value  
+
+- `qchisq()` → quantile (critical value) for a given probability
+
+These are analogous to 
+
+  - `dnorm()`, `pnorm()`, and `qnorm()` for the normal distribution, or
+  
+  - `dt()`, `pt()`, and `qt()` for the *t* distribution.
+
+---
+
+.pull-left[
+&lt;img src="EDUC641_week7_files/figure-html/unnamed-chunk-2-1.svg" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+
+```r
+dchisq(x = 5,
+       df= 3)
+```
+
+```
+[1] 0.07322491
+```
+
+]
+
+---
+
+.pull-left[
+&lt;img src="EDUC641_week7_files/figure-html/unnamed-chunk-4-1.svg" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+$$
+P( \chi^2 \geq 5) = ?
+$$
+
+
+```r
+pchisq(q   = 5, 
+       df  = 3, 
+       lower.tail = FALSE)
+```
+
+```
+[1] 0.1717971
+```
+
+]
+
+---
+
+#### **Back to our example**
+
+- Assume that the **null hypothesis is true** (callback outcome is independent of racialized name group).
+
+- Our sample discrepancy statistic (chi-square) is, `\(\chi^2_{\text{obs}} = 17.901\)`
+
+- Degrees of freedom, `\(df = (2 - 1)(2 - 1) = 1\)`
+
+- Question:  
+  &gt; What is the probability of observing a sample chi-square statistic **at least as large as 17.901** if the null hypothesis is true?
+
+.tiny[
+
+```r
+pchisq(q          = 17.901, 
+       df         = 1, 
+       lower.tail = FALSE)
+```
+
+```
+[1] 2.326988e-05
+```
+]
+
+**Conclusion:** 
+
+- The p-value is extremely small (very close to 0).
+
+- We reject the null hypothesis.
+
+- The data provide strong evidence of a significant association between racialized name group and callback outcome.
+
+---
+
+
+### Cramer’s `\(\vartheta\)`
+
+The chi-square test tells us whether an association exists.  
+
+Cramer’s `\(\vartheta\)` provides a **standardized effect size**:
+
+`$$\vartheta = \sqrt{\frac{\chi^2}{N(L-1)}}$$`
+
+- N: total sample size
+- L: the smaller of the number of rows or columns in the contingency table
+  - For a **2 × 2** table, L = 2.
+
+$$ \vartheta = \sqrt{\frac{17.901}{4890(2-1)}} = 0.061 $$
+
+- `\(\vartheta\)` ranges from **0** (no association) to **1** (perfect association).
+
+---
+
+### Relative Risk (Risk ratio)
+
+Relative risk is the ratio of the probability of an event in one group to the probability of the same event in another group.
+For our data:
+
+- **White-associated names**
+  `$$\text{Risk}_W = \frac{246}{2445} = 0.101$$`
+
+- **African American–associated names**
+  `$$\text{Risk}_{AA} = \frac{164}{2445} = 0.067$$`
+- **Relative Risk**
+
+`$$RR = \frac{\text{Risk}_W}{\text{Risk}_{AA}}
+     = \frac{0.101}{0.067}
+     = 1.51$$`
+
+**Interpretation**
+
+Applicants with White-associated names were about 1.5 times as likely to receive a callback as applicants with African American–associated names.
+
+---
+
+### Odds
+
+Odds compare the probability of the event to the probability of **not** having the event:
+
+For our example:
+
+- **White-associated names**
+  `$$\text{Odds}_W = \frac{246/2445}{2199/2445} = \frac{0.1006}{0.8994}=0.112$$`
+
+- **African American–associated names**
+  `$$\text{Odds}_{AA} = \frac{164/2445}{2281/2445} = \frac{0.0671}{0.9329} =0.072$$`
+### Odds Ratio (OR)
+
+`$$OR = \frac{\text{Odds}_W}{\text{Odds}_{AA}}
+   = \frac{0.112}{0.072}
+   = 1.55$$`
+
+**Interpretation**
+
+The odds of receiving a callback were **55% higher** for White-associated names compared to African American–associated names.
+
+---
+
+### **Risk vs. Odds**
+
+- **Risk:**  
+  “How likely is a callback?”
+
+- **Odds:**  
+  “How likely is a callback **relative to not** receiving one?”
+
+**In our data**
+
+- Relative Risk = 1.51  
+- Odds Ratio = 1.55
+
+Both tell the same story:
+
+&gt; Applicants with White-associated names are **substantially more likely**  
+&gt; to receive a callback than those with African American–associated names.
+
+---
+
+#### **APA Format Write-up**
+
+A chi-square test of independence was conducted to examine whether callback outcome was associated with racialized name group. The test was statistically significant, `\(\chi^2_{(1)}\)` = 17.90, p &lt; .001, indicating that callback rates differed by name group. The effect size, measured by Cramer’s `\(\vartheta\)`, was equal to 0.06.
+
+Applicants with White-associated names were 1.51 times more likely to receive a callback than applicants with African American–associated names (RR = 1.51). Similarly, the odds of receiving a callback were 1.55 times higher for White-associated names compared with African American–associated names (OR = 1.55).
+
+---
+
+**Assumptions of the Chi-Square Test of Independence**
+
+- Independent observations: Each individual (or case) must contribute to one and only one cell in the contingency table.
+
+- Adequate expected cell frequencies
+
+  - For a 2 × 2 table: all expected cell counts should be at least 5.  
+
+  - For larger tables:  
+  
+    - All expected counts should be greater than 1, and  
+    
+    - No more than 20% of cells should have expected counts below 5.
+
+If these assumptions are violated, the chi-square approximation may be inaccurate, and p-values may not be valid.
+
+**Alternatives When Assumptions Are Not Met**
+
+- **Fisher’s Exact Test** (`?fisher.test`)  
+  Use when expected frequencies are very small.
+
+- **McNemar’s Test** (`?mcnemar.test`)  
+  Use when observations are **not independent**, such as with matched pairs or repeated measures on the same individuals.
+
+---
+
+#### **R Implementation**
+
+.single[
+
+.tiny[
+
+
+```r
+# Create the contingency table by cell frequencies
+
+my.tab &lt;- as.table(rbind(c(2199, 246), 
+                         c(2281,164)))
+
+dimnames(my.tab) &lt;- list(racial_group = c("White", "African American"),
+                         callback     = c("No","Yes"))
+
+my.tab
+```
+
+```
+                  callback
+racial_group         No  Yes
+  White            2199  246
+  African American 2281  164
+```
+
+```r
+# Create the contingency table by cell frequencies
+
+fit &lt;- chisq.test(my.tab,
+                  correct = FALSE)
+
+fit
+```
+
+```
+
+	Pearson's Chi-squared test
+
+data:  my.tab
+X-squared = 17.901, df = 1, p-value = 2.327e-05
+```
+
+```r
+#fit$observed 
+
+#fit$expected
+```
+
+]
+]
+
+---
+
+.single[
+
+.tiny[
+
+
+```r
+# Alternatively, you can read the dataset and then 
+# create two-way table from the dataset
+
+
+d &lt;- read.csv(here('resources/datasets/callback.csv'))
+
+head(d)
+```
+
+```
+  ID     racial_group callback
+1  1            White       No
+2  2            White       No
+3  3            White       No
+4  4 African American      Yes
+5  5 African American       No
+6  6            White       No
+```
+
+```r
+# Create the contingency table by cell frequencies
+
+my.tab &lt;- table(d$racial_group,d$callback)
+my.tab
+```
+
+```
+                  
+                     No  Yes
+  African American 2281  164
+  White            2199  246
+```
+
+```r
+# Create the contingency table by cell frequencies
+
+fit &lt;- chisq.test(my.tab,
+                  correct = FALSE)
+
+fit
+```
+
+```
+
+	Pearson's Chi-squared test
+
+data:  my.tab
+X-squared = 17.901, df = 1, p-value = 2.327e-05
+```
+
+```r
+#fit$observed 
+
+#fit$expected
+```
+
+]
+]
+
+---
+
+### In-class Practice 
+
+Variables:
+
+- Socioeconomic status (Low-income / Middle-income / High-income)
+
+- Student outcome: Participation in AP/IB or not (Enrolled in advanced coursework / Not enrolled)
+
+Research question:
+
+&gt; Is student enrollment in advanced coursework (AP/IB) associated with socioeconomic status?
+
+&lt;br&gt;
+
+.tiny2[
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td, .tg th {
+  border-color:black;
+  border-style:solid;
+  border-width:1px;
+  font-family:Arial, sans-serif;
+  font-size:18px;
+  overflow:hidden;
+  padding:8px 5px;
+  word-break:normal;
+  text-align:left;
+  vertical-align:top;
+}
+.tg .tg-center {
+  text-align:center;
+  vertical-align:middle;
+}
+&lt;/style&gt;
+
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th&gt;&lt;/th&gt;
+    &lt;th class="tg-center" style="font-weight:bold;"&gt;Not enrolled in advanced coursework&lt;/th&gt;
+    &lt;th class="tg-center" style="font-weight:bold;"&gt;Enrolled in advanced coursework&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Low-income&lt;/td&gt;
+    &lt;td class="tg-center"&gt;300&lt;/td&gt;
+    &lt;td class="tg-center"&gt;80&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Middle-income&lt;/td&gt;
+    &lt;td class="tg-center"&gt;260&lt;/td&gt;
+    &lt;td class="tg-center"&gt;190&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;High-income&lt;/td&gt;
+    &lt;td class="tg-center"&gt;180&lt;/td&gt;
+    &lt;td class="tg-center"&gt;340&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
